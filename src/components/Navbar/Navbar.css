@@ -1,0 +1,96 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #3fcac7, #10eec5); /* Gradient background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px; /* Rounded edges */
+  color: white; /* Text color for better contrast */
+}
+
+.logo {
+  height: 50px; /* Adjust the size as needed */
+  background-color: #ffffff; /* White background for contrast */
+  padding: 5px; /* Space around the logo */
+  border-radius: 5px; /* Rounded corners */
+}
+
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-menu li {
+  text-transform: capitalize;
+  cursor: pointer;
+  color: #ffffff; /* White text */
+  font-size: 16px;
+  transition: all 0.3s ease;
+  padding: 5px 10px;
+  border-radius: 5px; /* Rounded edges for hover effect */
+}
+
+.navbar-menu li:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Subtle hover background */
+  color: #ffdd57; /* Highlight color on hover */
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar-right img {
+  height: 24px; /* Slightly larger icons */
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Add a hover effect */
+}
+
+.navbar-right img:hover {
+  transform: scale(1.1); /* Zoom effect on hover */
+}
+
+.navbar-search-icon {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ff4d4d; /* Vibrant red for notifications */
+  border-radius: 50%;
+  position: absolute;
+  top: -4px;
+  right: -4px;
+}
+
+button {
+  background: linear-gradient(90deg, #db5353, #ba1919); /* Gradient for buttons */
+  color: white;
+  border: none;
+  border-radius: 20px; /* Rounded button */
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+button:hover {
+  background: linear-gradient(90deg, #ff8c42, #ffdd57); /* Invert gradient on hover */
+  transform: translateY(-2px); /* Slight upward movement */
+}
+
+button:active {
+  transform: translateY(0); /* Reset on click */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjust shadow on click */
+}

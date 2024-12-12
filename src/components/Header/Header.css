@@ -1,0 +1,53 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: linear-gradient(90deg, #007BFF, #0056b3); /* Gradient background */
+    color: white; /* White text for contrast */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 1200px;
+    margin: 20px auto;
+  }
+  
+  .header-contents {
+    max-width: 600px; 
+    animation: fadIn 3s;/* Limit text content width */
+  }
+  
+  .header h2 {
+    font-size: 2.5rem; /* Large heading */
+    margin-bottom: 15px;
+  }
+  
+  .header p {
+    font-size: 1.2rem; /* Comfortable reading size */
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background: #ffdd57; /* Button background */
+    color: #333; /* Button text color */
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background: #ffc107; /* Lighter yellow on hover */
+  }
+  
+  .header-image {
+    max-width: 500px; /* Adjust the image size */
+    width: 100%; /* Make it responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Optional rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+  }
+  
