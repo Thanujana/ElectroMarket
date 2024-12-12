@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import './Navbar.css'; // Import the CSS file for styling
+import logo from "../../assets/logo.png";
+import searchIcon from "../../assets/search_icon.png";
+import basketIcon from "../../assets/basket_icon.png";
+
 
 const Navbar = () => {
   const [menu, setMenu] = useState('home');
 
   return (
     <div className="navbar">
-      <img src="assets.logo" alt="Logo" className="logo" />
+      <img src={logo} alt="Logo" className="logo" />
 
       <ul className="navbar-menu">
         <li
@@ -36,8 +40,11 @@ const Navbar = () => {
       </ul>
 
       <div className="navbar-right">
-        <img src="assets.search_icon" alt="Search" />
-        <img src="assets.basket_icon" alt="Basket" />
+        <img src={searchIcon} alt="Search" />
+        <img src={basketIcon} alt="Basket" />
+        <button className="sign-in-button" onClick={() => alert('Sign In Clicked!')}>
+          Sign In
+        </button>
       </div>
     </div>
   );

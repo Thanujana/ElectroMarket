@@ -8,7 +8,7 @@
     font-weight:500 ;
 }
 .explore-category-text{
-    max-width:60%;
+    max-width:100%;
     columns: #808080;
 }
 .explore-category-list{
@@ -18,20 +18,29 @@
     gap: 30px;
     text-align: center;
     margin:20px 0px;
-    overflow-x:scroll;
 }
 .explore-category-list::-webkit-scrollbar{
 display: none;
 }
 
-.explore-category-list img{
-    width:7.5w;
-    min-width: 80px;
+.explore-category-list img {
+    width: 100px; /* Increase the image size */
+    height: 100px; /* Ensure the height matches the width to maintain aspect ratio */
+    min-width: 80px; /* Minimum size limit */
     cursor: pointer;
-    border-radius: 50%;
-    transition: 0.2s;
-
+    border-radius: 15px; /* Slightly rounded corners for a modern look */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
 }
+
+.explore-category-list img:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* More prominent shadow on hover */
+    filter: brightness(1.2); /* Slight brightness increase for better focus */
+}
+
+
 .explore-category-list-item p{
     margin-top: 10px;
     color:#747474;

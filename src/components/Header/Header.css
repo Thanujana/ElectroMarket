@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px;
-    background: linear-gradient(90deg, #007BFF, #0056b3); /* Gradient background */
+    background: linear-gradient(90deg, #00c8ff, #417fc2); /* Gradient background */
     color: white; /* White text for contrast */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */

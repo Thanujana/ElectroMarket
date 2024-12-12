@@ -1,35 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 8px 20px; /* Reduce the padding to decrease height */
   background: linear-gradient(90deg, #3fcac7, #10eec5); /* Gradient background */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px; /* Rounded edges */
-  color: white; /* Text color for better contrast */
+  color: white;
+  width: 100%; /* Ensure full width */
 }
 
 .logo {
-  height: 50px; /* Adjust the size as needed */
+  height: 40px; /* Reduced logo size */
   background-color: #ffffff; /* White background for contrast */
   padding: 5px; /* Space around the logo */
   border-radius: 5px; /* Rounded corners */
 }
 
-
 .navbar-menu {
   display: flex;
   list-style: none;
-  gap: 20px;
+  gap: 15px; /* Reduced gap between menu items */
   margin: 0;
   padding: 0;
+  justify-content: center; /* Center menu items */
 }
 
 .navbar-menu li {
   text-transform: capitalize;
   cursor: pointer;
   color: #ffffff; /* White text */
-  font-size: 16px;
+  font-size: 14px; /* Reduced font size */
   transition: all 0.3s ease;
   padding: 5px 10px;
   border-radius: 5px; /* Rounded edges for hover effect */
@@ -43,11 +49,11 @@
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px; /* Reduced gap */
 }
 
 .navbar-right img {
-  height: 24px; /* Slightly larger icons */
+  height: 20px; /* Smaller icons */
   cursor: pointer;
   transition: transform 0.3s ease; /* Add a hover effect */
 }
@@ -77,8 +83,8 @@ button {
   color: white;
   border: none;
   border-radius: 20px; /* Rounded button */
-  padding: 8px 20px;
-  font-size: 14px;
+  padding: 6px 15px; /* Smaller padding */
+  font-size: 12px; /* Reduced font size */
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -93,4 +99,18 @@ button:hover {
 button:active {
   transform: translateY(0); /* Reset on click */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjust shadow on click */
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar-menu {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .navbar-right {
+    margin-top: 10px;
+  }
 }
