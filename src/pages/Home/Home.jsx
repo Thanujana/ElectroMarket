@@ -3,6 +3,8 @@ import './Home.css';
 import Header from '../../components/Header/Header';
 import ExploreCategory from '../../components/ExploreCategory/ExploreCategory';
 import ItemDisplay from '../../components/ItemDisplay/ItemDisplay';
+import ProductItem from '../../components/ProductItem/ProductItem';
+
 
 
 const Home = () => {
@@ -14,6 +16,8 @@ const Home = () => {
       <Header />
       <ExploreCategory category={category} setCategory={setCategory} />
       <ItemDisplay />
+      <ProductItem/>
+     
     </div>
   );
 };

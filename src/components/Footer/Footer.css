@@ -1,0 +1,128 @@
+/* Footer Container */
+.footer {
+    color: #f1f1f1; /* Light text for contrast */
+    background-color: #1e1e1e; /* Darker background for a modern look */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px; /* Increased spacing for a clean layout */
+    padding: 40px 5%; /* Reduced padding for minimized width */
+    padding-top: 60px;
+    font-family: 'Arial', sans-serif; /* Modern font */
+    max-width: 1200px; /* Limit the width */
+    margin: 0 auto; /* Center the footer */
+  }
+  
+  /* Footer Content */
+  .footer-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Adjusted columns */
+    gap: 40px; /* Reduced space between sections */
+    max-width: 1000px; /* Limit content width */
+  }
+  
+  /* Section Styling */
+  .footer-content-left,
+  .footer-content-right,
+  .footer-content-center {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  /* Logo Styling */
+  .footer-content-left img {
+    width: 120px; /* Reduced logo size */
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .footer-content-left img:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+  }
+  
+  /* Description Text */
+  .footer-content-left p {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: #cccccc; /* Muted text color */
+    margin-bottom: 15px;
+  }
+  
+  /* Social Icons */
+  .footer-social-icons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .footer-social-icons img {
+    width: 25px; /* Smaller icons */
+    height: 25px;
+    border-radius: 50%;
+    background-color: #3a3a3a; /* Background for icons */
+    padding: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .footer-social-icons img:hover {
+    background-color: #f1c40f; /* Highlighted color on hover */
+  }
+  
+  /* Center Section */
+  .footer-content-center h2,
+  .footer-content-right h2 {
+    font-size: 1rem; /* Smaller headers */
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+  
+  .footer-content-center ul,
+  .footer-content-right ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-content-center ul li,
+  .footer-content-right ul li {
+    margin-bottom: 6px; /* Tighter spacing */
+    font-size: 0.8rem;
+    color: #cccccc;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-content-center ul li:hover,
+  .footer-content-right ul li:hover {
+    color: #f1c40f; /* Highlighted color */
+  }
+  
+  /* Contact Details */
+  .footer-content-right ul li {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer-content-right ul li img {
+    margin-right: 8px;
+  }
+  
+  /* Divider Line */
+  .footer hr {
+    width: 80%; /* Narrower divider */
+    border: 0.5px solid #444;
+    margin: 10px 0;
+  }
+  
+  /* Copyright Section */
+  .footer-copyright {
+    font-size: 0.7rem;
+    color: #aaaaaa; /* Subtle text color */
+    text-align: center;
+  }
+  

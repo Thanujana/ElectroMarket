@@ -5,7 +5,7 @@ import searchIcon from "../../assets/search_icon.png";
 import basketIcon from "../../assets/basket_icon.png";
 
 
-const Navbar = () => {
+const Navbar = ({setShowLogin}) => {
   const [menu, setMenu] = useState('home');
 
   return (
@@ -42,8 +42,8 @@ const Navbar = () => {
       <div className="navbar-right">
         <img src={searchIcon} alt="Search" />
         <img src={basketIcon} alt="Basket" />
-        <button className="sign-in-button" onClick={() => alert('Sign In Clicked!')}>
-          Sign In
+        <button className="sign-in-button" onClick={() => setShowLogin(true)}>
+          Sign in
         </button>
       </div>
     </div>

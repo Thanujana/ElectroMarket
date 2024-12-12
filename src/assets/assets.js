@@ -120,7 +120,7 @@ export const item_list =[
 },
 {
     _id: "3",
-    name: "Microwaves",
+    name: "Microwave oven",
     image: item_1_3, 
     price: 200, 
     description: "Quick and convenient cooking with advanced microwave technology.",
@@ -209,7 +209,7 @@ export const item_list =[
   {
     _id: "14",
     name: "Processors (CPUs)",
-    image: "item_3_4",
+    image: item_3_4,
     price: 400,
     description: "High-performance processors for efficient computing.",
     category: "Computer Components"
