@@ -1,6 +1,6 @@
 <<<<<<< HEAD
 # ElectroMart
-A group project titled "Online Marketplace for Electronics Projects", connecting makers and professionals to share, buy, and sell electronics projects and components. Includes frontend, backend, and documentation.
+A group project titled "Online Marketplace for Electronics Products", Includes frontend, backend, and documentation.
 =======
 # React + Vite
 
