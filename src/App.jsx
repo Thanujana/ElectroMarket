@@ -6,7 +6,8 @@ import PlaceOrder from './pages/PlaceOrder/PlaceOrder'
 import Cart from './pages/Cart/Cart'
 import Footer from './components/Footer/Footer'
 import Login from './components/Login/Login'
-
+import ExploreCategory from './components/ExploreCategory/ExploreCategory';
+import ItemDisplay from './components/ItemDisplay/ItemDisplay';
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
     <div className='app'>
       <Navbar setShowLogin={setShowLogin}/>
       <Routes>
+        
         <Route path='/' element={<Home />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/order' element={<PlaceOrder />} />

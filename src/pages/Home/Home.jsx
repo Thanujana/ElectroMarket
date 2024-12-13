@@ -17,6 +17,7 @@ const Home = () => {
       <ExploreCategory category={category} setCategory={setCategory} />
       <ItemDisplay />
       <ProductItem/>
+      
      
     </div>
   );

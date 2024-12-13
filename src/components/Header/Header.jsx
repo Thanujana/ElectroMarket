@@ -1,20 +1,30 @@
 import React from 'react';
 import './Header.css';
+import sideImage from '/header_img.png'; // Replace with your side image path
+import bgImage from '/bg_image.jpg'; // Replace with your background image path
 
 const Header = () => {
   return (
-    <div className="header">
-      <div className="header-contents">
-        <h2>Discover Your Favorite Electronics Today!</h2>
-        <p>
-          Shop the latest gadgets, electronics, and accessories at unbeatable prices. Whether
-          you're looking for cutting-edge smartphones, high-quality audio gear, or must-have home
-          appliances, we've got you covered. Start exploring now!
-        </p>
-        <button>View Menu</button>
+    <header
+      className="header-container"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
+      {/* Glass Effect Card */}
+      <div className="glass-card">
+        <div className="glass-content">
+          <h1 className="glass-title">Shop the Future of Electronics Today!</h1>
+          <p className="glass-description">
+          Explore the ultimate destination for cutting-edge electronics -all in one seamless online marketplace.
+          </p>
+          <button className="glass-button">Explore Now</button>
+        </div>
+
+        {/* Side Image Inside Glass */}
+        <div className="glass-side-image">
+          <img src={sideImage} alt="Electronics Display" />
+        </div>
       </div>
-      <img src="/header_img.png" alt="Electronics" className="header-image" />
-    </div>
+    </header>
   );
 };
 

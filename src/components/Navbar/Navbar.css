@@ -1,116 +1,95 @@
-body {
-  margin: 0;
-  padding: 0;
-}
 
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 20px; /* Reduce the padding to decrease height */
-  background: linear-gradient(90deg, #3fcac7, #10eec5); /* Gradient background */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px; /* Rounded edges */
+.custom-navbar {
+  background-color: #1E293B; /* Dark navy blue */
   color: white;
-  width: 100%; /* Ensure full width */
-}
-
-.logo {
-  height: 40px; /* Reduced logo size */
-  background-color: #ffffff; /* White background for contrast */
-  padding: 5px; /* Space around the logo */
-  border-radius: 5px; /* Rounded corners */
-}
-
-.navbar-menu {
-  display: flex;
-  list-style: none;
-  gap: 15px; /* Reduced gap between menu items */
-  margin: 0;
-  padding: 0;
-  justify-content: center; /* Center menu items */
-}
-
-.navbar-menu li {
-  text-transform: capitalize;
-  cursor: pointer;
-  color: #ffffff; /* White text */
-  font-size: 14px; /* Reduced font size */
-  transition: all 0.3s ease;
-  padding: 5px 10px;
-  border-radius: 5px; /* Rounded edges for hover effect */
-}
-
-.navbar-menu li:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Subtle hover background */
-  color: #ffdd57; /* Highlight color on hover */
-}
-
-.navbar-right {
+  padding: 10px 20px;
   display: flex;
   align-items: center;
-  gap: 12px; /* Reduced gap */
+ }
+
+/* Logo styling */
+.logo {
+  width: 100px;
 }
 
-.navbar-right img {
-  height: 20px; /* Smaller icons */
-  cursor: pointer;
-  transition: transform 0.3s ease; /* Add a hover effect */
+/* Navbar links */
+.navbar-nav {
+  display: flex;
+  align-items: center;
 }
 
-.navbar-right img:hover {
-  transform: scale(1.1); /* Zoom effect on hover */
+
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+  transition: color 0.3s;
 }
 
-.navbar-search-icon {
+.nav-link:hover,
+.nav-link.active-link {
+  color: #FFD700; /* Gold for hover and active links */
+  font-weight: bold;
+}
+
+/* Search Wrapper */
+.search-wrapper {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
-  background-color: #ff4d4d; /* Vibrant red for notifications */
-  border-radius: 50%;
-  position: absolute;
-  top: -4px;
-  right: -4px;
-}
-
-button {
-  background: linear-gradient(90deg, #db5353, #ba1919); /* Gradient for buttons */
-  color: white;
+.search-input {
   border: none;
-  border-radius: 20px; /* Rounded button */
-  padding: 6px 15px; /* Smaller padding */
-  font-size: 12px; /* Reduced font size */
-  font-weight: bold;
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-size: 14px;
+  width: 200px;
+  margin-right: 10px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+/* Basket Icon */
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 15px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-button:hover {
-  background: linear-gradient(90deg, #ff8c42, #ffdd57); /* Invert gradient on hover */
-  transform: translateY(-2px); /* Slight upward movement */
+.btn.custom-signin-btn {
+  background-color: #048d8d; /* Bright blue */
+  border: none;
+  font-weight: bold;
+  padding: 4px 10px; /* Smaller padding */
+  font-size: 12px; /* Smaller font size */
+  border-radius: 4px; /* Rounded corners */
 }
 
-button:active {
-  transform: translateY(0); /* Reset on click */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjust shadow on click */
+.btn.custom-signin-btn:hover {
+  background-color: #1289d3; /* Darker blue for hover */
 }
 
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-  .navbar {
+  .navbar-nav {
     flex-direction: column;
-    align-items: flex-start;
-  }
-  .navbar-menu {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .navbar-right {
     margin-top: 10px;
+  }
+  .nav-link {
+    margin: 5px 0;
+  }
+  .search-wrapper {
+    margin-bottom: 10px;
   }
 }

@@ -1,53 +1,101 @@
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    background: linear-gradient(90deg, #00c8ff, #417fc2); /* Gradient background */
-    color: white; /* White text for contrast */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    max-width: 1200px;
-    margin: 20px auto;
-  }
+/* Main Header Container */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh; /* Focus on background content */
+  background-size: cover;
+  background-position: center top;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* Glass Effect Card */
+.glass-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1000px; /* Increased width */
+  min-height: 300px; /* Taller glass */
+  padding: 30px;
+  background: rgba(173, 216, 230, 0.2); /* Bluish transparent background */
+  backdrop-filter: blur(20px); /* Stronger blur for glassmorphism */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+  border-radius: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Depth effect */
+  color: white;
+  z-index: 2;
+}
+
+/* Glass Content (Text Section) */
+.glass-content {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.glass-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #0d2e3cba;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Makes the text more readable */
+  margin-bottom: 15px;
+}
+
+.glass-description {
+  font-size: 1.2rem;
+  color: #10292f; /* Light blue text for elegance */
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* Button Styling */
+.glass-button {
+  background: linear-gradient(90deg, #00aaff, #0c7e7b); /* Attractive blue gradient */
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
   
-  .header-contents {
-    max-width: 600px; 
-    animation: fadIn 3s;/* Limit text content width */
+  transition: all 0.3s ease-in-out;
+}
+
+.glass-button:hover {
+  background: linear-gradient(90deg, #007bff, #00aaff); /* Reverse gradient on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Side Image Inside Glass */
+.glass-side-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glass-side-image img {
+  max-width: 100%;
+  max-height: 200px; /* Larger side image */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Depth effect */
+}
+
+@media (max-width: 768px) {
+  .glass-card {
+    flex-direction: column; /* Stack content for smaller screens */
+    text-align: center;
   }
-  
-  .header h2 {
-    font-size: 2.5rem; /* Large heading */
-    margin-bottom: 15px;
+
+  .glass-content {
+    margin: 0 0 20px;
   }
-  
-  .header p {
-    font-size: 1.2rem; /* Comfortable reading size */
-    line-height: 1.6;
-    margin-bottom: 20px;
+
+  .glass-side-image img {
+    max-height: 150px; /* Resize for smaller screens */
   }
-  
-  button {
-    background: #ffdd57; /* Button background */
-    color: #333; /* Button text color */
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  button:hover {
-    background: #ffc107; /* Lighter yellow on hover */
-  }
-  
-  .header-image {
-    max-width: 500px; /* Adjust the image size */
-    width: 100%; /* Make it responsive */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 10px; /* Optional rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
-  }
-  
+}

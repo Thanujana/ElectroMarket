@@ -2,6 +2,7 @@ import basket_icon from './basket_icon.png'
 import logo from './logo.png'
 import header_img from './header_img.png'
 import search_icon from './search_icon.png'
+import bg_image from './bg_image.jpg'
 
 import category_1 from './category_1.jpeg'
 import category_2 from './category_2.png'
@@ -53,6 +54,7 @@ import logout_icon from './logout_icon.png'
 import parcel_icon from './parcel_icon.png'
 
 export const assets = {
+    bg_image,
     logo,
     basket_icon,
     header_img,
