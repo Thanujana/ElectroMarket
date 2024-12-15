@@ -16,7 +16,10 @@ const Header = () => {
           <p className="glass-description">
           Explore the ultimate destination for cutting-edge electronics -all in one seamless online marketplace.
           </p>
-          <button className="glass-button">Explore Now</button>
+          <button className="glass-button"onClick={() => document.getElementById('explore-category').scrollIntoView({ behavior: 'smooth' })}>
+            Explore Now
+          </button>
+
         </div>
 
         {/* Side Image Inside Glass */}
