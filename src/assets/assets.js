@@ -53,6 +53,25 @@ import bag_icon from './bag_icon.png'
 import logout_icon from './logout_icon.png'
 import parcel_icon from './parcel_icon.png'
 
+
+import item_allinone from './item_Allinone.png';
+import item_frontload from './item_frontload.png';
+import item_topload from './item_topload.png';
+import item_laundrycenter from './item_laundrycenter.png';
+import item_laundryset from './item_laundryset.png';
+
+import item_bottomfreezer from './item_bottomfreezer.png';
+import item_topfreezer from './item_topfreezer.png';
+import item_builtin from './item_builtin.png';
+import item_countertop from './item_countertop.png';
+import item_fourdoor from './item_fourdoor.png';
+import item_frenchdoor from './item_frenchdoor.png';
+import item_sidebyside from './item_sidebyside.png';
+
+import item_overtherange from './item_overtherange.png';
+import item_lowprofile from './item_lowprofile.png';
+
+
 export const assets = {
     bg_image,
     logo,
@@ -270,3 +289,29 @@ export const item_list =[
   
   
 ];
+export const varieties_list ={
+  refrigerators: [
+    { type: 'Bottom Freezer', image: item_bottomfreezer, price: 499,description: 'Spacious bottom freezer refrigerator for easy access to fresh foods.'  },
+    { type: 'Four Door', image: item_fourdoor, price: 1399, description: 'Flexible four-door design with customizable storage options.'  },
+    { type: 'French Door', image: item_frenchdoor, price: 1299, description: 'Elegant French door design with wide shelves and ample storage.'  },
+    { type: 'Side by Side', image: item_sidebyside, price: 1099, description: 'Side-by-side refrigerator for organized fresh and frozen food storage.' },
+    { type: 'Top Freezer', image: item_topfreezer, price: 399,'Classic top freezer design with energy-efficient performance.' },
+  ],
+  washers: [
+    { type: 'Top Load', image: item_topload, price: 549, description: '1.6-5.3 Cu. Ft. Capacity with Agitator or Impeller.' },
+    { type: 'Front Load', image: item_frontload, price: 699, description: 'Efficient front load washers for a deep clean.' },
+    { type: 'All In One', image: item_allinone, price: 799, description: 'Combination of washer and dryer in one unit.' },
+    { type: 'Laundry Center', image: item_laundrycenter, price: 999, description: 'Stacked washer and dryer combo.' },
+    { type: 'Laundry Set', image: item_laundryset, price: 1199, description: 'Matching washer and dryer set.' },
+  ],
+  microwaves: [
+    { type: 'Over the Range', image: item_overtherange, price: 299, description: 'Convenient over-the-range microwave with exhaust fan.'  },
+    { type: 'Low Profile', image: item_lowprofile, price: 199,description: 'Sleek low-profile microwave ideal for compact spaces.'  },
+    { type: 'Countertop', image: item_countertop, price: 199,description: 'Versatile countertop microwave for quick and easy cooking.'  },
+    { type: 'Built-In', image: item_builtin, price: 999,description: 'Stylish built-in microwave with advanced cooking technology.'  },
+  ],
+  
+
+
+};
+
