@@ -8,6 +8,11 @@ import basketIcon from "../../assets/basket_icon.png";
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState('home');
 
+  const handleScroll = (sectionId) => {
+    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    setMenu(sectionId); // Update menu state
+  };
+
   return (
     <nav className="navbar navbar-expand-lg custom-navbar">
       <div className="container-fluid">
@@ -27,38 +32,37 @@ const Navbar = ({ setShowLogin }) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+          <li className="nav-item">
               <a
-                className={`nav-link ${menu === 'home' ? 'active-link' : ''}`}
-                href="#"
-                onClick={() => setMenu('home')}
+                className={`nav-link ${menu === 'header-section' ? 'active' : ''}`}
+                onClick={() => handleScroll('header-section')} // Scroll to Header
               >
                 Home
               </a>
             </li>
+            {/* Menu Navigation */}
             <li className="nav-item">
               <a
-                className={`nav-link ${menu === 'menu' ? 'highlight-link' : ''}`}
-                href="#"
-                onClick={() => setMenu('menu')}
+                className={`nav-link ${menu === 'explore-category' ? 'active' : ''}`}
+                onClick={() => handleScroll('explore-category')} // Scroll to Explore Categories
               >
                 Menu
               </a>
             </li>
+            {/* Mobile App Navigation */}
             <li className="nav-item">
               <a
-                className={`nav-link ${menu === 'mobile-app' ? 'highlight-link' : ''}`}
-                href="#"
-                onClick={() => setMenu('mobile-app')}
+                className={`nav-link ${menu === 'app-download' ? 'active' : ''}`}
+                onClick={() => handleScroll('app-download')} // Scroll to App Download
               >
                 Mobile App
               </a>
             </li>
+            {/* Contact Us Navigation */}
             <li className="nav-item">
               <a
-                className={`nav-link ${menu === 'contact-us' ? 'active-link' : ''}`}
-                href="#"
-                onClick={() => setMenu('contact-us')}
+                className={`nav-link ${menu === 'footer-section' ? 'active' : ''}`}
+                onClick={() => handleScroll('footer-section')} // Scroll to Footer
               >
                 Contact Us
               </a>

@@ -6,6 +6,7 @@ import bgImage from '/bg_image.jpg'; // Replace with your background image path
 const Header = () => {
   return (
     <header
+       id="header-section"
       className="header-container"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
