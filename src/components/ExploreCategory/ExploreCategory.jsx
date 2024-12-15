@@ -6,8 +6,10 @@ const ExploreCategory = ({ category, setCategory }) => {
   const navigate = useNavigate();
 
   const handleCategoryClick = (item) => {
-    setCategory(item.category_name);
-    navigate(`/categories/${item.category_name.toLowerCase()}`);
+    const formattedCategory = item.category_name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-'); // Replace spaces and special characters with '-'
+    navigate(`/categories/${formattedCategory}`);
   };
   
 
@@ -28,7 +30,7 @@ const ExploreCategory = ({ category, setCategory }) => {
               cursor: 'pointer',
               transition: 'transform 0.2s',
             }}
-            onClick={() => handleCategoryClick(item)}
+            onClick={() => handleCategoryClick(item)} // Call the updated function
           >
             <div
               className={`card border-0 ${
@@ -41,7 +43,7 @@ const ExploreCategory = ({ category, setCategory }) => {
                 className="card-img-top rounded"
                 style={{
                   width: '100%',
-                  height: '120px', // Increased height
+                  height: '120px',
                   objectFit: 'cover',
                   boxShadow: category === item.category_name ? '0 4px 10px rgba(0, 0, 255, 0.4)' : '',
                 }}

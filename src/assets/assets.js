@@ -10,8 +10,8 @@ import category_3 from './category_3.png'
 import category_4 from './category_4.png'
 import category_5 from './category_5.jpeg'
 
-import item_1_1 from './item_1_1.jpeg'
-import item_1_2 from './item_1_2.jpeg'
+import item_auto from './item_auto.jpeg'
+import item_side from './item_side.jpeg'
 import item_1_3 from './item_1_3.jpeg'
 import item_1_4 from './item_1_4.jpeg'
 import item_1_5 from './item_1_5.jpeg'
@@ -106,7 +106,7 @@ export const item_list =[
     {
         _id:"1",
         name:"Washing machines",
-        image:item_1_1,
+        image:item_auto,
         price:300,
         description:"Efficient washing machines with multiple modes to suit your laundry needs.",
         category:"Home Appliances"
@@ -114,7 +114,7 @@ export const item_list =[
 {
     _id: "2",
     name: "Refrigerators",
-    image: item_1_2, 
+    image: item_side, 
     price: 400, 
     description: "Keep your food fresh and beverages chilled with our range of refrigerators.",
     category: "Home Appliances",
@@ -137,7 +137,7 @@ export const item_list =[
     category: "Home Appliances",
 },
 {
-    _id: "8",
+    _id: "5",
     name: "Electric Kettles",
     image: item_1_5, 
     price: 50, 
