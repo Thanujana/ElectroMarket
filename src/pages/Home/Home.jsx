@@ -14,25 +14,30 @@ const Home = () => {
 
   return (
     <div>
-    {/* Header Section */}
-    <Header />
+      {/* Header Section */}
+      <Header />
 
-    {/* Explore Categories */}
-    <div id="explore-category">
-      <ExploreCategory />
-    </div>
+      {/* Explore Categories */}
+      <div id="explore-category">
+        <ExploreCategory />
+      </div>
 
-    {/* Mobile App Download */}
-    <div id="app-download">
-      <AppDownload />
-    </div>
+      {/* Item Display Section */}
+      <div id="item-display">
+        <ItemDisplay />
+      </div>
 
-    {/* Footer */}
-    <div id="footer-section">
-      <Footer />
+      {/* Mobile App Download */}
+      <div id="app-download">
+        <AppDownload />
+      </div>
+
+      {/* Footer */}
+      <div id="footer-section">
+        <Footer />
+      </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default Home;
