@@ -3,27 +3,34 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { item_list } from '../../assets/assets';
 
 const CategoryItems = () => {
-  const { category_name } = useParams();
+  const { category_name } = useParams(); // Get the category name from URL
   const navigate = useNavigate();
 
-  // Reverse formatting: Replace hyphens with spaces and capitalize words
-  const formattedCategory = category_name
-    .replace(/-/g, ' ') // Replace hyphens with spaces
-    .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize words
+  // Decode and format category name (handle URL-encoded characters)
+  const formattedCategory = decodeURIComponent(category_name);
 
-  // Filter items based on the formatted category name
+  // Capitalize each word in the category name for display
+  const displayCategory = formattedCategory
+    .replace(/\b\w/g, (char) => char.toUpperCase())
+    .replace(/-/g, ' ');
+
+  // Filter items based on the decoded category name
   const filteredItems = item_list.filter(
     (item) => item.category.toLowerCase() === formattedCategory.toLowerCase()
   );
 
+  // Handle Explore button click (navigate to product details)
   const handleExploreClick = (itemName) => {
     const formattedName = itemName.toLowerCase().replace(/ /g, '-');
-    navigate(`/products/${formattedName}`); // Navigate to a detailed product page
+    navigate(`/products/${formattedCategory.toLowerCase().replace(/ /g, '-')}/${formattedName}`);
   };
 
   return (
     <div className="container py-4">
-      <h1 className="text-center mb-4 text-primary">{formattedCategory}</h1>
+      {/* Category Title */}
+      <h1 className="text-center mb-4 text-primary">{displayCategory}</h1>
+
+      {/* Display Items */}
       <div className="row">
         {filteredItems.length > 0 ? (
           filteredItems.map((item) => (
@@ -36,22 +43,27 @@ const CategoryItems = () => {
                   justifyContent: 'space-between',
                 }}
               >
+                {/* Image */}
                 <img
                   src={item.image}
                   alt={item.name}
                   className="card-img-top"
                   style={{
-                    objectFit: 'cover',
+                    objectFit: 'contain', // Ensure the full image fits
                     width: '100%',
-                    height: '180px', // Reduced image height
+                    height: '200px', // Increased for better visuals
                   }}
                 />
+
+                {/* Item Name and Description */}
                 <div className="card-body text-center">
                   <h5 className="card-title fw-bold">{item.name}</h5>
                   <p className="card-text text-muted" style={{ fontSize: '14px' }}>
                     {item.description}
                   </p>
                 </div>
+
+                {/* Explore Button */}
                 <div className="card-footer bg-white text-center border-0">
                   <button
                     className="btn btn-outline-primary btn-sm"
@@ -64,9 +76,8 @@ const CategoryItems = () => {
             </div>
           ))
         ) : (
-          <p className="text-center text-muted">
-            No items found in this category.
-          </p>
+          // Fallback if no items found
+          <p className="text-center text-muted">No items found in this category.</p>
         )}
       </div>
     </div>

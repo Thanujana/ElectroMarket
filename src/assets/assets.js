@@ -75,31 +75,14 @@ export const assets = {
     bag_icon,
     parcel_icon
 }
-
 export const category_list = [
-    {
-        category_name:"Home Appliances",
-        category_image:category_1
-    },
-    {
-        category_name:"consumer electronics",
-        category_image:category_2
-     },
-     {
-        category_name:"Computer Components",
-        category_image:category_3
-     },
-     {
-        category_name:"Smart Home Products",
-        category_image:category_4
-     },
-     {
-        category_name:"Industrial & Specialized Electronics",
-        category_image:category_5
-     }
-
-
+  { category_name: "home-appliances", category_image: category_1 },
+  { category_name: "consumer-electronics", category_image: category_2 },
+  { category_name: "computer-components", category_image: category_3 },
+  { category_name: "smart-home-products", category_image: category_4 },
+  { category_name: "industrial-specialized-electronics", category_image: category_5 },
 ];
+
 export default category_list;
 
 export const item_list =[
@@ -109,7 +92,7 @@ export const item_list =[
         image:item_auto,
         price:300,
         description:"Efficient washing machines with multiple modes to suit your laundry needs.",
-        category:"Home Appliances"
+        category:"home-appliances",
 },
 {
     _id: "2",
@@ -117,7 +100,7 @@ export const item_list =[
     image: item_side, 
     price: 400, 
     description: "Keep your food fresh and beverages chilled with our range of refrigerators.",
-    category: "Home Appliances",
+    category: "home-appliances",
 
 },
 {
@@ -126,7 +109,7 @@ export const item_list =[
     image: item_1_3, 
     price: 200, 
     description: "Quick and convenient cooking with advanced microwave technology.",
-    category: "Kitchen Appliances",
+    category: "home-appliances",
 },
 {
     _id: "4",
@@ -134,7 +117,7 @@ export const item_list =[
     image: item_1_4, 
     price: 500,
     description: "Stay cool during the summer with energy-efficient air conditioners.",
-    category: "Home Appliances",
+    category: "home-appliances",
 },
 {
     _id: "5",
@@ -142,7 +125,7 @@ export const item_list =[
     image: item_1_5, 
     price: 50, 
     description: "Quickly boil water with stylish and efficient electric kettles.",
-    category: "Kitchen Appliances",
+    category: "home-appliances",
 },
 {
     _id: "6",
@@ -150,7 +133,7 @@ export const item_list =[
     image: item_2_1, 
     price: 1200, 
     description: "High-quality digital cameras for photography enthusiasts.",
-    category: "Consumer Electronics"
+    category: "consumer-electronics",
   },
   {
     _id: "7",
@@ -158,7 +141,7 @@ export const item_list =[
     image: item_2_2,
     price: 900, 
     description: "Smart TVs with UHD 4K resolution and built-in streaming apps.",
-    category: "Consumer Electronics"
+    category:"consumer-electronics",
   },
   {
     _id: "8",
@@ -166,7 +149,7 @@ export const item_list =[
     image: item_2_3,
     price: 1500, 
     description: "Powerful laptops for work and gaming.",
-    category: "Consumer Electronics"
+    category: "consumer-electronics",
   },
   {
     _id: "9",
@@ -174,7 +157,7 @@ export const item_list =[
     image: item_2_4,
     price: 800, 
     description: "Latest smartphones with advanced features and sleek designs.",
-    category: "Consumer Electronics"
+    category:"consumer-electronics",
   },
   {
     _id: "10",
@@ -182,7 +165,7 @@ export const item_list =[
     image: item_2_5,
     price: 600, 
     description: "Lightweight tablets for productivity and entertainment.",
-    category: "Consumer Electronics"
+    category: "consumer-electronics",
   },
   {
     _id: "11",
@@ -190,7 +173,7 @@ export const item_list =[
     image: item_3_1,
     price: 300,
     description: "High-resolution monitors for gaming and productivity.",
-    category: "Computer Components"
+    category:  "computer-components",
   },
   {
     _id: "12",
@@ -198,7 +181,7 @@ export const item_list =[
     image: item_3_2,
     price: 50,
     description: "Ergonomic and responsive computer mouse for smooth navigation.",
-    category: "Computer Components"
+    category: "computer-components",
   },
   {
     _id: "13",
@@ -206,7 +189,7 @@ export const item_list =[
     image: item_3_3,
     price: 200,
     description: "Versatile motherboards compatible with the latest hardware.",
-    category: "Computer Components"
+    category:  "computer-components",
   },
   {
     _id: "14",
@@ -214,7 +197,7 @@ export const item_list =[
     image: item_3_4,
     price: 400,
     description: "High-performance processors for efficient computing.",
-    category: "Computer Components"
+    category:  "computer-components",
   },
   {
     _id: "15",
@@ -222,7 +205,7 @@ export const item_list =[
     image: item_3_5,
     price: 70,
     description: "Durable keyboards with smooth typing experience.",
-    category: "Computer Components"
+    category:  "computer-components",
   },
   {
     _id: "16",
@@ -230,7 +213,7 @@ export const item_list =[
     image:item_4_1,
     price: 120,
     description: "Smart security cameras with night vision and motion detection.",
-    category: "Smart Home Products"
+    category: "smart-home-products",
   },
   {
     _id: "17",
@@ -238,7 +221,7 @@ export const item_list =[
     image: item_4_2,
     price: 25,
     description: "Control your appliances remotely with these smart plugs.",
-    category: "Smart Home Products"
+    category: "smart-home-products",
   },
   {
     _id: "18",
@@ -246,7 +229,7 @@ export const item_list =[
     image: item_4_3,
     price: 150,
     description: "Stay secure with HD video doorbells and two-way communication.",
-    category: "Smart Home Products"
+    category: "smart-home-products",
   },
   {
     _id: "19",
@@ -254,7 +237,8 @@ export const item_list =[
     image: item_5_1,
     price: 50,
     description: "Advanced sensors for industrial and specialized applications.",
-    category: "Industrial and Specialized Electronics"
+    category: "industrial-specialized-electronics",
+
   },
   {
     _id: "20",
@@ -262,7 +246,8 @@ export const item_list =[
     image: item_5_2,
     price: 35,
     description: "Powerful microcontrollers for embedded system designs.",
-    category: "Industrial and Specialized Electronics"
+    category: "industrial-specialized-electronics",
+
   },
   {
     _id: "21",
@@ -270,7 +255,8 @@ export const item_list =[
     image:item_5_3,
     price: 40,
     description: "Accurate and versatile multimeters for electrical measurements.",
-    category: "Industrial and Specialized Electronics"
+    category: "industrial-specialized-electronics",
+
   },
   {
     _id: "22",
@@ -278,7 +264,8 @@ export const item_list =[
     image: item_5_4,
     price: 400,
     description: "High-quality oscilloscopes for signal analysis and debugging.",
-    category: "Industrial and Specialized Electronics"
+    category: "industrial-specialized-electronics",
+
   }
   
   

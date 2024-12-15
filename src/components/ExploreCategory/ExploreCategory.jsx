@@ -6,10 +6,7 @@ const ExploreCategory = ({ category, setCategory }) => {
   const navigate = useNavigate();
 
   const handleCategoryClick = (item) => {
-    const formattedCategory = item.category_name
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-'); // Replace spaces and special characters with '-'
-    navigate(`/categories/${formattedCategory}`);
+    navigate(`/categories/${item.category_name}`); // Use category_name directly (already clean)
   };
   
 
