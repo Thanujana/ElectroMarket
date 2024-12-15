@@ -1,45 +1,22 @@
-import React, { useState } from 'react'; // Added useState for itemCount
-import './ProductItem.css';
-import { assets } from '../../assets/assets';
+import React, { useContext } from "react";
+import "./ProductItem.css";
+import StoreContext from "../../Context/StoreContext";
 
-const ProductItem = ({ id, name, price, description, image }) => {
-  const [itemCount, setItemCount] = useState(0); // Initialize state for itemCount
+const ProductItem = ({ item }) => {
+  const { addToCart } = useContext(StoreContext); // Access cart management context
 
   return (
-    <div className="product-item">
-      <div className="product-item-img-container">
-        <img className="product-item-image" src={image} alt={name} />
-        {!itemCount ? (
-          <img
-            className="add"
-            onClick={() => setItemCount(prev => prev + 1)}
-            src={assets.add_icon_white}
-            alt="Add"
-          />
-        ) : (
-          <div className="product-item-counter">
-            <img
-              onClick={() => setItemCount(prev => Math.max(0, prev - 1))}
-              src={assets.remove_icon_red}
-              alt="Remove"
-            />
-            <p>{itemCount}</p>
-            <img
-              onClick={() => setItemCount(prev => prev + 1)}
-              src={assets.add_icon_green}
-              alt="Add More"
-            />
-          </div>
-        )}
-      </div>
-
-      <div className="product-item-info">
-        <div className="product-item-name-rating">
-          <p>{name}</p>
-          <img src={assets.rating_starts} alt="Rating" />
-        </div>
-        <p className="product-item-desc">{description}</p>
-        <p className="product-item-price">${price}</p>
+    <div className="card product-item">
+      <img src={item.image} className="card-img-top" alt={item.name} />
+      <div className="card-body">
+        <h5 className="card-title">{item.name}</h5>
+        <p className="card-text">{item.description}</p>
+        <p className="card-text">
+          <strong>${item.price}</strong>
+        </p>
+        <button className="btn btn-primary w-100" onClick={() => addToCart(item)}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );

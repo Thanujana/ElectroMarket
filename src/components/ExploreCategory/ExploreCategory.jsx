@@ -6,10 +6,10 @@ const ExploreCategory = ({ category, setCategory }) => {
   const navigate = useNavigate();
 
   const handleCategoryClick = (item) => {
-    setCategory((prev) => (prev === item.category_name ? 'All' : item.category_name));
-    alert(`${item.category_name} selected!`); // Feedback message for user
-    navigate(`/categories/${item.category_name.toLowerCase()}`); // Navigate to category-specific URL
+    setCategory(item.category_name);
+    navigate(`/categories/${item.category_name.toLowerCase()}`);
   };
+  
 
   return (
     <div className="container py-4">

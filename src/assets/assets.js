@@ -282,4 +282,4 @@ export const item_list =[
   }
   
   
-]
+];
