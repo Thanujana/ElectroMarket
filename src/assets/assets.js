@@ -295,7 +295,7 @@ export const varieties_list ={
     { type: 'Four Door', image: item_fourdoor, price: 1399, description: 'Flexible four-door design with customizable storage options.'  },
     { type: 'French Door', image: item_frenchdoor, price: 1299, description: 'Elegant French door design with wide shelves and ample storage.'  },
     { type: 'Side by Side', image: item_sidebyside, price: 1099, description: 'Side-by-side refrigerator for organized fresh and frozen food storage.' },
-    { type: 'Top Freezer', image: item_topfreezer, price: 399,'Classic top freezer design with energy-efficient performance.' },
+    { type: 'Top Freezer', image: item_topfreezer, price: 399,description:'Classic top freezer design with energy-efficient performance.'},
   ],
   washers: [
     { type: 'Top Load', image: item_topload, price: 549, description: '1.6-5.3 Cu. Ft. Capacity with Agitator or Impeller.' },

@@ -6,6 +6,7 @@ import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Cart from "./pages/Cart/Cart";
 import CategoryItems from "./components/CategoryItems/CategoryItems";
 import Login from "./components/Login/Login";
+import ProductDisplay from "./components/ProductDisplay";
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -19,14 +20,17 @@ const App = () => {
         {/* Navbar Component */}
         <Navbar setShowLogin={setShowLogin} />
 
-        {/* Routes Configuration */}
+  
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/categories/:category_name" element={<CategoryItems />} />
+          <Route path="/products" element={<ProductDisplay />} /> 
+       
         </Routes>
       </div>
+      
     </>
   );
 };
