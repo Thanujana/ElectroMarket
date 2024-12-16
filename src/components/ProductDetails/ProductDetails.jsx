@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import './ProductDetails.css';
 import { varieties_list } from "../../assets/assets";
 
 const ProductDetails = () => {

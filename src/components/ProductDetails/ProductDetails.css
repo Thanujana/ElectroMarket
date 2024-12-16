@@ -1,0 +1,67 @@
+/* Title Styling */
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Card Styles */
+  .card {
+    border: 1px solid #eaeaea;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-color: #007bff;
+  }
+  
+  .card .card-body h5 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .card .card-body p {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .card .card-body .fw-bold {
+    color: #28a745;
+  }
+  
+  /* Button Styles */
+  .btn-outline-primary {
+    border-color: #007bff;
+    color: #007bff;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .card {
+      margin-bottom: 1.5rem;
+    }
+  
+    .card .card-body h5 {
+      font-size: 1.1rem;
+    }
+  
+    h1 {
+      font-size: 2rem;
+    }
+  }
+  
