@@ -1,72 +1,101 @@
 /* General Page Styling */
 body {
-    background-color: #f9f9f9;
-    font-family: "Arial", sans-serif;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  /* Title Styling */
-  .product-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #333;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-align: center;
-  }
-  
-  /* Product Card */
-  .product-card {
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Image Styling */
-  .product-image {
-    height: 250px;
-    object-fit: contain; /* Ensures full image is shown */
-    background-color: #f8f8f8;
-  }
-  
-  /* Card Body */
-  .card-body {
-    padding: 15px;
-  }
-  
-  .product-description {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 10px;
-  }
-  
-  .product-price {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #28a745;
-  }
-  
-  /* Swiper Navigation Buttons */
-  .swiper-button-prev,
-  .swiper-button-next {
-    color: #333;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    padding: 10px;
-    transition: background 0.3s ease;
-  }
-  
-  .swiper-button-prev:hover,
-  .swiper-button-next:hover {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  
+  background-color: #f5f7fa; /* Soft gray background */
+  font-family: "Arial", sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page Title */
+.product-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Product Card */
+.product-card {
+  background: #ffffff; /* Clean white background */
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0, 128, 128, 0.2), /* Teal shadow */
+              0 12px 30px rgba(144, 238, 144, 0.3); /* Mint shadow */
+  border: 1px solid #0fd0d3; /* Teal border */
+}
+
+/* Front Load Card - Multi-Layer Shadow */
+.product-card.front-load:hover {
+  box-shadow: 0 8px 20px rgba(0, 128, 128, 0.3),
+              0 12px 40px rgba(46, 94, 207, 0.4),
+              0 15px 60px rgba(72, 201, 176, 0.2); /* Multi-layer shadow */
+  border: 2px solid #076270; /* Light teal border */
+}
+
+/* Image Styling */
+.product-image {
+  height: 250px;
+  object-fit: contain;
+  background-color: #a0f2f8; /* Minty light background for contrast */
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+/* Card Body */
+.card-body {
+  padding: 15px;
+  background: linear-gradient(to top, #f8f9fa, #ffffff); /* Subtle gradient */
+}
+
+.product-description {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.product-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+/* Highlight specific cards */
+.product-card.top-load:hover {
+  border-color: #20c997; /* Teal */
+}
+
+.product-card.all-in-one:hover {
+  border-color: #6f42c1; /* Purple */
+}
+
+/* Swiper Navigation Buttons */
+.swiper-button-prev,
+.swiper-button-next {
+  color: #20c997; /* Teal arrows */
+  background-color: rgba(32, 201, 151, 0.2);
+  border-radius: 50%;
+  padding: 10px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: rgba(32, 201, 151, 0.4);
+  transform: scale(1.1);
+}
