@@ -6,7 +6,9 @@ import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Cart from "./pages/Cart/Cart";
 import CategoryItems from "./components/CategoryItems/CategoryItems";
 import Login from "./components/Login/Login";
-import ProductDisplay from "./components/ProductDisplay";
+import ProductVarieties from "./components/ProductVarieties/ProductVarieties";
+
+
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -26,7 +28,8 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/categories/:category_name" element={<CategoryItems />} />
-          <Route path="/products" element={<ProductDisplay />} /> 
+          <Route path="/products/:product_type" element={<ProductVarieties />} />
+
        
         </Routes>
       </div>
