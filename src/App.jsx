@@ -28,7 +28,9 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/categories/:category_name" element={<CategoryItems />} />
-          <Route path="/products/:product_type" element={<ProductVarieties />} />
+          
+
+
 
        
         </Routes>

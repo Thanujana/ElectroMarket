@@ -1,12 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { assets } from "../../assets/assets";
+import { varieties_list } from "../../assets/assets";
 
 const ProductVarieties = () => {
-  const { product_type } = useParams(); // Get the product type from the URL
-  const productVarieties = assets[product_type];
+  const { product_type } = useParams(); // Extract product_type from the URL
+
+  // Match the product_type to varieties_list keys
+  const sanitizedType = product_type.split("/").pop();
+  const productVarieties = varieties_list[sanitizedType];
 
   console.log("Product Type:", product_type);
+  console.log("Sanitized Type:", sanitizedType);
   console.log("Product Varieties:", productVarieties);
 
   if (!productVarieties) {
@@ -21,7 +25,7 @@ const ProductVarieties = () => {
   return (
     <div className="container py-4">
       <h1 className="text-center mb-4 text-primary">
-        {product_type.replace(/-/g, " ").toUpperCase()} Varieties
+        {sanitizedType.replace(/-/g, " ").toUpperCase()} Varieties
       </h1>
       <div className="row">
         {productVarieties.map((product, index) => (
@@ -35,9 +39,7 @@ const ProductVarieties = () => {
               />
               <div className="card-body">
                 <h5 className="card-title fw-bold">{product.type}</h5>
-                <p className="text-muted" style={{ fontSize: "14px" }}>
-                  {product.description}
-                </p>
+                <p className="text-muted">{product.description}</p>
                 <p className="fw-bold text-success">
                   Starting at ${product.price}
                 </p>
