@@ -6,7 +6,7 @@ import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Cart from "./pages/Cart/Cart";
 import CategoryItems from "./components/CategoryItems/CategoryItems";
 import Login from "./components/Login/Login";
-import ProductVarieties from "./components/ProductVarieties/ProductVarieties";
+import ProductDetails from './components/ProductDetails/ProductDetails';
 
 
 
@@ -28,6 +28,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/categories/:category_name" element={<CategoryItems />} />
+          <Route path="/products/:product_name" element={<ProductDetails />} />
           
 
 

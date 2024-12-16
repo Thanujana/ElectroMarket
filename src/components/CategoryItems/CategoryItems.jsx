@@ -65,14 +65,13 @@ const CategoryItems = () => {
 
                 {/* Explore Button */}
                 <div className="card-footer bg-white text-center border-0">
-                  <Link
-                    to={`/products/${item.name
-                      .toLowerCase()
-                      .replace(/ /g, "-")}`}
-                    className="btn btn-outline-primary btn-sm"
-                  >
-                    Explore
+                <Link
+                  to={`/products/${item.name.toLowerCase().replace(/ /g, "-")}`}
+                   className="btn btn-outline-primary btn-sm"
+                     >
+                     Explore
                   </Link>
+
                   
                 </div>
               </div>
