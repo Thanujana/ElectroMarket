@@ -1,67 +1,72 @@
-/* Title Styling */
-h1 {
+/* General Page Styling */
+body {
+    background-color: #f9f9f9;
+    font-family: "Arial", sans-serif;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Title Styling */
+  .product-title {
     font-size: 2.5rem;
     font-weight: bold;
-    text-align: center;
-    color: #007bff;
-    margin-bottom: 2rem;
-    text-transform: uppercase;
+    color: #333;
     letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
   }
   
-  /* Card Styles */
-  .card {
-    border: 1px solid #eaeaea;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Product Card */
+  .product-card {
     border-radius: 10px;
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
-  .card:hover {
-    transform: translateY(-10px);
+  .product-card:hover {
+    transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    border-color: #007bff;
   }
   
-  .card .card-body h5 {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #333;
+  /* Image Styling */
+  .product-image {
+    height: 250px;
+    object-fit: contain; /* Ensures full image is shown */
+    background-color: #f8f8f8;
   }
   
-  .card .card-body p {
+  /* Card Body */
+  .card-body {
+    padding: 15px;
+  }
+  
+  .product-description {
     font-size: 0.9rem;
     color: #666;
+    margin-bottom: 10px;
   }
   
-  .card .card-body .fw-bold {
+  .product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
     color: #28a745;
   }
   
-  /* Button Styles */
-  .btn-outline-primary {
-    border-color: #007bff;
-    color: #007bff;
-    transition: all 0.3s ease;
+  /* Swiper Navigation Buttons */
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: #333;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    padding: 10px;
+    transition: background 0.3s ease;
   }
   
-  .btn-outline-primary:hover {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .card {
-      margin-bottom: 1.5rem;
-    }
-  
-    .card .card-body h5 {
-      font-size: 1.1rem;
-    }
-  
-    h1 {
-      font-size: 2rem;
-    }
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    background-color: rgba(0, 0, 0, 0.3);
   }
   

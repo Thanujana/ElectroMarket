@@ -1,46 +1,63 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import './ProductDetails.css';
+import "./ProductDetails.css"; // Custom CSS file
 import { varieties_list } from "../../assets/assets";
 
+// Import Swiper components
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
+
 const ProductDetails = () => {
-  const { product_name } = useParams(); // Get product name from URL
+  const { product_name } = useParams();
   const formattedName = decodeURIComponent(product_name);
 
-  // Capitalize and replace dashes for display
+  // Capitalize and replace dashes
   const displayName = formattedName.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
-  // Fetch varieties from the list based on the product name
+  // Fetch product varieties
   const varieties = varieties_list[formattedName.toLowerCase()] || [];
 
   return (
     <div className="container py-4">
-      <h1 className="text-center mb-4 text-primary">{displayName}</h1>
+      {/* Page Title */}
+      <h1 className="text-center mb-5 product-title">{displayName}</h1>
 
+      {/* Swiper Carousel */}
       {varieties.length > 0 ? (
-        <div className="row">
+        <Swiper
+          spaceBetween={20} // Space between slides
+          slidesPerView={3} // Show 3 slides at a time
+          navigation // Enable navigation arrows
+          modules={[Navigation]}
+          breakpoints={{
+            320: { slidesPerView: 1 }, // 1 slide for mobile screens
+            768: { slidesPerView: 2 }, // 2 slides for tablets
+            1024: { slidesPerView: 3 }, // 3 slides for desktops
+          }}
+        >
           {varieties.map((variety, index) => (
-            <div key={index} className="col-md-4 mb-4">
-              <div className="card shadow-sm border-0">
+            <SwiperSlide key={index}>
+              <div className="card product-card border-0 shadow-sm">
+                {/* Product Image */}
                 <img
                   src={variety.image}
                   alt={variety.type}
-                  className="card-img-top"
-                  style={{ objectFit: "contain", height: "200px" }}
+                  className="card-img-top product-image"
                 />
+                {/* Product Details */}
                 <div className="card-body text-center">
                   <h5 className="card-title fw-bold">{variety.type}</h5>
-                  <p className="card-text text-muted">{variety.description}</p>
-                  <p className="card-text fw-bold">${variety.price}</p>
+                  <p className="card-text product-description">{variety.description}</p>
+                  <p className="product-price fw-bold text-success">${variety.price}</p>
                 </div>
               </div>
-            </div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       ) : (
-        <p className="text-center text-muted">
-          No varieties found for this product.
-        </p>
+        <p className="text-center text-muted">No varieties found for this product.</p>
       )}
     </div>
   );
