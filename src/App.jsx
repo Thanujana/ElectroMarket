@@ -7,7 +7,7 @@ import Cart from "./pages/Cart/Cart";
 import CategoryItems from "./components/CategoryItems/CategoryItems";
 import Login from "./components/Login/Login";
 import ProductDetails from './components/ProductDetails/ProductDetails';
-import Register from "./components/Register/Register";
+import Register from "./components/Register/Register.jsx";
 
 
 
