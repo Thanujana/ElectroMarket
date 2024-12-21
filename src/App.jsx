@@ -1,28 +1,22 @@
 import React, { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes,useNavigate} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Cart from "./pages/Cart/Cart";
 import CategoryItems from "./components/CategoryItems/CategoryItems";
 import Login from "./components/Login/Login";
 import ProductDetails from './components/ProductDetails/ProductDetails';
-import Register from "./components/Register/Register.jsx";
+import Register from "./components/Register/Register";
 
 
 
 const App = () => {
-  const [showLogin, setShowLogin] = useState(false);
 
   return (
-    <>
-      {/* Conditionally render the Login modal */}
-      {showLogin && <Login setShowLogin={setShowLogin} />}
-      {showLogin && <Register setShowLogin={setShowLogin} />}
-
-      <div className="app">
+    <div className="app">
         {/* Navbar Component */}
-        <Navbar setShowLogin={setShowLogin} />
+        <Navbar />
 
   
         <Routes>
@@ -31,15 +25,13 @@ const App = () => {
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/categories/:category_name" element={<CategoryItems />} />
           <Route path="/products/:product_name" element={<ProductDetails />} />
+          <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} /> 
           
-
-
-
-       
-        </Routes>
+ </Routes>
       </div>
       
-    </>
+
   );
 };
 

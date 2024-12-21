@@ -86,10 +86,18 @@ const Login = () => {
                 
 </div>
                     <button type="submit" className="btn btn-primary w-100 mb-3">Login</button>
+                    <p className="text-center mt-3">
+                    Don't have an account?{" "}
+                    <span
+                      className="text-decoration-none text-success"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => navigate("/register")} // Switch to Register view
+                    >
+                      Register
+                    </span>
+                  </p>
+
                     
-                    <p className="text-center">
-                        Don't have an account? {""} <a href="/register" className="text-decoration-none text-success">Register</a>
-                    </p>
             </form>
         </div>
         </div>

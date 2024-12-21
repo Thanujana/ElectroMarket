@@ -4,13 +4,30 @@ import './Navbar.css'; // Custom CSS
 import logo from "../../assets/logo.png";
 import searchIcon from "../../assets/search_icon.png";
 import basketIcon from "../../assets/basket_icon.png";
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState('home');
+  const navigate = useNavigate();
 
   const handleScroll = (sectionId) => {
-    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-    setMenu(sectionId); // Update menu state
+    // Check if the user is already on the home page
+    if (location.pathname === '/') {
+      // Scroll to the section
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // Navigate to home and then scroll to the section
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 300); // Delay to ensure page has loaded
+    }
+    setMenu(sectionId); // Update the active menu item
+  };
+
+  const handleNavigation = (route, menuName) => {
+    navigate(route); // Navigate to the route
+    setMenu(menuName); // Update the active menu item
   };
 
   return (
@@ -35,7 +52,8 @@ const Navbar = ({ setShowLogin }) => {
           <li className="nav-item">
               <a
                 className={`nav-link ${menu === 'header-section' ? 'active' : ''}`}
-                onClick={() => handleScroll('header-section')} // Scroll to Header
+                onClick={() => handleScroll('header-section')}
+                
               >
                 Home
               </a>
@@ -79,9 +97,9 @@ const Navbar = ({ setShowLogin }) => {
           <img src={basketIcon} alt="Basket" className="icon me-3" />
           <button
           className="btn btn-sm custom-signin-btn"
-           onClick={() => setShowLogin(true)}
+           onClick={() => navigate('/login')}
           >
-  Sign In
+  Login
 </button>
 
 
