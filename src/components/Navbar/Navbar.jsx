@@ -94,7 +94,14 @@ const Navbar = ({ setShowLogin }) => {
             />
             <img src={searchIcon} alt="Search" className="icon search-icon" />
           </div>
-          <img src={basketIcon} alt="Basket" className="icon me-3" />
+          <img
+            src={basketIcon}
+            alt="Basket"
+            className="icon me-3"
+            onClick={() => navigate('/cart')} // Add navigation to Cart page
+            style={{ cursor: "pointer" }} // Make it visually clear the icon is clickable
+          />
+
           <button
           className="btn btn-sm custom-signin-btn"
            onClick={() => navigate('/login')}

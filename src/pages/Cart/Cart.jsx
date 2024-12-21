@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ApiService from "../../service/ApiService";
-import { useCart } from "../Context/CartContext";
+import { useCart } from "../../Context/CartContext";
 import './Cart.css'; // Include your existing styles
+
+
 
 const Cart = () => {
     const { cart, dispatch } = useCart();
