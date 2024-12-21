@@ -47,12 +47,18 @@ const Login = () => {
       <div
         className="card p-4 shadow-lg"
         style={{
-          width: "400px",
+          width: "360px",
           borderRadius: "15px",
           background: "rgba(255, 255, 255, 0.9)",
         }}
       >
-        <h2 className="text-center text-primary mb-4">Login</h2>
+        <h2 className="text-center text-primary mb-4"
+        style={{
+          fontSize: "2rem",
+          fontWeight: "700",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+        }}
+        >Login</h2>
         {message && <p className="text-danger text-center">{message}</p>}
      
             <form onSubmit={handleSubmit}>
@@ -61,6 +67,8 @@ const Login = () => {
                 <input
                     type="email"
                     name="email"
+                    id="email"
+                    className="form-control"
                     value={formData.email}
                     onChange={handleChange}
                     required />
@@ -70,9 +78,12 @@ const Login = () => {
                 <input
                     type="password"
                     name="password"
+                    id="password"
+                    className="form-control"
                     value={formData.password}
                     onChange={handleChange}
                     required />
+                
 </div>
                     <button type="submit" className="btn btn-primary w-100 mb-3">Login</button>
                     
