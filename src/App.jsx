@@ -7,6 +7,7 @@ import Cart from "./pages/Cart/Cart";
 import CategoryItems from "./components/CategoryItems/CategoryItems";
 import Login from "./components/Login/Login";
 import ProductDetails from './components/ProductDetails/ProductDetails';
+import Register from "./components/Register/Register";
 
 
 
@@ -17,6 +18,7 @@ const App = () => {
     <>
       {/* Conditionally render the Login modal */}
       {showLogin && <Login setShowLogin={setShowLogin} />}
+      {showLogin && <Register setShowLogin={setShowLogin} />}
 
       <div className="app">
         {/* Navbar Component */}
