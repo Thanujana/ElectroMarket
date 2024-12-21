@@ -27,10 +27,11 @@ const cartReducer = (state, action) =>{
             return {...state, cart:newCart};
         }
 
-        case 'REMOVE_ITEM': {
-            const newCart = state.cart.filter(item => item.quantity > 1);
+        case 'REMOVE_ITEM':{
+            const newCart = state.cart.filter(item=> item.id !== action.payload.id);
             localStorage.setItem('cart', JSON.stringify(newCart));
-            return {...state, cart: newCart};
+            return {...state, cart:newCart};
+        
         }
     }
 }        
