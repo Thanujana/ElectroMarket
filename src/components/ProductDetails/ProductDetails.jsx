@@ -51,6 +51,14 @@ const ProductDetails = () => {
                   <h5 className="card-title fw-bold">{variety.type}</h5>
                   <p className="card-text product-description">{variety.description}</p>
                   <p className="product-price fw-bold text-success">${variety.price}</p>
+
+                  <button
+  className="btn btn-success mt-2 add-to-cart-btn"
+  onClick={() => handleAddToCart(variety)}
+>
+  Add to Cart
+</button>
+
                 </div>
               </div>
             </SwiperSlide>

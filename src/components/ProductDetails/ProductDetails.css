@@ -99,3 +99,8 @@ body {
   background-color: rgba(32, 201, 151, 0.4);
   transform: scale(1.1);
 }
+
+
+.add-to-cart-btn:hover {
+  background-color: #0056b3; /* Change to a darker shade of blue on hover */
+}
