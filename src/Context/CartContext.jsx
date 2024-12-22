@@ -3,10 +3,6 @@ import React, {createContext, useReducer, useContext, useEffect} from "react";
 
 const CartContext = createContext();
 
-const initialState = {
-    cart: JSON.parse(localStorage.getItem('cart')) || [],
-}
-
 
 const cartReducer = (state, action) =>{
     switch(action.type){
@@ -63,23 +59,15 @@ const cartReducer = (state, action) =>{
     }
 };
 
-
-
-
-export const CartProvider = ({children}) => {
-
-    const [state, dispatch] = useReducer(cartReducer, initialState);
-
-
-    useEffect(() =>{
-        localStorage.setItem('cart', JSON.stringify(state.cart));
-    }, [state.cart]);
-
+export const CartContextProvider = ({ children }) => {
+    const [cart, dispatch] = useReducer(cartReducer, []);
     return (
-        <CartContext.Provider value={{cart: state.cart, dispatch}}>
+        <CartContext.Provider value={{ cart, dispatch }}>
             {children}
         </CartContext.Provider>
-    )
-}
+    );
+};
 
 export const useCart = () => useContext(CartContext);
+
+export default CartContextProvider;

@@ -8,12 +8,13 @@ import CategoryItems from "./components/CategoryItems/CategoryItems";
 import Login from "./components/Login/Login";
 import ProductDetails from './components/ProductDetails/ProductDetails';
 import Register from "./components/Register/Register";
-
+import CartContextProvider from "./Context/CartContext";
 
 
 const App = () => {
 
   return (
+    <CartContextProvider>
     <div className="app">
         {/* Navbar Component */}
         <Navbar />
@@ -31,8 +32,8 @@ const App = () => {
           
  </Routes>
       </div>
+      </CartContextProvider>
       
-
   );
 };
 
