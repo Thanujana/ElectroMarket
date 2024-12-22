@@ -2,6 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import "./ProductDetails.css"; // Custom CSS file
 import { varieties_list } from "../../assets/assets";
+import { useNavigate } from "react-router-dom";
+
 
 // Import Swiper components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,6 +13,7 @@ import { Navigation } from "swiper/modules";
 
 const ProductDetails = () => {
   const { product_name } = useParams();
+  const navigate = useNavigate();
   const formattedName = decodeURIComponent(product_name);
 
   // Capitalize and replace dashes
@@ -18,6 +21,16 @@ const ProductDetails = () => {
 
   // Fetch product varieties
   const varieties = varieties_list[formattedName.toLowerCase()] || [];
+  const handleAddToCart = (variety) => {
+    const isRegistered = localStorage.getItem("isRegistered");
+  if (!isRegistered) {
+    alert("You need to register before adding items to the cart.");
+    navigate("/register"); // Redirect to the registration page
+  } else {
+    alert(`${variety.type} added to the cart!`);
+    // Add item to cart logic can go here
+  }
+};
 
   return (
     <div className="container py-4">

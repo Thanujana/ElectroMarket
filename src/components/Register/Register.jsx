@@ -35,23 +35,18 @@ const Register = () => {
     }
 
     try {
-      const response = await ApiService.registerUser({
-        email: formData.email,
-        name: formData.name,
-        phoneNumber: formData.phoneNumber,
-        password: formData.password,
-      });
 
-      if (response.status === 200) {
-        setMessage("User Successfully Registered");
-        setTimeout(() => {
-          navigate("/login");
-        }, 4000);
-      }
-    } catch (error) {
-      setMessage(error.response?.data.message || error.message || "Unable to register a user");
-    }
-  };
+    // Simulate successful registration using localStorage
+    localStorage.setItem("isRegistered", "true"); // Save registration flag
+    localStorage.setItem("userData", JSON.stringify(formData)); // Save user data if needed
+    setMessage("User successfully registered!");
+    setTimeout(() => {
+      navigate("/login"); // Redirect to home or login after registration
+    }, 3000);
+  } catch (error) {
+    setMessage("An error occured during registration");
+  }
+};
 
   return (
     <div
