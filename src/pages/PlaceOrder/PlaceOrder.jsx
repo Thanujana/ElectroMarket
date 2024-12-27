@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./PlaceOrder.css";
 
 const PlaceOrder = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     address: "",
-    phone: "",
+    phoneNumber: "",
     email: "",
     postalCode: "",
     deliveryInstructions: "",
@@ -16,33 +15,30 @@ const PlaceOrder = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Order Submitted:", formData);
     alert("Order placed successfully!");
-    navigate("/"); // Redirect to home page after placing order
   };
 
   return (
-    <div className="container my-5">
+    <div className="container mt-5">
       <h1 className="text-center mb-4">Place Your Order</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="p-4 border rounded bg-light" onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">
+          <label htmlFor="fullName" className="form-label">
             Full Name
           </label>
           <input
             type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
             className="form-control"
+            id="fullName"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
             required
           />
         </div>
@@ -51,33 +47,36 @@ const PlaceOrder = () => {
             Address
           </label>
           <textarea
+            className="form-control"
             id="address"
             name="address"
             rows="3"
             value={formData.address}
             onChange={handleChange}
-            className="form-control"
             required
           ></textarea>
         </div>
         <div className="mb-3">
-          <label htmlFor="phone" className="form-label">
+          <label htmlFor="phoneNumber" className="form-label">
             Phone Number
           </label>
           <input
             type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
             className="form-control"
+            id="phoneNumber"
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleChange}
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email Address</label>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email Address
+          </label>
           <input
             type="email"
+            className="form-control"
             id="email"
             name="email"
             value={formData.email}
@@ -85,10 +84,13 @@ const PlaceOrder = () => {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="postalCode">Postal Code</label>
+        <div className="mb-3">
+          <label htmlFor="postalCode" className="form-label">
+            Postal Code
+          </label>
           <input
             type="text"
+            className="form-control"
             id="postalCode"
             name="postalCode"
             value={formData.postalCode}
@@ -96,9 +98,12 @@ const PlaceOrder = () => {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="deliveryInstructions">Delivery Instructions (Optional)</label>
+        <div className="mb-3">
+          <label htmlFor="deliveryInstructions" className="form-label">
+            Delivery Instructions (Optional)
+          </label>
           <textarea
+            className="form-control"
             id="deliveryInstructions"
             name="deliveryInstructions"
             rows="3"
@@ -106,9 +111,12 @@ const PlaceOrder = () => {
             onChange={handleChange}
           ></textarea>
         </div>
-        <div className="form-group">
-          <label htmlFor="paymentMethod">Payment Method</label>
+        <div className="mb-3">
+          <label htmlFor="paymentMethod" className="form-label">
+            Payment Method
+          </label>
           <select
+            className="form-select"
             id="paymentMethod"
             name="paymentMethod"
             value={formData.paymentMethod}
@@ -121,9 +129,15 @@ const PlaceOrder = () => {
             <option value="upi">UPI</option>
           </select>
         </div>
-        <div className="form-group">
-          <input type="checkbox" id="terms" name="terms" required />
-          <label htmlFor="terms">
+        <div className="mb-3 form-check">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="terms"
+            name="terms"
+            required
+          />
+          <label htmlFor="terms" className="form-check-label">
             I agree to the terms and conditions.
           </label>
         </div>
