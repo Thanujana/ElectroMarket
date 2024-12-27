@@ -10,6 +10,7 @@ import ProductDetails from './components/ProductDetails/ProductDetails';
 import Register from "./components/Register/Register";
 import CartContextProvider from "./Context/CartContext";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
+import PaymentPage from "./pages/PaymentPage/PaymentPage";
 
 
 
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} /> 
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
+        <Route path="/payment" element={<PaymentPage />} />
           
  </Routes>
       </div>

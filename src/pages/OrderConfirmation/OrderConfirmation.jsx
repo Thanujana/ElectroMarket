@@ -20,6 +20,10 @@ const OrderConfirmation = () => {
     );
   }
 
+  const handlePayment = () => {
+    navigate("/payment", { state: { formData } }); // Redirect to payment page with formData
+  };
+
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">Order Confirmation</h1>
@@ -34,7 +38,7 @@ const OrderConfirmation = () => {
           <p><strong>Delivery Instructions:</strong> {formData.deliveryInstructions}</p>
         )}
         <hr />
-        <div className="d-flex justify-content-between mt-4">
+       <div className="d-flex justify-content-between mt-4">
           <button
             className="btn btn-secondary"
             onClick={() => navigate("/cart")}
@@ -43,7 +47,7 @@ const OrderConfirmation = () => {
           </button>
           <button
             className="btn btn-danger"
-            onClick={() => alert("Payment process initiated!")}
+            onClick={handlePayment}
           >
             Pay Now
           </button>

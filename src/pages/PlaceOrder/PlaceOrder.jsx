@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./PlaceOrder.css";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const PlaceOrder = () => {
+  const navigate = useNavigate(); // Initialize navigate
+
   const [formData, setFormData] = useState({
     fullName: "",
     address: "",
@@ -11,11 +11,8 @@ const PlaceOrder = () => {
     email: "",
     postalCode: "",
     deliveryInstructions: "",
-    paymentMethod: "",
   });
 
-  const navigate = useNavigate();
-  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -23,7 +20,8 @@ const PlaceOrder = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Navigate to Order Confirmation with the formData
+
+    // Simulate placing order and navigate to confirmation
     navigate("/order-confirmation", { state: { formData } });
   };
 
@@ -32,9 +30,7 @@ const PlaceOrder = () => {
       <h1 className="text-center mb-4">Place Your Order</h1>
       <form className="p-4 border rounded bg-light" onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="fullName" className="form-label">
-            Full Name
-          </label>
+          <label htmlFor="fullName" className="form-label">Full Name</label>
           <input
             type="text"
             className="form-control"
@@ -46,9 +42,7 @@ const PlaceOrder = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="address" className="form-label">
-            Address
-          </label>
+          <label htmlFor="address" className="form-label">Address</label>
           <textarea
             className="form-control"
             id="address"
@@ -60,9 +54,7 @@ const PlaceOrder = () => {
           ></textarea>
         </div>
         <div className="mb-3">
-          <label htmlFor="phoneNumber" className="form-label">
-            Phone Number
-          </label>
+          <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
           <input
             type="tel"
             className="form-control"
@@ -74,9 +66,7 @@ const PlaceOrder = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email Address
-          </label>
+          <label htmlFor="email" className="form-label">Email</label>
           <input
             type="email"
             className="form-control"
@@ -88,9 +78,7 @@ const PlaceOrder = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="postalCode" className="form-label">
-            Postal Code
-          </label>
+          <label htmlFor="postalCode" className="form-label">Postal Code</label>
           <input
             type="text"
             className="form-control"
@@ -113,18 +101,6 @@ const PlaceOrder = () => {
             value={formData.deliveryInstructions}
             onChange={handleChange}
           ></textarea>
-        </div>
-        <div className="mb-3 form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="terms"
-            name="terms"
-            required
-          />
-          <label htmlFor="terms" className="form-check-label">
-            I agree to the terms and conditions.
-          </label>
         </div>
         <button type="submit" className="btn btn-primary w-100">
           Place Order
