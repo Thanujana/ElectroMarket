@@ -34,12 +34,20 @@ const OrderConfirmation = () => {
           <p><strong>Delivery Instructions:</strong> {formData.deliveryInstructions}</p>
         )}
         <hr />
-        <button
-          className="btn btn-success w-100"
-          onClick={() => alert("Order confirmed!")}
-        >
-          Confirm Order
-        </button>
+        <div className="d-flex justify-content-between mt-4">
+          <button
+            className="btn btn-secondary"
+            onClick={() => navigate("/cart")}
+          >
+            Cancel
+          </button>
+          <button
+            className="btn btn-danger"
+            onClick={() => alert("Payment process initiated!")}
+          >
+            Pay Now
+          </button>
+        </div>
       </div>
     </div>
   );
