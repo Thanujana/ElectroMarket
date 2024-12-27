@@ -1,67 +1,61 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useCart } from "../../Context/CartContext";
-import './Cart.css'; // Include your existing styles
+import React, { useContext } from "react";
+import "./Cart.css";
+import { StoreContext } from "../../Context/StoreContext";
+import { varieties_list } from "../../assets/assets"; 
 
 const Cart = () => {
-    const { cart, dispatch } = useCart();
-    const navigate = useNavigate();
+  const { cartItems, removeFromCart,clearCart} = useContext(StoreContext);
 
-    // Increment item quantity
-    const incrementItem = (product) => {
-        dispatch({ type: 'INCREMENT_ITEM', payload: product });
-    };
+  // Calculate total price for each item and overall cart total
+  const getItemTotal = (itemId) => (varieties_list[itemId].price * cartItems[itemId]).toFixed(2);
+  const getCartTotal = () =>
+    Object.keys(cartItems)
+      .reduce((total, itemId) => total + varieties_list[itemId].price * cartItems[itemId], 0)
+      .toFixed(2);
 
-    // Decrement item quantity or remove item if quantity is 1
-    const decrementItem = (product) => {
-        const cartItem = cart.find(item => item.id === product.id);
-        if (cartItem && cartItem.quantity > 1) {
-            dispatch({ type: 'DECREMENT_ITEM', payload: product });
-        } else {
-            dispatch({ type: 'REMOVE_ITEM', payload: product });
-        }
-    };
-
-    // Calculate total price
-    const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-
-    const handleCheckout = () => {
-        alert("Checkout successful! Your items will be processed.");
-        dispatch({ type: 'CLEAR_CART' });
-        navigate("/");
-    };
-
-    return (
-        <div className="cart-page">
-            <h1>Cart</h1>
-
-            {cart.length === 0 ? (
-                <p>Your cart is empty</p>
-            ) : (
-                <div>
-                    <ul>
-                        {cart.map(item => (
-                            <li key={item.id} className="cart-item">
-                                <img src={item.image} alt={item.name} className="cart-item-image" />
-                                <div>
-                                    <h2>{item.name}</h2>
-                                    <p>{item.description}</p>
-                                    <div className="quantity-controls">
-                                        <button onClick={() => decrementItem(item)}>-</button>
-                                        <span>{item.quantity}</span>
-                                        <button onClick={() => incrementItem(item)}>+</button>
-                                    </div>
-                                    <span className="item-price">${item.price.toFixed(2)}</span>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                    <h2>Total: ${totalPrice.toFixed(2)}</h2>
-                    <button className="checkout-button" onClick={handleCheckout}>Checkout</button>
-                </div>
-            )}
+  return (
+    <div className="cart">
+      <h1>Shopping Cart</h1>
+      {Object.keys(cartItems).length === 0 ? (
+        <p>Your cart is empty. Add some items to see them here.</p>
+      ) : (
+        <div className="cart-items">
+          <div className="cart-items-header">
+            <p>Image</p>
+            <p>Title</p>
+            <p>Price</p>
+            <p>Quantity</p>
+            <p>Total</p>
+            <p>Remove</p>
+          </div>
+          <hr />
+          {Object.keys(cartItems).map((itemId) => (
+            <div key={itemId} className="cart-item">
+              <img
+                src={varieties_list[itemId].image}
+                alt={varieties_list[itemId].title}
+                className="cart-item-image"
+              />
+              <p>{varieties_list[itemId].title}</p>
+              <p>${varieties_list[itemId].price.toFixed(2)}</p>
+              <p>{cartItems[itemId]}</p>
+              <p>${getItemTotal(itemId)}</p>
+              <button
+                className="remove-btn"
+                onClick={() => removeFromCart(itemId)}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <hr />
+          <div className="cart-total">
+            <h2>Total: ${getCartTotal()}</h2>
+          </div>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default Cart;

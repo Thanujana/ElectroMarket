@@ -291,24 +291,24 @@ export const item_list =[
 ];
 export const varieties_list ={
   "refrigerators": [
-    { type: 'Bottom Freezer', image: item_bottomfreezer, price: 499,description: 'Spacious bottom freezer refrigerator for easy access to fresh foods.'  },
-    { type: 'Four Door', image: item_fourdoor, price: 1399, description: 'Flexible four-door design with customizable storage options.'  },
-    { type: 'French Door', image: item_frenchdoor, price: 1299, description: 'Elegant French door design with wide shelves and ample storage.'  },
-    { type: 'Side by Side', image: item_sidebyside, price: 1099, description: 'Side-by-side refrigerator for organized fresh and frozen food storage.' },
-    { type: 'Top Freezer', image: item_topfreezer, price: 399,description:'Classic top freezer design with energy-efficient performance.'},
+    { id: 23,type: 'Bottom Freezer', image: item_bottomfreezer, price: 499,description: 'Spacious bottom freezer refrigerator for easy access to fresh foods.'  },
+    { id: 24,type:'Four Door', image: item_fourdoor, price: 1399, description: 'Flexible four-door design with customizable storage options.'  },
+    { id: 25,type: 'French Door', image: item_frenchdoor, price: 1299, description: 'Elegant French door design with wide shelves and ample storage.'  },
+    { id: 26,type: 'Side by Side', image: item_sidebyside, price: 1099, description: 'Side-by-side refrigerator for organized fresh and frozen food storage.' },
+    { id: 27,type: 'Top Freezer', image: item_topfreezer, price: 399,description:'Classic top freezer design with energy-efficient performance.'},
   ],
   "washing-machines": [
-    { type: 'Top Load', image: item_topload, price: 549, description: '1.6-5.3 Cu. Ft. Capacity with Agitator or Impeller.' },
-    { type: 'Front Load', image: item_frontload, price: 699, description: 'Efficient front load washers for a deep clean.' },
-    { type: 'All In One', image: item_allinone, price: 799, description: 'Combination of washer and dryer in one unit.' },
-    { type: 'Laundry Center', image: item_laundrycenter, price: 999, description: 'Stacked washer and dryer combo.' },
-    { type: 'Laundry Set', image: item_laundryset, price: 1199, description: 'Matching washer and dryer set.' },
+    {id: 28, type: 'Top Load', image: item_topload, price: 549, description: '1.6-5.3 Cu. Ft. Capacity with Agitator or Impeller.' },
+    {id: 29, type: 'Front Load', image: item_frontload, price: 699, description: 'Efficient front load washers for a deep clean.' },
+    {id: 30, type: 'All In One', image: item_allinone, price: 799, description: 'Combination of washer and dryer in one unit.' },
+    {id: 31, type: 'Laundry Center', image: item_laundrycenter, price: 999, description: 'Stacked washer and dryer combo.' },
+    {id: 32,type: 'Laundry Set', image: item_laundryset, price: 1199, description: 'Matching washer and dryer set.' },
   ],
   "microwave-oven": [
-    { type: 'Over the Range', image: item_overtherange, price: 299, description: 'Convenient over-the-range microwave with exhaust fan.'  },
-    { type: 'Low Profile', image: item_lowprofile, price: 199,description: 'Sleek low-profile microwave ideal for compact spaces.'  },
-    { type: 'Countertop', image: item_countertop, price: 199,description: 'Versatile countertop microwave for quick and easy cooking.'  },
-    { type: 'Built-In', image: item_builtin, price: 999,description: 'Stylish built-in microwave with advanced cooking technology.'  },
+    { id: 33,type: 'Over the Range', image: item_overtherange, price: 299, description: 'Convenient over-the-range microwave with exhaust fan.'  },
+    {id: 34, type: 'Low Profile', image: item_lowprofile, price: 199,description: 'Sleek low-profile microwave ideal for compact spaces.'  },
+    { id: 35,type: 'Countertop', image: item_countertop, price: 199,description: 'Versatile countertop microwave for quick and easy cooking.'  },
+    { id: 36,type: 'Built-In', image: item_builtin, price: 999,description: 'Stylish built-in microwave with advanced cooking technology.'  },
   ],
   
 

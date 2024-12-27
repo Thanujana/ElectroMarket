@@ -1,41 +1,39 @@
-import { createContext, useState } from 'react';
-import { item_list } from '../assets/assets'; // Make sure item_list is correctly imported.
+import React, { createContext, useState } from "react";
 
-export const StoreContext = createContext(null); // Create context without initial value.
+export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-  const [cartItems,setCartItems] =useState({});
+  const [cartItems, setCartItems] = useState({});
 
   const addToCart = (itemId) => {
-    if (!item_list[itemId]) {
-      console.warn(`Item with ID ${itemId} does not exist in item_list.`);
-      return; // Do nothing if the item does not exist
-    }
-  
     setCartItems((prev) => ({
       ...prev,
-      [itemId]: (prev[itemId] || 0) + 1, // Increment or initialize count
+      [itemId]: (prev[itemId] || 0) + 1,
     }));
   };
-  
 
   const removeFromCart = (itemId) => {
     setCartItems((prev) => {
-      if (prev[itemId] === 1) {
-        const updatedCart = { ...prev };
-        delete updatedCart[itemId]; // Remove the item when count reaches 0
-        return updatedCart;
+      const updated = { ...prev };
+      if (updated[itemId] > 1) {
+        updated[itemId] -= 1;
       } else {
-        return { ...prev, [itemId]: prev[itemId] - 1 }; // Decrement count
+        delete updated[itemId];
       }
+      return updated;
     });
   };
+  const clearCart = () => {
+    setCartItems({});
+  };
   
+  const totalItems = Object.values(cartItems).reduce((acc, qty) => acc + qty, 0);
   return (
-    <StoreContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <StoreContext.Provider value={{ cartItems, addToCart, removeFromCart,clearCart,
+        totalItems, }}>
       {props.children}
     </StoreContext.Provider>
   );
 };
 
-export default StoreContextProvider;  // Default export for the provider
+export default StoreContextProvider;
