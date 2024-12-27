@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./PlaceOrder.css";
 
@@ -13,6 +14,8 @@ const PlaceOrder = () => {
     paymentMethod: "",
   });
 
+  const navigate = useNavigate();
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -20,8 +23,8 @@ const PlaceOrder = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Order Submitted:", formData);
-    alert("Order placed successfully!");
+    // Navigate to Order Confirmation with the formData
+    navigate("/order-confirmation", { state: { formData } });
   };
 
   return (
@@ -110,24 +113,6 @@ const PlaceOrder = () => {
             value={formData.deliveryInstructions}
             onChange={handleChange}
           ></textarea>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="paymentMethod" className="form-label">
-            Payment Method
-          </label>
-          <select
-            className="form-select"
-            id="paymentMethod"
-            name="paymentMethod"
-            value={formData.paymentMethod}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Payment Method</option>
-            <option value="creditCard">Credit/Debit Card</option>
-            <option value="cashOnDelivery">Cash on Delivery</option>
-            <option value="upi">UPI</option>
-          </select>
         </div>
         <div className="mb-3 form-check">
           <input

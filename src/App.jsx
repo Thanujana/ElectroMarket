@@ -9,6 +9,9 @@ import Login from "./components/Login/Login";
 import ProductDetails from './components/ProductDetails/ProductDetails';
 import Register from "./components/Register/Register";
 import CartContextProvider from "./Context/CartContext";
+import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
+
+
 
 
 
@@ -30,6 +33,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} /> 
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
           
  </Routes>
       </div>
