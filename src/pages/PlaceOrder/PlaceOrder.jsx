@@ -8,6 +8,10 @@ const PlaceOrder = () => {
     name: "",
     address: "",
     phone: "",
+    email: "",
+    postalCode: "",
+    deliveryInstructions: "",
+    paymentMethod: "",
   });
 
   const handleChange = (e) => {
@@ -69,6 +73,59 @@ const PlaceOrder = () => {
             className="form-control"
             required
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="postalCode">Postal Code</label>
+          <input
+            type="text"
+            id="postalCode"
+            name="postalCode"
+            value={formData.postalCode}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="deliveryInstructions">Delivery Instructions (Optional)</label>
+          <textarea
+            id="deliveryInstructions"
+            name="deliveryInstructions"
+            rows="3"
+            value={formData.deliveryInstructions}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div className="form-group">
+          <label htmlFor="paymentMethod">Payment Method</label>
+          <select
+            id="paymentMethod"
+            name="paymentMethod"
+            value={formData.paymentMethod}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Payment Method</option>
+            <option value="creditCard">Credit/Debit Card</option>
+            <option value="cashOnDelivery">Cash on Delivery</option>
+            <option value="upi">UPI</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <input type="checkbox" id="terms" name="terms" required />
+          <label htmlFor="terms">
+            I agree to the terms and conditions.
+          </label>
         </div>
         <button type="submit" className="btn btn-primary w-100">
           Place Order
