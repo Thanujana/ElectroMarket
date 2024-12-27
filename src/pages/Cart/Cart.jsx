@@ -25,21 +25,24 @@ const Cart = () => {
     }, 0);
 
   return (
-    <div className="cart">
-      <h1>Shopping Cart</h1>
+    <div className="container my-5">
+      <h1 className="text-center mb-4">Shopping Cart</h1>
       {Object.keys(cartItems).length === 0 ? (
-        <p>Your cart is empty. Add some items to see them here.</p>
+        <p className="text-center text-muted">Your cart is empty. Add some items to see them here.</p>
       ) : (
-        <div className="cart-items">
-          <div className="cart-items-header">
-            <p>Image</p>
-            <p>Title</p>
-            <p>Price</p>
-            <p>Quantity</p>
-            <p>Total</p>
-            <p>Remove</p>
-          </div>
-          <hr />
+        <div className="table-responsive">
+          <table className="table table-bordered text-center align-middle">
+          <thead className="table-light">
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Remove</th>
+            </tr>
+            </thead>
+         <tbody>
           {Object.keys(cartItems).map((itemId) => {
             const item = getItemById(itemId);
             if (!item) {
@@ -47,30 +50,41 @@ const Cart = () => {
               return null;
             }
             return (
-              <div key={itemId} className="cart-item">
-                <img
-                  src={item.image}
-                  alt={item.type}
-                  className="cart-item-image"
-                />
-                <p>{item.type}</p>
-                <p>${item.price.toFixed(2)}</p>
-                <p>{cartItems[itemId]}</p>
-                <p>${getItemTotal(itemId)}</p>
-                <button
-                  className="remove-btn"
-                  onClick={() => removeFromCart(itemId)}
-                >
-                  Remove
-                </button>
-              </div>
+                <tr key={itemId}>
+                <td>
+                  <img
+                    src={item.image}
+                    alt={item.type}
+                    className="img-thumbnail"
+                    style={{ maxWidth: "100px" }}
+                  />
+                </td>
+                <td>{item.type}</td>
+                <td>${item.price.toFixed(2)}</td>
+                <td>{cartItems[itemId]}</td>
+                <td>${getItemTotal(itemId)}</td>
+                <td>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => removeFromCart(itemId)}
+                  >
+                    &times;
+                  </button>
+                </td>
+              </tr>
             );
           })}
-          <hr />
-          <div className="cart-total">
-            <h2>Total: ${getCartTotal().toFixed(2)}</h2>
-            <button className="clear-btn" onClick={clearCart}>
-              Clear Cart
+        </tbody>
+        <tfoot>
+        <tr>
+                <td colSpan="4" className="text-end fw-bold">Grand Total:</td>
+                <td colSpan="2" className="fw-bold">${getCartTotal()}</td>
+              </tr>
+            </tfoot>
+          </table>
+          <div className="text-end">
+            <button className="btn btn-warning mt-3" onClick={clearCart}>
+            Clear Cart
             </button>
           </div>
         </div>
