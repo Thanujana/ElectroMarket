@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Cart.css";
 import { StoreContext } from "../../Context/StoreContext";
@@ -7,6 +8,7 @@ import { varieties_list } from "../../assets/assets";
 const Cart = () => {
   const { cartItems, removeFromCart, clearCart } = useContext(StoreContext);
 
+  const navigate = useNavigate();
   // Flatten varieties_list for easy lookup
   const allItems = Object.values(varieties_list).flat();
   const getItemById = (id) => allItems.find((item) => item.id === parseInt(id));
@@ -95,7 +97,7 @@ const Cart = () => {
                 <p>Total:</p>
                 <p>${(getSubtotal() + deliveryFee).toFixed(2)}</p>
               </div>
-              <button className="btn btn-danger w-100 mt-3">Proceed to Checkout</button>
+              <button className="btn btn-danger w-100 mt-3" onClick={() => navigate("/place-order")}>Proceed to Checkout</button>
               <button
                 className="btn btn-outline-danger w-100 mt-2"
                 onClick={clearCart}

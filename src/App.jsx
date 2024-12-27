@@ -11,6 +11,7 @@ import Register from "./components/Register/Register";
 import CartContextProvider from "./Context/CartContext";
 
 
+
 const App = () => {
 
   return (
@@ -23,7 +24,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/order" element={<PlaceOrder />} />
+          <Route path="/place-order" element={<PlaceOrder />} />
           <Route path="/categories/:category_name" element={<CategoryItems />} />
           <Route path="/products/:product_name" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
