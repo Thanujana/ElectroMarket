@@ -40,7 +40,7 @@ const App = () => {
         <Route path="/payment" element={<PaymentPage />} />
 
         {/* Admin Routes */}
-      <Route path="/admin" element={<AdminDashboard />} />
+       <Route path="/admin" element={<AdminDashboard />} />
           
  </Routes>
       </div>
