@@ -58,53 +58,61 @@ const CategoryList = () => {
   };
 
   return (
-    <div className="admin-category-page">
-      <div className="admin-category-list">
-        <h2>Manage Categories</h2>
-        <button className="btn-add-category" onClick={handleAddCategory}>
+    <div className="container mt-4">
+      <div className="mb-4">
+        <h2 className="text-center">Manage Categories</h2>
+        <button className="btn btn-primary" onClick={handleAddCategory}>
           Add Category
         </button>
-        <ul>
+        </div>
+
+        <ul className="list-group">
           {categories.length > 0 ? (
             categories.map((category) => (
-              <li key={category.id} className="category-item">
-                <span className="category-name">{category.name}</span>
-                <div className="admin-btns">
-                  <button className="btn-edit" onClick={() => handleEdit(category.id)}>
+              <li key={category.id} className="list-group-item d-flex justify-content-between align-items-center">
+                 <span>{category.name}</span>
+                 <div>
+                 <button className="btn btn-warning btn-sm me-2" onClick={() => handleEdit(category.id)}>
                     Edit
                   </button>
-                  <button className="btn-delete" onClick={() => handleDelete(category.id)}>
+                  <button className="btn btn-danger btn-sm" onClick={() => handleDelete(category.id)}>
                     Delete
                   </button>
                 </div>
               </li>
             ))
           ) : (
-            <li className="no-category">No categories available.</li>
+            <li className="list-group-item text-center">No categories available.</li>
           )}
         </ul>
-      </div>
-
-        {/* Modal for Add/Edit Category */}
+     {/* Modal for Add/Edit Category */}
         {showModal && (
-        <div className="modal-overlay">
+        <div className="modal fade show d-block" tabIndex="-1">
+        <div className="modal-dialog">
           <div className="modal-content">
-            <h3>{currentCategory ? "Edit Category" : "Add Category"}</h3>
+            <div className="modal-header">
+            <h5 className="modal-title">{currentCategory ? "Edit Category" : "Add Category"}</h5>
+                <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+              </div>
+              <div className="modal-body">
             <input
               type="text"
+              className="form-control"
               placeholder="Category Name"
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
             />
-            <div className="modal-buttons">
-              <button className="btn-save" onClick={handleSave}>
+            </div>
+            <div className="modal-footer">
+                <button className="btn btn-success" onClick={handleSave}>
                 Save
               </button>
-              <button className="btn-cancel" onClick={() => setShowModal(false)}>
+              <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
                 Cancel
               </button>
             </div>
           </div>
+        </div>
         </div>
       )}
     </div>
