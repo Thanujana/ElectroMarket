@@ -12,9 +12,7 @@ import CartContextProvider from "./Context/CartContext";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
 import PaymentPage from "./pages/PaymentPage/PaymentPage";
 import AdminDashboard from "./admin/AdminDashboard";
-
-
-
+import CategoryList from "./admin/AdminCategoryPage/CategoryList";
 
 
 
@@ -41,8 +39,8 @@ const App = () => {
 
         {/* Admin Routes */}
        <Route path="/admin" element={<AdminDashboard />} />
-          
- </Routes>
+       <Route path="/admin/categories" element={<CategoryList />} />  
+      </Routes>
       </div>
       </CartContextProvider>
       
