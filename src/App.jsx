@@ -11,6 +11,8 @@ import Register from "./components/Register/Register";
 import CartContextProvider from "./Context/CartContext";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
 import PaymentPage from "./pages/PaymentPage/PaymentPage";
+import AdminDashboard from "./admin/AdminDashboard";
+
 
 
 
@@ -36,6 +38,9 @@ const App = () => {
         <Route path="/register" element={<Register />} /> 
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
         <Route path="/payment" element={<PaymentPage />} />
+
+        {/* Admin Routes */}
+      <Route path="/admin" element={<AdminDashboard />} />
           
  </Routes>
       </div>
