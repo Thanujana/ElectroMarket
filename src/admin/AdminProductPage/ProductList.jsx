@@ -3,43 +3,71 @@ import React, { useState } from "react";
 const ProductList = () => {
   const [categories, setCategories] = useState([
     { id: 1, name: "Electronics", products: [{ id: 1, name: "Smartphone" }, { id: 2, name: "Laptop" }] },
-    { id: 2, name: "Consumer Electronics", products: [{ id: 3, name: "monitor" }, { id: 4, name: "Mouse" }] },
+    { id: 2, name: "Consumer Electronics", products: [{ id: 3, name: "Monitor" }, { id: 4, name: "Mouse" }] },
     { id: 3, name: "Home Appliances", products: [{ id: 5, name: "Microwave" }, { id: 6, name: "Vacuum Cleaner" }] },
   ]);
 
   const [showModal, setShowModal] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(null);
+  const [currentProduct, setCurrentProduct] = useState(null);
   const [productName, setProductName] = useState("");
 
   // Handle Add Product
   const handleAddProduct = (category) => {
     setCurrentCategory(category);
+    setCurrentProduct(null); // No product selected for adding
     setProductName("");
     setShowModal(true);
   };
 
-  // Save Product
+  // Handle Edit Product
+  const handleEditProduct = (category, product) => {
+    setCurrentCategory(category);
+    setCurrentProduct(product); // Set the product being edited
+    setProductName(product.name); // Pre-fill the input with the product name
+    setShowModal(true);
+  };
+
+  // Save Product (Add or Edit)
   const handleSaveProduct = () => {
     if (!productName.trim()) {
       alert("Product name cannot be empty.");
       return;
     }
 
-    const newProduct = {
-      id: Date.now(),
-      name: productName,
-    };
+    if (currentProduct) {
+      // Edit existing product
+      setCategories((prevCategories) =>
+        prevCategories.map((category) =>
+          category.id === currentCategory.id
+            ? {
+                ...category,
+                products: category.products.map((product) =>
+                  product.id === currentProduct.id ? { ...product, name: productName } : product
+                ),
+              }
+            : category
+        )
+      );
+    } else {
+      // Add new product
+      const newProduct = {
+        id: Date.now(),
+        name: productName,
+      };
 
-    setCategories((prevCategories) =>
-      prevCategories.map((category) =>
-        category.id === currentCategory.id
-          ? { ...category, products: [...category.products, newProduct] }
-          : category
-      )
-    );
+      setCategories((prevCategories) =>
+        prevCategories.map((category) =>
+          category.id === currentCategory.id
+            ? { ...category, products: [...category.products, newProduct] }
+            : category
+        )
+      );
+    }
 
     setShowModal(false);
     setProductName("");
+    setCurrentProduct(null);
   };
 
   return (
@@ -53,7 +81,10 @@ const ProductList = () => {
           <ul>
             {category.products.length > 0 ? (
               category.products.map((product) => (
-                <li key={product.id}>{product.name}</li>
+                <li key={product.id}>
+                  {product.name}
+                  <button onClick={() => handleEditProduct(category, product)}>Edit</button>
+                </li>
               ))
             ) : (
               <li>No products available in this category.</li>
@@ -64,7 +95,9 @@ const ProductList = () => {
 
       {showModal && (
         <div>
-          <h3>Add Product to {currentCategory?.name}</h3>
+          <h3>
+            {currentProduct ? "Edit Product" : "Add Product"} to {currentCategory?.name}
+          </h3>
           <input
             type="text"
             placeholder="Enter product name"
