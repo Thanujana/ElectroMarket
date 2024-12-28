@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 const CategoryList = () => {
   const [categories, setCategories] = useState([
     { id: 1, name: "Electronics" },
-    { id: 2, name: "Fashion" },
+    { id: 2, name: "Consumer Electronics" },
     { id: 3, name: "Home Appliances" },
-    { id: 4, name: "Books" },
+    { id: 4, name: "........." },
   ]);
 
   const [showModal, setShowModal] = useState(false); // To toggle the modal
