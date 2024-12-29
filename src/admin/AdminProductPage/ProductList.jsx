@@ -3,55 +3,80 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const ProductList = () => {
   const [categories, setCategories] = useState([
-    { id: 1, name: "Electronics", products: [{ id: 1, name: "Smartphone" }, { id: 2, name: "Laptop" }] },
-    { id: 2, name: "Consumer Electronics", products: [{ id: 3, name: "Monitor" }, { id: 4, name: "Mouse" }] },
-    { id: 3, name: "Home Appliances", products: [{ id: 5, name: "Microwave" }, { id: 6, name: "Vacuum Cleaner" }] },
+    {
+      id: 1,
+      name: "Electronics",
+      products: [
+        { id: 1, name: "Smartphone", description: "A high-tech phone", price: 699, image: "" },
+        { id: 2, name: "Laptop", description: "Portable computer", price: 999, image: "" },
+      ],
+    },
+    {
+      id: 2,
+      name: "Consumer Electronics",
+      products: [
+        { id: 3, name: "Monitor", description: "HD monitor", price: 199, image: "" },
+        { id: 4, name: "Mouse", description: "Wireless mouse", price: 49, image: "" },
+      ],
+    },
   ]);
 
   const [showModal, setShowModal] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(null);
   const [currentProduct, setCurrentProduct] = useState(null);
-  const [productName, setProductName] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    price: "",
+    image: "",
+  });
 
   const handleAddProduct = (category) => {
     setCurrentCategory(category);
     setCurrentProduct(null);
-    setProductName("");
+    setFormData({ name: "", description: "", price: "", image: "" });
     setShowModal(true);
   };
 
   const handleEditProduct = (category, product) => {
     setCurrentCategory(category);
     setCurrentProduct(product);
-    setProductName(product.name);
+    setFormData({
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      image: product.image,
+    });
     setShowModal(true);
   };
 
   const handleSaveProduct = () => {
-    if (!productName.trim()) {
-      alert("Product name cannot be empty.");
+    const { name, description, price, image } = formData;
+
+    if (!name.trim() || !description.trim() || !price || !image.trim()) {
+      alert("All fields are required!");
       return;
     }
 
+    const updatedProduct = { ...currentProduct, ...formData, price: parseFloat(price) };
+
     if (currentProduct) {
+      // Update existing product
       setCategories((prevCategories) =>
         prevCategories.map((category) =>
           category.id === currentCategory.id
             ? {
                 ...category,
                 products: category.products.map((product) =>
-                  product.id === currentProduct.id ? { ...product, name: productName } : product
+                  product.id === currentProduct.id ? updatedProduct : product
                 ),
               }
             : category
         )
       );
     } else {
-      const newProduct = {
-        id: Date.now(),
-        name: productName,
-      };
-
+      // Add new product
+      const newProduct = { ...formData, id: Date.now(), price: parseFloat(price) };
       setCategories((prevCategories) =>
         prevCategories.map((category) =>
           category.id === currentCategory.id
@@ -62,14 +87,18 @@ const ProductList = () => {
     }
 
     setShowModal(false);
-    setProductName("");
+    setFormData({ name: "", description: "", price: "", image: "" });
     setCurrentProduct(null);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   return (
     <div className="container mt-4">
       <h2 className="text-center mb-4">Manage Products</h2>
-
       {categories.map((category) => (
         <div key={category.id} className="mb-4 border rounded p-3 bg-light shadow-sm">
           <h3 className="d-flex justify-content-between align-items-center">
@@ -88,13 +117,26 @@ const ProductList = () => {
                   key={product.id}
                   className="list-group-item d-flex justify-content-between align-items-center"
                 >
-                  {product.name}
-                  <button
-                    className="btn btn-sm btn-warning"
-                    onClick={() => handleEditProduct(category, product)}
-                  >
-                    Edit
-                  </button>
+                  <div>
+                    <strong>{product.name}</strong>
+                    <p className="mb-1 text-muted">{product.description}</p>
+                    <span className="text-success">${product.price}</span>
+                  </div>
+                  <div>
+                    <img
+                      src={product.image || "https://via.placeholder.com/50"}
+                      alt={product.name}
+                      style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                    />
+                    <div>
+                      <button
+                        className="btn btn-sm btn-warning me-2"
+                        onClick={() => handleEditProduct(category, product)}
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </div>
                 </li>
               ))
             ) : (
@@ -113,35 +155,48 @@ const ProductList = () => {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">
-                  {currentProduct ? "Edit Product" : "Add Product"} to{" "}
-                  {currentCategory?.name}
+                  {currentProduct ? "Edit Product" : "Add Product"} to {currentCategory?.name}
                 </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setShowModal(false)}
-                ></button>
+                <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
               </div>
               <div className="modal-body">
                 <input
                   type="text"
+                  className="form-control mb-2"
+                  placeholder="Product Name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                />
+                <textarea
+                  className="form-control mb-2"
+                  placeholder="Description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                ></textarea>
+                <input
+                  type="number"
+                  className="form-control mb-2"
+                  placeholder="Price"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
                   className="form-control"
-                  placeholder="Enter product name"
-                  value={productName}
-                  onChange={(e) => setProductName(e.target.value)}
+                  placeholder="Image URL"
+                  name="image"
+                  value={formData.image}
+                  onChange={handleInputChange}
                 />
               </div>
               <div className="modal-footer">
-                <button
-                  className="btn btn-success"
-                  onClick={handleSaveProduct}
-                >
+                <button className="btn btn-success" onClick={handleSaveProduct}>
                   Save
                 </button>
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => setShowModal(false)}
-                >
+                <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
                   Cancel
                 </button>
               </div>
