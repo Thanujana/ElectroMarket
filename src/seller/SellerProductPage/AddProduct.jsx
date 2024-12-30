@@ -58,11 +58,10 @@ const AddProduct = () => {
     alert("Product added successfully!");
   };
 
-  return (
-    <div className="container mt-5">
+  return (<div className="container mt-5">
     {/* Card to Contain Form */}
     <div className="card shadow-lg">
-      <div className="card-header bg-primary text-white">
+    <div className="card-header bg-dark text-white">
         <h2 className="mb-0">Add Product</h2>
       </div>
   
@@ -138,7 +137,12 @@ const AddProduct = () => {
   
             {/* Navigation Buttons */}
             <div className="d-flex justify-content-end">
-              <button className="btn btn-primary" onClick={handleNext}>
+              <button className="btn"
+               style={{
+                backgroundColor: "#20c997",
+                color: "white",
+              }}
+               onClick={handleNext}>
                 Next <i className="bi bi-arrow-right-circle-fill ms-2"></i>
               </button>
             </div>
@@ -146,10 +150,8 @@ const AddProduct = () => {
         )}
       </div>
     </div>
-  </div>
+ 
   
-        )}
-
         {/* Step 2: Categories */}
         {step === 2 && (
           <div>
@@ -490,7 +492,7 @@ const AddProduct = () => {
           </div>
         )}
       </div>
-    </div>
+    
   );
 };
 
