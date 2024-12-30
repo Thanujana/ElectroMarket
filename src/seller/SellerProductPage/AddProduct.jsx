@@ -107,18 +107,99 @@ const AddProduct = () => {
         {/* Step 2: Categories */}
         {step === 2 && (
           <div>
-            <h2>Step 2: Categories</h2>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="electronics"
-                className="form-check-input"
-                onChange={() => handleDeliveryMethodChange("Electronics")}
-              />
-              <label htmlFor="electronics" className="form-check-label">
-                Electronics
-              </label>
+          <h2>Step 2: Categories</h2>
+          <p>Select the category your product belongs to:</p>
+        
+          <div className="row">
+            {/* Electronics */}
+            <div className="col-md-4">
+              <h5>Electronics</h5>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="smartphones"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Smartphones")}
+                />
+                <label htmlFor="smartphones" className="form-check-label">
+                  Smartphones
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="laptops"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Laptops")}
+                />
+                <label htmlFor="laptops" className="form-check-label">
+                  Laptops
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="tablets"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Tablets")}
+                />
+                <label htmlFor="tablets" className="form-check-label">
+                  Tablets
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="wearables"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Wearables")}
+                />
+                <label htmlFor="wearables" className="form-check-label">
+                  Wearables (e.g., Smartwatches)
+                </label>
+              </div>
             </div>
+        
+            
+        
+            {/* Cameras */}
+            <div className="col-md-4">
+              <h5>Cameras</h5>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="dslr"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("DSLR Cameras")}
+                />
+                <label htmlFor="dslr" className="form-check-label">
+                  DSLR Cameras
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="lenses"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Camera Lenses")}
+                />
+                <label htmlFor="lenses" className="form-check-label">
+                  Camera Lenses
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="drones"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Drones")}
+                />
+                <label htmlFor="drones" className="form-check-label">
+                  Drones
+                </label>
+              </div>
+            </div>
+          </div>
             {/* Repeat similar for other categories */}
             <button className="btn btn-secondary mt-3 me-3" onClick={handlePrevious}>
               Back
