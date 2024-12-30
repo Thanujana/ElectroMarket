@@ -602,42 +602,133 @@ const AddProduct = () => {
   </div>
 )}
 
+{/* Step 5: Complaints/Returns */}
+{step === 5 && (
+  <div>
+    <h3 className="text-secondary mb-4">
+      <i className="bi bi-file-earmark-text me-2"></i>Step 5: Complaints/Returns
+    </h3>
 
-        {/* Step 5: Complaints/Returns */}
-        {step === 5 && (
-          <div>
-            <h2>Step 5: Complaints/Returns</h2>
-            <input
-              type="text"
-              name="warranty"
-              value={formData.complaints.warranty}
-              onChange={handleInputChange}
-              className="form-control mb-3"
-              placeholder="Warranty Period"
-            />
-            <textarea
-              name="address"
-              value={formData.complaints.address}
-              onChange={handleInputChange}
-              className="form-control mb-3"
-              placeholder="Address for Complaints or Returns"
-            ></textarea>
-            <textarea
-              name="returnPolicy"
-              value={formData.complaints.returnPolicy}
-              onChange={handleInputChange}
-              className="form-control"
-              placeholder="Return Policy"
-            ></textarea>
-            <button className="btn btn-secondary mt-3 me-3" onClick={handlePrevious}>
-              Back
-            </button>
-            <button className="btn btn-success mt-3" onClick={handleSubmit}>
-              Submit
-            </button>
-          </div>
-        )}
-      </div>
+    {/* Warranty Period */}
+    <div className="mb-4">
+      <label htmlFor="warranty" className="form-label">
+        Warranty Period
+      </label>
+      <input
+        type="text"
+        id="warranty"
+        name="warranty"
+        value={formData.complaints.warranty}
+        onChange={handleInputChange}
+        className="form-control"
+        placeholder="Enter warranty period (e.g., 6 months, 1 year)"
+      />
+    </div>
+
+    {/* Address for Complaints */}
+    <div className="mb-4">
+      <label htmlFor="address" className="form-label">
+        Address for Complaints or Returns
+      </label>
+      <textarea
+        id="address"
+        name="address"
+        value={formData.complaints.address}
+        onChange={handleInputChange}
+        className="form-control"
+        rows="3"
+        placeholder="Enter return or complaints address"
+      ></textarea>
+    </div>
+
+    {/* Return Policy */}
+    <div className="mb-4">
+      <label htmlFor="returnPolicy" className="form-label">
+        Return Policy
+      </label>
+      <textarea
+        id="returnPolicy"
+        name="returnPolicy"
+        value={formData.complaints.returnPolicy}
+        onChange={handleInputChange}
+        className="form-control"
+        rows="4"
+        placeholder="Describe the return policy (e.g., Return within 30 days)"
+      ></textarea>
+    </div>
+
+    {/* Navigation Buttons */}
+    <div
+      className="d-flex justify-content-between align-items-center mt-4"
+      style={{
+        padding: "0 10px",
+      }}
+    >
+      <button
+        className="btn btn-outline-secondary"
+        onClick={handlePrevious}
+      >
+        <i className="bi bi-arrow-left-circle me-2"></i>Back
+      </button>
+      <button
+        className="btn"
+        style={{
+          backgroundColor: "#28a745", // Success green color
+          color: "white",
+          padding: "10px 20px",
+        }}
+        onClick={handleSubmit}
+      >
+        Submit <i className="bi bi-check-circle ms-2"></i>
+      </button>
+    </div>
+  </div>
+)}
+
+ {/* Step 6: Success Message */}
+ {step === 6 && (
+            <div
+              className="d-flex flex-column align-items-center justify-content-center"
+              style={{
+                height: "400px",
+                background: "rgba(255, 218, 218, 0.3)", // Light red background
+              }}
+            >
+              <img
+                src="https://via.placeholder.com/200" // Replace with actual illustration
+                alt="Success"
+                style={{ maxWidth: "250px", marginBottom: "20px" }}
+              />
+              <h3 className="text-center text-secondary">
+                Your advertisement was successfully added!
+              </h3>
+              <button
+                className="btn btn-warning mt-3"
+                style={{
+                  padding: "10px 30px",
+                  borderRadius: "30px",
+                  fontWeight: "bold",
+                  color: "white",
+                }}
+              >
+                View your advertisement →
+              </button>
+              <p className="mt-3">
+                or{" "}
+                <a
+                  href="/"
+                  style={{
+                    textDecoration: "underline",
+                    color: "#FF6D39",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Return to home page
+                </a>
+              </p>
+            </div>
+          )}
+  </div>
       </div>
   );
 };
