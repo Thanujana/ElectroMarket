@@ -14,6 +14,8 @@ import PaymentPage from "./pages/PaymentPage/PaymentPage";
 import AdminDashboard from "./admin/AdminDashboard";
 import CategoryList from "./admin/AdminCategoryPage/CategoryList";
 import ProductList from "./admin/AdminProductPage/ProductList"; 
+import OrderList from "./admin/AdminOrderPage/OrderList";  // Adjust if necessary
+
 
 
 
@@ -43,6 +45,7 @@ const App = () => {
        <Route path="/admin" element={<AdminDashboard />} />
        <Route path="/admin/categories" element={<CategoryList />} />
        <Route path="/admin/products" element={<ProductList />} /> 
+       <Route path="/admin/orders" element={<OrderList />} />
       </Routes>
       </div>
       </CartContextProvider>

@@ -126,7 +126,7 @@ const ProductList = () => {
                     <img
                       src={product.image || "https://via.placeholder.com/50"}
                       alt={product.name}
-                      style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                      style={{ width: "100px", height: "100px", objectFit: "cover" }}
                     />
                     <div>
                       <button
