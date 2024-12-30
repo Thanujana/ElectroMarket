@@ -13,9 +13,11 @@ import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
 import PaymentPage from "./pages/PaymentPage/PaymentPage";
 import AdminDashboard from "./admin/AdminDashboard";
 import CategoryList from "./admin/AdminCategoryPage/CategoryList";
-import ProductList from "./admin/AdminProductPage/ProductList"; 
+import AdminProductList from "./admin/AdminProductPage/ProductList";
 import OrderList from "./admin/AdminOrderPage/OrderList"; 
 import SellerDashboard from "./seller/SellerDashboard";
+import SellerProductList from "./seller/SellerProductPage/ProductList";
+import AddProduct from "./seller/SellerProductPage/AddProduct";
 
 
 
@@ -47,11 +49,13 @@ const App = () => {
         {/* Admin Routes */}
        <Route path="/admin" element={<AdminDashboard />} />
        <Route path="/admin/categories" element={<CategoryList />} />
-       <Route path="/admin/products" element={<ProductList />} /> 
+       <Route path="/admin/products" element={<AdminProductList />} />
        <Route path="/admin/orders" element={<OrderList />} />
 
        {/* Seller Routes */}
        <Route path="/seller/dashboard" element={<SellerDashboard />} />
+       <Route path="/seller/products" element={<SellerProductList />} />
+       <Route path="/seller/products/add" element={<AddProduct />} />
       </Routes>
       </div>
       </CartContextProvider>
