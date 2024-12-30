@@ -477,37 +477,131 @@ const AddProduct = () => {
   </div>
 )}
 
-        {/* Step 4: Delivery */}
-        {step === 4 && (
-          <div>
-            <h2>Step 4: Delivery</h2>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="pickup"
-                className="form-check-input"
-                onChange={() => handleDeliveryMethodChange("Self Pickup")}
-              />
-              <label htmlFor="pickup" className="form-check-label">
-                Self Pickup
-              </label>
-            </div>
-            {/* Add more delivery options */}
-            <input
-              type="date"
-              name="shippingTime"
-              value={formData.shippingTime}
-              onChange={handleInputChange}
-              className="form-control mt-3"
-            />
-            <button className="btn btn-secondary mt-3 me-3" onClick={handlePrevious}>
-              Back
-            </button>
-            <button className="btn btn-primary mt-3" onClick={handleNext}>
-              Next
-            </button>
-          </div>
-        )}
+       {/* Step 4: Delivery */}
+{step === 4 && (
+  <div>
+    <h3 className="text-secondary mb-4">
+      <i className="bi bi-truck me-2"></i>Step 4: Delivery
+    </h3>
+    <p className="mb-3">Select the delivery methods available for this product:</p>
+
+    {/* Delivery Options */}
+    <div className="row">
+      {/* Option 1 */}
+      <div className="col-md-4 mb-3">
+        <div className="form-check">
+          <input
+            type="checkbox"
+            id="pickup"
+            className="form-check-input"
+            onChange={() => handleDeliveryMethodChange("Self Pickup")}
+          />
+          <label htmlFor="pickup" className="form-check-label">
+            Self Pickup
+          </label>
+        </div>
+      </div>
+
+      {/* Option 2 */}
+      <div className="col-md-4 mb-3">
+        <div className="form-check">
+          <input
+            type="checkbox"
+            id="doorDelivery"
+            className="form-check-input"
+            onChange={() => handleDeliveryMethodChange("Door Delivery")}
+          />
+          <label htmlFor="doorDelivery" className="form-check-label">
+            Door Delivery
+          </label>
+        </div>
+      </div>
+
+      {/* Option 3 */}
+      <div className="col-md-4 mb-3">
+        <div className="form-check">
+          <input
+            type="checkbox"
+            id="expressDelivery"
+            className="form-check-input"
+            onChange={() => handleDeliveryMethodChange("Express Delivery")}
+          />
+          <label htmlFor="expressDelivery" className="form-check-label">
+            Express Delivery
+          </label>
+        </div>
+      </div>
+
+      {/* Option 4 */}
+      <div className="col-md-4 mb-3">
+        <div className="form-check">
+          <input
+            type="checkbox"
+            id="standardShipping"
+            className="form-check-input"
+            onChange={() => handleDeliveryMethodChange("Standard Shipping")}
+          />
+          <label htmlFor="standardShipping" className="form-check-label">
+            Standard Shipping
+          </label>
+        </div>
+      </div>
+
+      {/* Option 5 */}
+      <div className="col-md-4 mb-3">
+        <div className="form-check">
+          <input
+            type="checkbox"
+            id="pickupLocation"
+            className="form-check-input"
+            onChange={() => handleDeliveryMethodChange("Pickup from a Location")}
+          />
+          <label htmlFor="pickupLocation" className="form-check-label">
+            Pickup from a Location
+          </label>
+        </div>
+      </div>
+    </div>
+
+    {/* Shipping Date Input */}
+    <div className="mt-4">
+      <label htmlFor="shippingTime" className="form-label">
+        Estimated Shipping Time
+      </label>
+      <input
+        type="date"
+        name="shippingTime"
+        value={formData.shippingTime}
+        onChange={handleInputChange}
+        className="form-control"
+      />
+    </div>
+
+    {/* Navigation Buttons */}
+    <div
+      className="d-flex justify-content-between align-items-center mt-4"
+      style={{
+        padding: "0 10px",
+      }}
+    >
+      <button className="btn btn-outline-secondary" onClick={handlePrevious}>
+        <i className="bi bi-arrow-left-circle me-2"></i>Back
+      </button>
+      <button
+        className="btn"
+        style={{
+          backgroundColor: "#20c997", // Mint green color
+          color: "white",
+          padding: "10px 20px",
+        }}
+        onClick={handleNext}
+      >
+        Next <i className="bi bi-arrow-right-circle ms-2"></i>
+      </button>
+    </div>
+  </div>
+)}
+
 
         {/* Step 5: Complaints/Returns */}
         {step === 5 && (
