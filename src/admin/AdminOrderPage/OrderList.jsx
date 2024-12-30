@@ -38,30 +38,32 @@ const OrderList = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
 
   return (
-    <div className="container">
-      <h2 className="header">Admin Order List</h2>
-      {orders.map((order) => (
-        <div key={order.id} className="order-card">
-          <h3 className="order-header">
-            Order #{order.id}
-            <button
-              className="btn"
-              onClick={() => setSelectedOrder(order)}
-            >
-              View Details
-            </button>
-          </h3>
-          <p>
-            <strong>Customer:</strong> {order.customer.name}
-          </p>
-          <p>
-            <strong>Total:</strong> ${order.total}
-          </p>
-          <p>
-            <strong>Status:</strong> {order.status}
-          </p>
-        </div>
-      ))}
+    <div className="container mt-4">
+      <h2 className="mb-4">Admin Order List</h2>
+      <div className="list-group">
+        {orders.map((order) => (
+          <div key={order.id} className="list-group-item">
+            <h5 className="d-flex justify-content-between">
+              Order #{order.id}
+              <button
+                className="btn btn-info btn-sm"
+                onClick={() => setSelectedOrder(order)}
+              >
+                View Details
+              </button>
+            </h5>
+            <p>
+              <strong>Customer:</strong> {order.customer.name}
+            </p>
+            <p>
+              <strong>Total:</strong> ${order.total}
+            </p>
+            <p>
+              <strong>Status:</strong> {order.status}
+            </p>
+          </div>
+        ))}
+      </div>
 
       {selectedOrder && (
         <OrderDetails order={selectedOrder} onClose={() => setSelectedOrder(null)} />
