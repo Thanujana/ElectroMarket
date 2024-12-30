@@ -51,7 +51,7 @@ const App = () => {
        <Route path="/admin/orders" element={<OrderList />} />
 
        {/* Seller Routes */}
-       <Route path="/seller" element={<SellerDashboard />} />
+       <Route path="/seller/dashboard" element={<SellerDashboard />} />
       </Routes>
       </div>
       </CartContextProvider>
