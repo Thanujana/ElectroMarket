@@ -59,56 +59,102 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h1>Add Product</h1>
-      <div className="card p-4">
+    <div className="container mt-5">
+    {/* Card to Contain Form */}
+    <div className="card shadow-lg">
+      <div className="card-header bg-primary text-white">
+        <h2 className="mb-0">Add Product</h2>
+      </div>
+  
+      <div className="card-body">
         {/* Step 1: Description */}
         {step === 1 && (
           <div>
-            <h2>Step 1: Description</h2>
-            <input
-              type="text"
-              name="productName"
-              value={formData.productName}
-              onChange={handleInputChange}
-              className="form-control mb-3"
-              placeholder="Product Name"
-            />
-            <textarea
-              name="productDescription"
-              value={formData.productDescription}
-              onChange={handleInputChange}
-              className="form-control mb-3"
-              rows="3"
-              placeholder="Product Description"
-            ></textarea>
-            <input
-              type="number"
-              name="price"
-              value={formData.price}
-              onChange={handleInputChange}
-              className="form-control mt-3 mb-3"
-              placeholder="Price"
-            />
-            <input
-              type="number"
-              name="availability"
-              value={formData.availability}
-              onChange={handleInputChange}
-              className="form-control"
-              placeholder="Number of Units Available"
-            />
-            <button className="btn btn-primary mt-3" onClick={handleNext}>
-              Next
-            </button>
+            <h3 className="text-secondary mb-4">
+              <i className="bi bi-pencil-square me-2"></i>Step 1: Description
+            </h3>
+  
+            <div className="mb-4">
+              <label htmlFor="productName" className="form-label">
+                Product Name
+              </label>
+              <input
+                type="text"
+                name="productName"
+                value={formData.productName}
+                onChange={handleInputChange}
+                className="form-control"
+                id="productName"
+                placeholder="Enter the product name"
+              />
+            </div>
+  
+            <div className="mb-4">
+              <label htmlFor="productDescription" className="form-label">
+                Product Description
+              </label>
+              <textarea
+                name="productDescription"
+                value={formData.productDescription}
+                onChange={handleInputChange}
+                className="form-control"
+                id="productDescription"
+                rows="4"
+                placeholder="Describe your product"
+              ></textarea>
+            </div>
+  
+            <div className="row mb-4">
+              <div className="col-md-6">
+                <label htmlFor="price" className="form-label">
+                  Price
+                </label>
+                <input
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleInputChange}
+                  className="form-control"
+                  id="price"
+                  placeholder="Enter the price"
+                />
+              </div>
+  
+              <div className="col-md-6">
+                <label htmlFor="availability" className="form-label">
+                  Number of Units Available
+                </label>
+                <input
+                  type="number"
+                  name="availability"
+                  value={formData.availability}
+                  onChange={handleInputChange}
+                  className="form-control"
+                  id="availability"
+                  placeholder="Enter available units"
+                />
+              </div>
+            </div>
+  
+            {/* Navigation Buttons */}
+            <div className="d-flex justify-content-end">
+              <button className="btn btn-primary" onClick={handleNext}>
+                Next <i className="bi bi-arrow-right-circle-fill ms-2"></i>
+              </button>
+            </div>
           </div>
+        )}
+      </div>
+    </div>
+  </div>
+  
         )}
 
         {/* Step 2: Categories */}
         {step === 2 && (
           <div>
           <h2>Step 2: Categories</h2>
-          <p>Select the category your product belongs to:</p>
+          <p>Select the category your product belongs to (max. 3):</p>
         
           <div className="row">
             {/* Electronics */}
@@ -159,7 +205,143 @@ const AddProduct = () => {
                 </label>
               </div>
             </div>
+        {/* Accessories */}
+        <div className="col-md-4">
+              <h5>Accessories</h5>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="headphones"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Headphones")}
+                />
+                <label htmlFor="headphones" className="form-check-label">
+                  Headphones
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="chargers"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Chargers")}
+                />
+                <label htmlFor="chargers" className="form-check-label">
+                  Chargers & Adapters
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="cables"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Cables")}
+                />
+                <label htmlFor="cables" className="form-check-label">
+                  Cables (e.g., HDMI, USB)
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="powerbanks"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Power Banks")}
+                />
+                <label htmlFor="powerbanks" className="form-check-label">
+                  Power Banks
+                </label>
+              </div>
+            </div>
         
+            {/* Home Appliances */}
+            <div className="col-md-4">
+              <h5>Home Appliances</h5>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="televisions"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Televisions")}
+                />
+                <label htmlFor="televisions" className="form-check-label">
+                  Televisions
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="refrigerators"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Refrigerators")}
+                />
+                <label htmlFor="refrigerators" className="form-check-label">
+                  Refrigerators
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="microwaves"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Microwaves")}
+                />
+                <label htmlFor="microwaves" className="form-check-label">
+                  Microwaves
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="vacuumcleaners"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Vacuum Cleaners")}
+                />
+                <label htmlFor="vacuumcleaners" className="form-check-label">
+                  Vacuum Cleaners
+                </label>
+              </div>
+            </div>
+          </div>
+        
+          <div className="row mt-4">
+            {/* Gaming */}
+            <div className="col-md-4">
+              <h5>Gaming</h5>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="consoles"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Gaming Consoles")}
+                />
+                <label htmlFor="consoles" className="form-check-label">
+                  Gaming Consoles
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="games"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Games")}
+                />
+                <label htmlFor="games" className="form-check-label">
+                  Games (PS5, Xbox, PC)
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="gamingAccessories"
+                  className="form-check-input"
+                  onChange={() => handleDeliveryMethodChange("Gaming Accessories")}
+                />
+                <label htmlFor="gamingAccessories" className="form-check-label">
+                  Gaming Accessories (e.g., Controllers, Keyboards)
+                </label>
+              </div>
+            </div>
             
         
             {/* Cameras */}
@@ -214,6 +396,7 @@ const AddProduct = () => {
         {step === 3 && (
           <div>
             <h2>Step 3: Photos</h2>
+            <p>Add product photos (max 10)</p>
             <input
               type="file"
               multiple
