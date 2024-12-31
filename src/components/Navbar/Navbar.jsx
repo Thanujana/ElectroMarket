@@ -67,15 +67,7 @@ const Navbar = ({ setShowLogin }) => {
                 Menu
               </a>
             </li>
-            {/* Mobile App Navigation */}
-            <li className="nav-item">
-              <a
-                className={`nav-link ${menu === 'app-download' ? 'active' : ''}`}
-                onClick={() => handleScroll('app-download')} // Scroll to App Download
-              >
-                Mobile App
-              </a>
-            </li>
+
             {/* Contact Us Navigation */}
             <li className="nav-item">
               <a

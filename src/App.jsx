@@ -15,13 +15,8 @@ import AdminDashboard from "./admin/AdminDashboard";
 import CategoryList from "./admin/AdminCategoryPage/CategoryList";
 import AdminProductList from "./admin/AdminProductPage/ProductList";
 import AdminOrderList from "./admin/AdminOrderPage/OrderList";
-import SellerDashboard from "./seller/SellerDashboard";
-import SellerProductList from "./seller/SellerProductPage/ProductList";
-import AddProduct from "./seller/SellerProductPage/AddProduct";
-import SellerOrderList from "./seller/SellerOrderPage/OrderList";
-import OrderDetails from "./seller/SellerOrderPage/OrderDetails";
-import SellerEarningsPage from "./seller/SellerEarningsPage";
 import RoleSelection from "./components/RoleSelection/Role";
+import AddProduct from "./admin/AdminProductPage/AddProduct";
 
 const App = () => {
   return (
@@ -29,20 +24,15 @@ const App = () => {
       <div className="app">
         <Navbar />
         <Routes>
-        <Route path="/role" element={<RoleSelection />} />
+          <Route path="/role" element={<RoleSelection />} />
           {/* Customer Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/place-order" element={<PlaceOrder />} />
           <Route path="/categories/:category_name" element={<CategoryItems />} />
           <Route path="/products/:product_name" element={<ProductDetails />} />
-          {/* Buyer Login/Register */}
-        <Route path="/login/buyer" element={<Login role="Buyer" />} />
-        <Route path="/register/buyer" element={<Register role="Buyer" />} />
-
-        {/* Seller Login/Register */}
-        <Route path="/login/seller" element={<Login role="Seller" />} />
-        <Route path="/register/seller" element={<Register role="Seller" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/payment" element={<PaymentPage />} />
 
@@ -51,14 +41,9 @@ const App = () => {
           <Route path="/admin/categories" element={<CategoryList />} />
           <Route path="/admin/products" element={<AdminProductList />} />
           <Route path="/admin/orders" element={<AdminOrderList />} />
+          <Route path="/admin/products/add" element={<AddProduct />} />
 
-          {/* Seller Routes */}
-          <Route path="/seller/dashboard" element={<SellerDashboard />} />
-          <Route path="/seller/products" element={<SellerProductList />} />
-          <Route path="/seller/products/add" element={<AddProduct />} />
-          <Route path="/seller/orders" element={<SellerOrderList />} />
-          <Route path="/seller/orders/:orderId" element={<OrderDetails />} />
-          <Route path="/seller/earnings" element={<SellerEarningsPage />} />
+         
 
         </Routes>
       </div>

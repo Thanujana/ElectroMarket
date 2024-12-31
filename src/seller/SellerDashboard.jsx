@@ -54,14 +54,7 @@ const SellerDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
-              <div className="card text-white bg-warning mb-3">
-                <div className="card-body">
-                  <h5 className="card-title">Total Earnings</h5>
-                  <p className="card-text">{mockData.overview.totalEarnings}</p>
-                </div>
-              </div>
-            </div>
+            
             <div className="col-md-3">
               <div className="card text-white bg-info mb-3">
                 <div className="card-body">

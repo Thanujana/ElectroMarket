@@ -27,11 +27,7 @@ const Home = () => {
         <ItemDisplay />
       </div>
 
-      {/* Mobile App Download */}
-      <div id="app-download">
-        <AppDownload />
-      </div>
-
+   
       {/* Footer */}
       <div id="footer-section">
         <Footer />
