@@ -20,6 +20,8 @@ import SellerProductList from "./seller/SellerProductPage/ProductList";
 import AddProduct from "./seller/SellerProductPage/AddProduct";
 import SellerOrderList from "./seller/SellerOrderPage/OrderList";
 import OrderDetails from "./seller/SellerOrderPage/OrderDetails";
+import SellerEarningsPage from "./seller/SellerEarningsPage";
+
 
 const App = () => {
   return (
@@ -50,6 +52,8 @@ const App = () => {
           <Route path="/seller/products/add" element={<AddProduct />} />
           <Route path="/seller/orders" element={<SellerOrderList />} />
           <Route path="/seller/orders/:orderId" element={<OrderDetails />} />
+          <Route path="/seller/earnings" element={<SellerEarningsPage />} />
+
         </Routes>
       </div>
     </CartContextProvider>
