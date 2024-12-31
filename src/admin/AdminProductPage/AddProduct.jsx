@@ -145,7 +145,7 @@ const AddProduct = () => {
                   Price
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="price"
                   value={formData.price}
                   onChange={handleInputChange}
@@ -198,7 +198,7 @@ const AddProduct = () => {
     >
       <i className="bi bi-tags-fill me-2"></i>Step 2: Categories
     </h3>
-    <p className="mb-4">Select the category your product belongs to (max. 3):</p>
+    <p className="mb-4">Select the category your product belongs to:</p>
 
     {/* Grid for Categories */}
     <div className="container">
@@ -709,7 +709,7 @@ const AddProduct = () => {
       <button
         className="btn"
         style={{
-          backgroundColor: "#28a745", // Success green color
+          backgroundColor: "#28a745", 
           color: "white",
           padding: "10px 20px",
         }}

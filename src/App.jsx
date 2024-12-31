@@ -18,6 +18,7 @@ import AdminOrderList from "./admin/AdminOrderPage/OrderList";
 import RoleSelection from "./components/RoleSelection/Role";
 import AddProduct from "./admin/AdminProductPage/AddProduct";
 
+
 const App = () => {
   return (
     <CartContextProvider>
@@ -25,16 +26,20 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/role" element={<RoleSelection />} />
+ 
+<Route path="/login/buyer" element={<Login role="User" />} />
+<Route path="/register/buyer" element={<Register role="User" />} />
+<Route path="/login/seller" element={<Login role="Seller" />} />
+<Route path="/register/seller" element={<Register role="Seller" />} />
           {/* Customer Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/place-order" element={<PlaceOrder />} />
           <Route path="/categories/:category_name" element={<CategoryItems />} />
           <Route path="/products/:product_name" element={<ProductDetails />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/payment" element={<PaymentPage />} />
+          
 
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminDashboard />} />

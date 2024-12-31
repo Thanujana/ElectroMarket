@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ProductList = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([
     {
       id: 1,
@@ -51,14 +51,6 @@ const ProductList = () => {
     image: "",
   });
 
-  const handleAddProduct = (category, subcategory) => {
-    setCurrentCategory(category);
-    setCurrentSubcategory(subcategory);
-    setCurrentProduct(null);
-    setFormData({ name: "", description: "", price: "", image: "" });
-    setShowModal(true);
-  };
-  // Function to handle deletion
   const handleDeleteProduct = (categoryId, subcategoryId, productId) => {
     setCategories((prevCategories) =>
       prevCategories.map((category) =>
@@ -91,7 +83,7 @@ const ProductList = () => {
       price: product.price,
       image: product.image,
     });
-    setShowModal(true);
+    setShowModal(true); // Open modal
   };
 
   const handleSaveProduct = () => {
@@ -104,45 +96,25 @@ const ProductList = () => {
 
     const updatedProduct = { ...currentProduct, ...formData, price: parseFloat(price) };
 
-    if (currentProduct) {
-      // Update existing product
-      setCategories((prevCategories) =>
-        prevCategories.map((category) =>
-          category.id === currentCategory.id
-            ? {
-                ...category,
-                subcategories: category.subcategories.map((subcategory) =>
-                  subcategory.id === currentSubcategory.id
-                    ? {
-                        ...subcategory,
-                        products: subcategory.products.map((product) =>
-                          product.id === currentProduct.id ? updatedProduct : product
-                        ),
-                      }
-                    : subcategory
-                ),
-              }
-            : category
-        )
-      );
-    } else {
-      // Add new product
-      const newProduct = { ...formData, id: Date.now(), price: parseFloat(price) };
-      setCategories((prevCategories) =>
-        prevCategories.map((category) =>
-          category.id === currentCategory.id
-            ? {
-                ...category,
-                subcategories: category.subcategories.map((subcategory) =>
-                  subcategory.id === currentSubcategory.id
-                    ? { ...subcategory, products: [...subcategory.products, newProduct] }
-                    : subcategory
-                ),
-              }
-            : category
-        )
-      );
-    }
+    setCategories((prevCategories) =>
+      prevCategories.map((category) =>
+        category.id === currentCategory.id
+          ? {
+              ...category,
+              subcategories: category.subcategories.map((subcategory) =>
+                subcategory.id === currentSubcategory.id
+                  ? {
+                      ...subcategory,
+                      products: subcategory.products.map((product) =>
+                        product.id === currentProduct.id ? updatedProduct : product
+                      ),
+                    }
+                  : subcategory
+              ),
+            }
+          : category
+      )
+    );
 
     setShowModal(false);
     setFormData({ name: "", description: "", price: "", image: "" });
@@ -196,9 +168,14 @@ const ProductList = () => {
                           >
                             Edit
                           </button>
-                          <button className="btn btn-danger btn-sm" onClick={() => handleDeleteProduct(category.id, subcategory.id, product.id)}>
-                    Delete
-                  </button>
+                          <button
+                            className="btn btn-danger btn-sm"
+                            onClick={() =>
+                              handleDeleteProduct(category.id, subcategory.id, product.id)
+                            }
+                          >
+                            Delete
+                          </button>
                         </div>
                       </div>
                     </li>
@@ -213,6 +190,68 @@ const ProductList = () => {
           ))}
         </div>
       ))}
+
+      {/* Modal for Editing */}
+      {showModal && (
+        <div className="modal show d-block" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Edit Product</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setShowModal(false)}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <input
+                  type="text"
+                  className="form-control mb-2"
+                  placeholder="Product Name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                />
+                <textarea
+                  className="form-control mb-2"
+                  placeholder="Description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                ></textarea>
+                <input
+                  type="text"
+                  className="form-control mb-2"
+                  placeholder="Price"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Image URL"
+                  name="image"
+                  value={formData.image}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="modal-footer">
+                <button className="btn btn-success" onClick={handleSaveProduct}>
+                  Save
+                </button>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setShowModal(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
