@@ -104,7 +104,7 @@ const Navbar = ({ setShowLogin }) => {
 
           <button
           className="btn btn-sm custom-signin-btn"
-           onClick={() => navigate('/login')}
+           onClick={() => navigate('/role')}
           >
   Login
 </button>

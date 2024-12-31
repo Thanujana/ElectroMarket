@@ -21,7 +21,7 @@ import AddProduct from "./seller/SellerProductPage/AddProduct";
 import SellerOrderList from "./seller/SellerOrderPage/OrderList";
 import OrderDetails from "./seller/SellerOrderPage/OrderDetails";
 import SellerEarningsPage from "./seller/SellerEarningsPage";
-
+import RoleSelection from "./components/RoleSelection/Role";
 
 const App = () => {
   return (
@@ -29,14 +29,20 @@ const App = () => {
       <div className="app">
         <Navbar />
         <Routes>
+        <Route path="/role" element={<RoleSelection />} />
           {/* Customer Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/place-order" element={<PlaceOrder />} />
           <Route path="/categories/:category_name" element={<CategoryItems />} />
           <Route path="/products/:product_name" element={<ProductDetails />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          {/* Buyer Login/Register */}
+        <Route path="/login/buyer" element={<Login role="Buyer" />} />
+        <Route path="/register/buyer" element={<Register role="Buyer" />} />
+
+        {/* Seller Login/Register */}
+        <Route path="/login/seller" element={<Login role="Seller" />} />
+        <Route path="/register/seller" element={<Register role="Seller" />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/payment" element={<PaymentPage />} />
 

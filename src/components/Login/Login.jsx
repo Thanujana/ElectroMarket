@@ -1,107 +1,93 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ApiService from "../../service/ApiService";
 
+const Login = ({ role }) => {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
-const Login = () => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
-
-    const [message, setMessage] = useState(null);
-    const navigate = useNavigate();
-
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Mock validation: Simulate role-specific login
+      const savedUserData = JSON.parse(localStorage.getItem(`${role.toLowerCase()}Data`));
+      if (
+        savedUserData &&
+        savedUserData.email === formData.email &&
+        savedUserData.password === formData.password
+      ) {
+        setMessage(`Login successful as ${role}!`);
+        setTimeout(() => navigate(`/${role.toLowerCase()}/dashboard`), 2000); // Redirect based on role
+      } else {
+        setMessage("Invalid email or password.");
+      }
+    } catch (error) {
+      setMessage("An error occurred during login.");
     }
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await ApiService.loginUser(formData);
-            if (response.status === 200) {
-                setMessage("User Successfully Loged in");
-                localStorage.setItem('token', response.token);
-                localStorage.setItem('role', response.role);
-                setTimeout(() => {
-                    navigate("/profile")
-                }, 4000)
-            }
-        } catch (error) {
-            setMessage(error.response?.data.message || error.message || "unable to Login a user");
-        }
-    }
-
-    return (
-      <div
+  return (
+    <div
       className="d-flex align-items-center justify-content-center vh-100"
       style={{
-        background: "linear-gradient(135deg, rgba(0, 128, 255, 0.7), rgba(0, 255, 128, 0.6))",
-        backdropFilter: "blur(10px)",
+        background: role === "Seller"
+          ? "linear-gradient(135deg, rgba(255, 102, 0, 0.7), rgba(255, 51, 153, 0.6))"
+          : "linear-gradient(135deg, rgba(0, 102, 255, 0.7), rgba(0, 255, 102, 0.6))",
       }}
     >
-      <div
-        className="card p-4 shadow-lg"
-        style={{
-          width: "360px",
-          borderRadius: "15px",
-          background: "rgba(255, 255, 255, 0.9)",
-        }}
-      >
-        <h2 className="text-center text-primary mb-4"
-        style={{
-          fontSize: "2rem",
-          fontWeight: "700",
-          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-        }}
-        >Login</h2>
+      <div className="card p-4 shadow-lg" style={{ width: "400px" }}>
+        <h2 className={`text-center mb-4 ${role === "Seller" ? "text-warning" : "text-primary"}`}>
+          Login as {role}
+        </h2>
         {message && <p className="text-danger text-center">{message}</p>}
-     
-            <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-                <label htmlFor="email" className="form-label">Email: </label>
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="form-control"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required />
-                    </div>
-               <div className="mb-3">   
-                <label htmlFor="password" className="form-label">Password: </label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    className="form-control"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required />
-                
-</div>
-                    <button type="submit" className="btn btn-primary w-100 mb-3">Login</button>
-                    <p className="text-center mt-3">
-                    Don't have an account?{" "}
-                    <span
-                      className="text-decoration-none text-success"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => navigate("/register")} // Switch to Register view
-                    >
-                      Register
-                    </span>
-                  </p>
-
-                    
-            </form>
-        </div>
-        </div>
-    );
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              className="form-control"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label>Password:</label>
+            <input
+              type="password"
+              name="password"
+              className="form-control"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className={`btn w-100 ${role === "Seller" ? "btn-warning" : "btn-primary"}`}
+          >
+            Login
+          </button>
+          <p className="text-center mt-3">
+            Don't have an account?{" "}
+            <span
+              className={`text-${role === "Seller" ? "warning" : "primary"}`}
+              onClick={() => navigate(`/register/${role.toLowerCase()}`)}
+              style={{ cursor: "pointer" }}
+            >
+              Register
+            </span>
+          </p>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default Login;

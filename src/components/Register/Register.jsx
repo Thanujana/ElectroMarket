@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ApiService from "../../service/ApiService";
 
-const Register = () => {
+const Register = ({ role }) => {
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -10,7 +9,6 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
-
   const [message, setMessage] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const navigate = useNavigate();
@@ -19,72 +17,50 @@ const Register = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    // Clear password error when user modifies fields
     if (name === "password" || name === "confirmPassword") {
-      setPasswordError(null);
+      setPasswordError(null); // Clear password error when modifying fields
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
       setPasswordError("Passwords do not match.");
       return;
     }
 
     try {
-
-    // Simulate successful registration using localStorage
-    localStorage.setItem("isRegistered", "true"); // Save registration flag
-    localStorage.setItem("userData", JSON.stringify(formData)); // Save user data if needed
-    setMessage("User successfully registered!");
-    setTimeout(() => {
-      navigate("/login"); // Redirect to home or login after registration
-    }, 3000);
-  } catch (error) {
-    setMessage("An error occured during registration");
-  }
-};
+      // Save user data in localStorage with role-specific key
+      localStorage.setItem(`${role.toLowerCase()}Data`, JSON.stringify(formData));
+      setMessage(`${role} Registration Successful!`);
+      setTimeout(() => navigate(`/login/${role.toLowerCase()}`), 3000); // Redirect to role-specific login page
+    } catch (error) {
+      setMessage("An error occurred during registration.");
+    }
+  };
 
   return (
     <div
       className="d-flex align-items-center justify-content-center vh-100"
       style={{
-        background: "linear-gradient(135deg, rgba(0, 128, 255, 0.7), rgba(0, 255, 128, 0.6))",
-        backdropFilter: "blur(10px)",
+        background: role === "Seller"
+          ? "linear-gradient(135deg, rgba(255, 102, 0, 0.7), rgba(255, 51, 153, 0.6))"
+          : "linear-gradient(135deg, rgba(0, 102, 255, 0.7), rgba(0, 255, 102, 0.6))",
       }}
     >
-      <div
-        className="card p-4 shadow-lg"
-        style={{
-          width: "360px",
-          borderRadius: "15px",
-          background: "rgba(255, 255, 255, 0.9)",
-        }}
-      >
-        <h2
-          className="text-center text-primary mb-4"
-          style={{
-            fontSize: "2rem",
-            fontWeight: "700",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-          }}
-        >
-          Register
+      <div className="card p-4 shadow-lg" style={{ width: "400px" }}>
+        <h2 className={`text-center mb-4 ${role === "Seller" ? "text-warning" : "text-primary"}`}>
+          Register as {role}
         </h2>
-        {message && <p className="text-danger text-center">{message}</p>}
+        {message && <p className="text-success text-center">{message}</p>}
         {passwordError && <p className="text-danger text-center">{passwordError}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email:
-            </label>
+            <label>Email:</label>
             <input
               type="email"
               name="email"
-              id="email"
               className="form-control"
               value={formData.email}
               onChange={handleChange}
@@ -92,13 +68,10 @@ const Register = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">
-              Name:
-            </label>
+            <label>Name:</label>
             <input
               type="text"
               name="name"
-              id="name"
               className="form-control"
               value={formData.name}
               onChange={handleChange}
@@ -106,13 +79,10 @@ const Register = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="phoneNumber" className="form-label">
-              Phone Number:
-            </label>
+            <label>Phone Number:</label>
             <input
               type="text"
               name="phoneNumber"
-              id="phoneNumber"
               className="form-control"
               value={formData.phoneNumber}
               onChange={handleChange}
@@ -120,13 +90,10 @@ const Register = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="password" className="form-label">
-              Password:
-            </label>
+            <label>Password:</label>
             <input
               type="password"
               name="password"
-              id="password"
               className="form-control"
               value={formData.password}
               onChange={handleChange}
@@ -134,33 +101,32 @@ const Register = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="confirmPassword" className="form-label">
-              Confirm Password:
-            </label>
+            <label>Confirm Password:</label>
             <input
               type="password"
               name="confirmPassword"
-              id="confirmPassword"
               className="form-control"
               value={formData.confirmPassword}
               onChange={handleChange}
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary w-100 mb-3">
+          <button
+            type="submit"
+            className={`btn w-100 ${role === "Seller" ? "btn-warning" : "btn-primary"}`}
+          >
             Register
           </button>
-                    <p className="text-center mt-3">
+          <p className="text-center mt-3">
             Already have an account?{" "}
             <span
-              className="text-decoration-none text-primary"
+              className={`text-${role === "Seller" ? "warning" : "primary"}`}
+              onClick={() => navigate(`/login/${role.toLowerCase()}`)}
               style={{ cursor: "pointer" }}
-              onClick={() => navigate("/login")} // Switch to Login view
             >
               Login
             </span>
           </p>
-
         </form>
       </div>
     </div>
