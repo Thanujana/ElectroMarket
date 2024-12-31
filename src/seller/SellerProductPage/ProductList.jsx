@@ -8,6 +8,7 @@ const ProductList = () => {
       price: "$50",
       stock: 10,
       category: "Electronics",
+      Image:"",
     },
     {
       id: 2,
@@ -15,6 +16,7 @@ const ProductList = () => {
       price: "$25",
       stock: 20,
       category: "Accessories",
+      image:"",
     },
   ];
 
@@ -29,6 +31,7 @@ const ProductList = () => {
             <th>Price</th>
             <th>Stock</th>
             <th>Category</th>
+            <th>Image</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -40,6 +43,7 @@ const ProductList = () => {
               <td>{product.price}</td>
               <td>{product.stock}</td>
               <td>{product.category}</td>
+              <td>{product.image}</td>
               <td>
                 <button className="btn btn-sm btn-warning me-2">Edit</button>
                 <button className="btn btn-sm btn-danger">Delete</button>

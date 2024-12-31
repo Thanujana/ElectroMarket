@@ -14,7 +14,43 @@ const AddProduct = () => {
     shippingTime: "",
     complaints: { warranty: "", address: "", returnPolicy: "" },
   });
+  
 
+  const [errors, setErrors] = useState({});
+    const validateStep = () => {
+    const newErrors = {};
+
+    if (step === 1) {
+      if (!formData.productName) newErrors.productName = "Product name is required.";
+      if (!formData.productDescription) newErrors.productDescription = "Description is required.";
+      if (!formData.price || formData.price <= 0) newErrors.price = "Price must be greater than 0.";
+      if (!formData.availability || formData.availability <= 0)
+        newErrors.availability = "Availability must be greater than 0.";
+    }
+
+    if (step === 2) {
+      if (formData.categories.length === 0)
+        newErrors.categories = "Please select at least one category.";
+    }
+
+    if (step === 3) {
+      if (formData.photos.length === 0) newErrors.photos = "Please upload at least one photo.";
+    }
+
+    if (step === 4) {
+      if (formData.deliveryMethods.length === 0)
+        newErrors.deliveryMethods = "Please select at least one delivery method.";
+    }
+
+    if (step === 5) {
+      if (!formData.complaints.warranty) newErrors.warranty = "Warranty is required.";
+      if (!formData.complaints.address) newErrors.address = "Address is required.";
+      if (!formData.complaints.returnPolicy) newErrors.returnPolicy = "Return policy is required.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Return true if no errors
+  };
   const handleNext = () => {
     setStep((prev) => prev + 1);
   };
@@ -685,49 +721,6 @@ const AddProduct = () => {
   </div>
 )}
 
- {/* Step 6: Success Message */}
- {step === 6 && (
-            <div
-              className="d-flex flex-column align-items-center justify-content-center"
-              style={{
-                height: "400px",
-                background: "rgba(255, 218, 218, 0.3)", // Light red background
-              }}
-            >
-              <img
-                src="https://via.placeholder.com/200" // Replace with actual illustration
-                alt="Success"
-                style={{ maxWidth: "250px", marginBottom: "20px" }}
-              />
-              <h3 className="text-center text-secondary">
-                Your advertisement was successfully added!
-              </h3>
-              <button
-                className="btn btn-warning mt-3"
-                style={{
-                  padding: "10px 30px",
-                  borderRadius: "30px",
-                  fontWeight: "bold",
-                  color: "white",
-                }}
-              >
-                View your advertisement →
-              </button>
-              <p className="mt-3">
-                or{" "}
-                <a
-                  href="/"
-                  style={{
-                    textDecoration: "underline",
-                    color: "#FF6D39",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Return to home page
-                </a>
-              </p>
-            </div>
-          )}
   </div>
       </div>
   );
