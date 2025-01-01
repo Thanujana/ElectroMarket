@@ -3,7 +3,6 @@ import "./Home.css";
 import Header from "../../components/Header/Header";
 import ExploreCategory from "../../components/ExploreCategory/ExploreCategory";
 import ItemDisplay from "../../components/ItemDisplay/ItemDisplay";
-import AppDownload from '../../components/AppDownload/AppDownload';
 import Footer from '../../components/Footer/Footer';
 
 const Home = () => {

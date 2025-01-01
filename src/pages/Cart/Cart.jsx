@@ -97,7 +97,28 @@ const Cart = () => {
                 <p>Total:</p>
                 <p>${(getSubtotal() + deliveryFee).toFixed(2)}</p>
               </div>
-              <button className="btn btn-danger w-100 mt-3" onClick={() => navigate("/place-order")}>Proceed to Checkout</button>
+              <button
+  className="btn btn-danger w-100 mt-3"
+  onClick={() =>
+    navigate("/place-order", {
+      state: {
+        cartItems: Object.keys(cartItems).map((itemId) => {
+          const item = getItemById(itemId);
+          return {
+            id: itemId,
+            title: item.type,
+            image: item.image,
+            price: item.price,
+            quantity: cartItems[itemId],
+          };
+        }),
+      },
+    })
+  }
+>
+  Proceed to Checkout
+</button>
+
               <button
                 className="btn btn-outline-danger w-100 mt-2"
                 onClick={clearCart}
