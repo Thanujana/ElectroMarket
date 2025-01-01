@@ -87,11 +87,19 @@ const OrderConfirmation = () => {
             Cancel
           </button>
           <button
-            className="btn btn-danger"
-            onClick={() => alert("Payment process initiated!")}
-          >
-            Pay Now
-          </button>
+  className="btn btn-danger"
+  onClick={() =>
+    navigate("/payment", {
+      state: {
+        totalAmount: formData.cartItems
+          .reduce((total, item) => total + item.price * item.quantity, 0), // Calculate total amount
+      },
+    })
+  }
+>
+  Pay Now
+</button>
+
         </div>
       </div>
     </div>

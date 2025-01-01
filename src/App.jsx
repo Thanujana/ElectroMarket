@@ -18,6 +18,7 @@ import AdminProductList from "./admin/AdminProductPage/ProductList";
 import AdminOrderList from "./admin/AdminOrderPage/OrderList";
 import Role from "./components/RoleSelection/Role";
 import AddProduct from "./admin/AdminProductPage/AddProduct";
+import OrderStatus from "./pages/OrderStatus/OrderStatus";
 
 
 const App = () => {
@@ -38,7 +39,7 @@ const App = () => {
           <Route path="/products/:product_name" element={<ProductDetails />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/payment" element={<PaymentPage />} />
-          
+          <Route path="/order-status" element={<OrderStatus />} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminDashboard />} />
