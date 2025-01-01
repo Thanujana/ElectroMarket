@@ -6,12 +6,68 @@ const LoginRegister = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true); // Toggle between Login and Register
 
+  const sideImage =
+    role === "seller"
+      ? "/Seller.jpg"
+      :"/Buyer.jpg";
+
   return (
-    <div>
-      <h1>{isLogin ? `Login as ${role}` : `Register as ${role}`}</h1>
-      <button onClick={() => setIsLogin(true)}>Login</button>
-      <button onClick={() => setIsLogin(false)}>Register</button>
-      {isLogin ? <LoginForm role={role} navigate={navigate} /> : <RegisterForm role={role} navigate={navigate} />}
+    <div
+      className="container-fluid vh-100 d-flex align-items-center justify-content-center"
+      style={{ backgroundColor: "#f8f9fa" }}
+    >
+      <div className="row shadow rounded" style={{ width: "900px", height: "550px" }}>
+        {/* Left Side Image Section */}
+        <div
+          className="col-md-6 d-none d-md-flex align-items-center justify-content-center"
+          style={{
+            backgroundImage: `url(${sideImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            borderTopLeftRadius: "15px",
+            borderBottomLeftRadius: "15px",
+          }}
+        >
+          <div className="text-white text-center p-3" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+            <h3>{role === "seller" ? "Sell with Confidence" : "Shop with Ease"}</h3>
+            <p>
+              {role === "seller"
+                ? "Join us to showcase your products and reach a wider audience."
+                : "Sign up now to explore a variety of products tailored for you."}
+            </p>
+          </div>
+        </div>
+
+        {/* Right Side Form Section */}
+        <div
+          className="col-md-6 bg-white p-4"
+          style={{
+            borderTopRightRadius: "15px",
+            borderBottomRightRadius: "15px",
+          }}
+        >
+          <h2 className="text-center mb-4">{isLogin ? `Login as ${role}` : `Register as ${role}`}</h2>
+
+          <div className="d-flex justify-content-center mb-4">
+            <button
+              className={`btn ${isLogin ? "btn-primary" : "btn-light"} me-2`}
+              onClick={() => setIsLogin(true)}
+              style={{ width: "45%" }}
+            >
+              Login
+            </button>
+            <button
+              className={`btn ${!isLogin ? "btn-primary" : "btn-light"} ms-2`}
+              onClick={() => setIsLogin(false)}
+              style={{ width: "45%" }}
+            >
+              Register
+            </button>
+          </div>
+
+          {isLogin ? <LoginForm role={role} navigate={navigate} /> : <RegisterForm role={role} navigate={navigate} />}
+        </div>
+      </div>
     </div>
   );
 };
@@ -36,12 +92,46 @@ const LoginForm = ({ role, navigate }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {error && <p>{error}</p>}
-      <label>Email:</label>
-      <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-      <label>Password:</label>
-      <input type="password" name="password" value={formData.password} onChange={handleChange} required />
-      <button type="submit">Login</button>
+      {error && <p className="text-danger text-center">{error}</p>}
+      <div className="mb-3">
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          className="form-control"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          className="form-control"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="d-flex justify-content-between mb-3">
+        <div>
+          <input type="checkbox" id="remember" />
+          <label htmlFor="remember" className="ms-2">
+            Remember me
+          </label>
+        </div>
+        <span
+          style={{ cursor: "pointer", color: "blue" }}
+          onClick={() => alert("Password reset functionality coming soon!")}
+        >
+          Forgot Password?
+        </span>
+      </div>
+      <button type="submit" className="btn btn-primary w-100">
+        Login
+      </button>
     </form>
   );
 };
@@ -66,18 +156,56 @@ const RegisterForm = ({ role, navigate }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {error && <p>{error}</p>}
-      <label>Email:</label>
-      <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-      <label>Name:</label>
-      <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-      <label>Password:</label>
-      <input type="password" name="password" value={formData.password} onChange={handleChange} required />
-      <label>Confirm Password:</label>
-      <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
-      <button type="submit">Register</button>
+      {error && <p className="text-danger text-center">{error}</p>}
+      <div className="mb-3">
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          className="form-control"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label>Name:</label>
+        <input
+          type="text"
+          name="name"
+          className="form-control"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          className="form-control"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label>Confirm Password:</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          className="form-control"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <button type="submit" className="btn btn-primary w-100">
+        Register
+      </button>
     </form>
   );
 };
 
-export default LoginRegister; // Ensure this line is present
+export default LoginRegister;
