@@ -4,43 +4,60 @@ import "./OrderStatus.css";
 
 const OrderStatus = () => {
   const location = useLocation();
-  const { paymentMethod, totalAmount, status } = location.state || {};
 
-  if (!status || status.length === 0) {
-    return <p>No order status available. Please place an order first.</p>;
-  }
+  // Extracting state values passed through navigation
+  const { paymentMethod, totalAmount, status } = location.state || {
+    paymentMethod: "Not Specified",
+    totalAmount: 0,
+    status: ["Ordered"],
+  };
 
-  const currentStatusIndex = 3; // Dynamically set based on API or user actions (e.g., "Out for Delivery")
+  // Determine the current status
+  const currentStepIndex = status.indexOf("Delivered") + 1; // Update this dynamically
 
   return (
-    <div className="container mt-5">
-      <h1 className="text-center mb-4">Order Status</h1>
-      <p className="text-center mb-4">
+    <div className="container mt-5 order-status-container">
+      <h1 className="text-center">Order Status</h1>
+      <p className="text-center">
         <strong>Payment Method:</strong> {paymentMethod} <br />
         <strong>Total Amount:</strong> Rs. {totalAmount}
       </p>
 
-      {/* Progress Bar */}
-      <div className="progress-bar-container mb-4">
-        <div className="progress-bar">
-          {status.map((step, index) => (
-            <div
-              key={index}
-              className={`progress-step ${index <= currentStatusIndex ? "active" : ""}`}
-            >
-              <div className="progress-circle">
-                {index < currentStatusIndex && <span className="checkmark">&#10003;</span>}
-              </div>
-              <p className="progress-label">{step}</p>
+      {/* Horizontal Progress Bar */}
+      <div className="order-progress-bar">
+        {status.map((step, index) => (
+          <div
+            key={index}
+            className={`order-step ${
+              index < currentStepIndex ? "completed" : ""
+            }`}
+          >
+            <div className="step-circle">
+              {index < currentStepIndex ? (
+                <span className="checkmark">✔️</span>
+              ) : (
+                <span className="step-number">{index + 1}</span>
+              )}
             </div>
-          ))}
-        </div>
+            <p className="step-label">{step}</p>
+          </div>
+        ))}
       </div>
 
-      {/* Status Message */}
-      <div className="text-center">
-        <h4 className="text-primary">{status[currentStatusIndex]}</h4>
-        <p>Your package is {status[currentStatusIndex]} and will arrive soon!</p>
+      {/* Current Status Message */}
+      <div className="text-center mt-4">
+        <h3
+          style={{
+            color: currentStepIndex === status.length ? "blue" : "orange",
+          }}
+        >
+          {status[currentStepIndex - 1]}
+        </h3>
+        <p>
+          {currentStepIndex === status.length
+            ? "Your package is Delivered and will arrive soon!"
+            : `Your package is currently at the ${status[currentStepIndex - 1]} stage.`}
+        </p>
       </div>
     </div>
   );
