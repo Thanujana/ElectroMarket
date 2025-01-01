@@ -1,16 +1,62 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <aside style={{ width: "250px", height: "100vh", background: "#f4f4f4", padding: "20px" }}>
-      <h2>Admin Panel</h2>
+    <aside
+      className="d-flex flex-column vh-100 border-end"
+      style={{
+        width: "250px",
+        backgroundColor: "#1E293B", // Updated color
+        padding: "20px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <h4 className="text-center mb-4" style={{ fontWeight: "bold", color: "#FFFFFF" }}>
+        Admin Panel
+      </h4>
       <nav>
-        <ul style={{ listStyleType: "none", padding: 0 }}>
-          <li><Link to="/admin">Dashboard</Link></li>
-          <li><Link to="/admin/categories">Manage Categories</Link></li>
-          <li><Link to="/admin/products">Manage Products</Link></li>
-          <li><Link to="/admin/orders">Manage Orders</Link></li>
+        <ul className="nav flex-column">
+          <li className="nav-item mb-2">
+            <NavLink
+              to="/seller/dashboard"
+              className={({ isActive }) =>
+                `nav-link px-3 py-2 ${isActive ? "bg-primary text-white rounded" : "text-light"}`
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+          <li className="nav-item mb-2">
+            <NavLink
+              to="/admin/categories"
+              className={({ isActive }) =>
+                `nav-link px-3 py-2 ${isActive ? "bg-primary text-white rounded" : "text-light"}`
+              }
+            >
+              Manage Categories
+            </NavLink>
+          </li>
+          <li className="nav-item mb-2">
+            <NavLink
+              to="/admin/products"
+              className={({ isActive }) =>
+                `nav-link px-3 py-2 ${isActive ? "bg-primary text-white rounded" : "text-light"}`
+              }
+            >
+              Manage Products
+            </NavLink>
+          </li>
+          <li className="nav-item mb-2">
+            <NavLink
+              to="/admin/orders"
+              className={({ isActive }) =>
+                `nav-link px-3 py-2 ${isActive ? "bg-primary text-white rounded" : "text-light"}`
+              }
+            >
+              Manage Orders
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </aside>
