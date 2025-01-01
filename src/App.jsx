@@ -5,9 +5,10 @@ import Home from "./pages/Home/Home";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Cart from "./pages/Cart/Cart";
 import CategoryItems from "./components/CategoryItems/CategoryItems";
-import Login from "./components/Login/Login";
+import LoginRegister from './components/LoginRegister/LoginRegister';
+
 import ProductDetails from "./components/ProductDetails/ProductDetails";
-import Register from "./components/Register/Register";
+
 import CartContextProvider from "./Context/CartContext";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
 import PaymentPage from "./pages/PaymentPage/PaymentPage";
@@ -15,7 +16,7 @@ import AdminDashboard from "./admin/AdminDashboard";
 import CategoryList from "./admin/AdminCategoryPage/CategoryList";
 import AdminProductList from "./admin/AdminProductPage/ProductList";
 import AdminOrderList from "./admin/AdminOrderPage/OrderList";
-import RoleSelection from "./components/RoleSelection/Role";
+import Role from "./components/RoleSelection/Role";
 import AddProduct from "./admin/AdminProductPage/AddProduct";
 
 
@@ -25,12 +26,10 @@ const App = () => {
       <div className="app">
         <Navbar />
         <Routes>
-          <Route path="/role" element={<RoleSelection />} />
- 
-<Route path="/login/buyer" element={<Login role="User" />} />
-<Route path="/register/buyer" element={<Register role="User" />} />
-<Route path="/login/seller" element={<Login role="Seller" />} />
-<Route path="/register/seller" element={<Register role="Seller" />} />
+          <Route path="/role" element={<Role />} />
+          <Route path="/login/:role" element={<LoginRegister />} />
+          <Route path="/register/:role" element={<LoginRegister />} />
+
           {/* Customer Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
