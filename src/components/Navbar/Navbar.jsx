@@ -17,7 +17,7 @@ const Navbar = ({ setShowLogin }) => {
       document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     } else {
       // Navigate to home and then scroll to the section
-      navigate('/');
+      navigate('/buyer/dashboard');
       setTimeout(() => {
         document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
       }, 300); // Delay to ensure page has loaded

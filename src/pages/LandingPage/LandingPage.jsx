@@ -1,60 +1,80 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "./LandingPage.css";
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
+  const photos = [
+    "/photo1.jpg",
+    "/photo2.jpg",
+    "/photo3.jpg",
+    "/photo4.jpg",
+  ]; // Array of image URLs
+
+  const [currentPhoto, setCurrentPhoto] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * photos.length);
+      console.log("Current photo path:", photos[randomIndex]); // Debugging log
+      setCurrentPhoto(randomIndex);
+    }, 3000);
+    return () => clearInterval(interval); // Cleanup interval
+  }, []);
+
   return (
     <div className="landing-page">
-      <header className="landing-header">
-        <h1>Welcome to ElectroMart</h1>
-        <p>Your one-stop destination for buyers and sellers.</p>
-      </header>
+      {/* Background Image */}
+      <div
+        className="photo-banner"
+        style={{
+          backgroundImage: `url(${photos[currentPhoto]})`,
+        }}
+      >
+        <div className="photo-overlay">
+          <header className="landing-header">
+            <h1>Welcome to ElectroMart</h1>
+            <p>Your one-stop destination for buyers and sellers.</p>
+          </header>
+        </div>
+      </div>
 
-      <section className="features-section">
-        <div className="feature">
-          <h2>For Buyers</h2>
-          <p>Explore the latest gadgets and enjoy seamless shopping experiences.</p>
-          <button
-            className="btn btn-primary"
-            onClick={() => navigate("/role")}
-          >
-            Explore as Buyer
-          </button>
-        </div>
+      <div className="container text-center mt-5">
+        <div className="row">
+          {/* Buyer Section */}
+          <div className="col-md-6 mb-4">
+            <div className="card">
+              <div className="card-body">
+                <h2>For Buyers</h2>
+                <p>Discover the best deals on the latest electronics.</p>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => navigate("/role")}
+                >
+                  Continue as Buyer
+                </button>
+              </div>
+            </div>
+          </div>
 
-        <div className="feature">
-          <h2>For Sellers</h2>
-          <p>Manage your inventory, track orders, and grow your business efficiently.</p>
-          <button
-            className="btn btn-secondary"
-            onClick={() => navigate("/role")}
-          >
-            Explore as Seller
-          </button>
+          {/* Seller Section */}
+          <div className="col-md-6 mb-4">
+            <div className="card">
+              <div className="card-body">
+                <h2>For Sellers</h2>
+                <p>Grow your business by reaching a wide customer base.</p>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => navigate("/role")}
+                >
+                  Continue as Seller
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
-
-      <section className="advanced-features">
-        <h2>Why Choose ElectroMart?</h2>
-        <div className="advanced-feature-item">
-          <h3>For Buyers:</h3>
-          <ul>
-            <li>Wide range of electronics at unbeatable prices.</li>
-            <li>Secure payment options and fast delivery.</li>
-            <li>Personalized recommendations tailored to your needs.</li>
-          </ul>
-        </div>
-        <div className="advanced-feature-item">
-          <h3>For Sellers:</h3>
-          <ul>
-            <li>Advanced analytics to track sales and performance.</li>
-            <li>Access to a wide customer base.</li>
-            <li>Easy tools for managing products and orders.</li>
-          </ul>
-        </div>
-      </section>
+      </div>
     </div>
   );
 };
