@@ -18,7 +18,7 @@ const LandingPage = () => {
           <p>Explore the latest gadgets and enjoy seamless shopping experiences.</p>
           <button
             className="btn btn-primary"
-            onClick={() => navigate("/buyer/dashboard")}
+            onClick={() => navigate("/role")}
           >
             Explore as Buyer
           </button>
@@ -29,7 +29,7 @@ const LandingPage = () => {
           <p>Manage your inventory, track orders, and grow your business efficiently.</p>
           <button
             className="btn btn-secondary"
-            onClick={() => navigate("/seller/dashboard")}
+            onClick={() => navigate("/role")}
           >
             Explore as Seller
           </button>
