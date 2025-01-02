@@ -6,9 +6,8 @@ import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Cart from "./pages/Cart/Cart";
 import CategoryItems from "./components/CategoryItems/CategoryItems";
 import LoginRegister from './components/LoginRegister/LoginRegister';
-
 import ProductDetails from "./components/ProductDetails/ProductDetails";
-
+import LandingPage from "./pages/LandingPage/LandingPage";
 import CartContextProvider from "./Context/CartContext";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
 import PaymentPage from "./pages/PaymentPage/PaymentPage";
@@ -27,6 +26,7 @@ const App = () => {
       <div className="app">
         <Navbar />
         <Routes>
+        <Route path="/" element={<LandingPage />} />
           <Route path="/role" element={<Role />} />
           <Route path="/login/:role" element={<LoginRegister />} />
           <Route path="/register/:role" element={<LoginRegister />} />
