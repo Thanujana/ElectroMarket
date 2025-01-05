@@ -1,26 +1,42 @@
-*{
-  padding: 0;
+/* Full-Width Navbar and Footer */
+.full-width {
+  width: 100%;
+}
+
+/* Header Section */
+.header-container {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  padding: 40px 20px;
+}
+
+/* Video Section */
+.video-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #1e293b;
+  color: white;
+}
+
+.footer-logo {
+  max-width: 150px;
+}
+
+.footer p {
   margin: 0;
-  box-sizing: border-box;
-}
-body{
-  min-height: 100vh;
-}
-a{
-  text-decoration: none;
-  color:inherit;
-}
-.app{
-  width: 90%;
-  margin:auto;
-}
-
-
-@keyframes fadeIn{
-  0%{
-    opacity: 0;
-  }
-  100%{
-    opacity:1 ;
-  }
 }

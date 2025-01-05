@@ -26,13 +26,13 @@ const App = () => {
       <div className="app">
         <Navbar />
         <Routes>
-        <Route path="/" element={<LandingPage />} />
+      // 
           <Route path="/role" element={<Role />} />
           <Route path="/login/:role" element={<LoginRegister />} />
           <Route path="/register/:role" element={<LoginRegister />} />
 
           {/* Customer Routes */}
-          <Route path="/buyer/dashboard" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/place-order" element={<PlaceOrder />} />
           <Route path="/categories/:category_name" element={<CategoryItems />} />
@@ -41,6 +41,7 @@ const App = () => {
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/order-status" element={<OrderStatus />} />
 
+    
           {/* Admin Routes */}
           <Route path="/seller/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/categories" element={<CategoryList />} />

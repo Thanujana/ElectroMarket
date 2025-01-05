@@ -291,11 +291,11 @@ export const item_list =[
 ];
 export const varieties_list ={
   "refrigerators": [
-    { id: 23,type: 'Bottom Freezer', image: item_bottomfreezer, price: 499,description: 'Spacious bottom freezer refrigerator for easy access to fresh foods.'  },
-    { id: 24,type:'Four Door', image: item_fourdoor, price: 1399, description: 'Flexible four-door design with customizable storage options.'  },
-    { id: 25,type: 'French Door', image: item_frenchdoor, price: 1299, description: 'Elegant French door design with wide shelves and ample storage.'  },
-    { id: 26,type: 'Side by Side', image: item_sidebyside, price: 1099, description: 'Side-by-side refrigerator for organized fresh and frozen food storage.' },
-    { id: 27,type: 'Top Freezer', image: item_topfreezer, price: 399,description:'Classic top freezer design with energy-efficient performance.'},
+    { id: 23,type: 'Bottom Freezer', image: item_bottomfreezer, price: 499,description: 'Spacious bottom freezer refrigerator for easy access to fresh foods.,rating: 4'  },
+    { id: 24,type:'Four Door', image: item_fourdoor, price: 1399, description: 'Flexible four-door design with customizable storage options.rating: 4.5 '  },
+    { id: 25,type: 'French Door', image: item_frenchdoor, price: 1299, description: 'Elegant French door design with wide shelves and ample storage.rating: 5 '  },
+    { id: 26,type: 'Side by Side', image: item_sidebyside, price: 1099, description: 'Side-by-side refrigerator for organized fresh and frozen food storage.rating: 4.5 ' },
+    { id: 27,type: 'Top Freezer', image: item_topfreezer, price: 399,description:'Classic top freezer design with energy-efficient performance.rating: 5 '},
   ],
   "washing-machines": [
     {id: 28, type: 'Top Load', image: item_topload, price: 549, description: '1.6-5.3 Cu. Ft. Capacity with Agitator or Impeller.' },

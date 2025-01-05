@@ -6,52 +6,62 @@ const ExploreCategory = ({ category, setCategory }) => {
   const navigate = useNavigate();
 
   const handleCategoryClick = (item) => {
-    navigate(`/categories/${item.category_name}`); // Use category_name directly (already clean)
+    navigate(`/categories/${item.category_name}`);
   };
-  
 
   return (
-    <div className="container py-4">
-      <h1 className="text-center mb-3">Explore the Categories.!!!</h1>
-      <p className="text-muted text-center mb-4">
+    <div
+      className="container-fluid py-5"
+      style={{
+        background: 'linear-gradient(135deg, #ADD8E6 50%, #dbeafe 50%)', // Replace white with soft gradient
+        borderRadius: '20px',
+        boxShadow: '0 8px 20px rgba(0, 0, 0, 0.1)',
+      }}
+    >
+      <h1 className="text-center mb-3">Explore the Categories</h1>
+      <p
+        className="text-muted text-center mb-5"
+        style={{ fontSize: '1rem', lineHeight: '1.6', color: '#555' }}
+      >
         Discover a wide range of categories tailored to your interests. Whether you're looking for
         the latest trends or diving into your favorite topics, we've got you covered.
       </p>
-      <div className="d-flex justify-content-between align-items-center flex-wrap">
+      <div className="row g-4 justify-content-center">
         {category_list.map((item, index) => (
           <div
             key={index}
-            className="text-center"
-            style={{
-              width: '18%',
-              cursor: 'pointer',
-              transition: 'transform 0.2s',
-            }}
-            onClick={() => handleCategoryClick(item)} // Call the updated function
+            className="col-lg-2 col-md-3 col-sm-4 col-6 text-center"
+            onClick={() => handleCategoryClick(item)}
+            style={{ cursor: 'pointer' }}
           >
             <div
-              className={`card border-0 ${
-                category === item.category_name ? 'border-primary' : ''
-              }`}
+              className="card border-0 shadow-sm"
+              style={{
+                background: 'linear-gradient(180deg,rgb(25, 189, 189), #f3f4f6)', // Slight gradient for cards
+                borderRadius: '10px',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+              }}
             >
-              <img
-                src={item.category_image}
-                alt={item.category_name}
-                className="card-img-top rounded"
+              <div
                 style={{
-                  width: '100%',
-                  height: '120px',
-                  objectFit: 'cover',
-                  boxShadow: category === item.category_name ? '0 4px 10px rgba(0, 0, 255, 0.4)' : '',
+                  backgroundColor: '#e0f2fe', // Updated color behind the image
+                  borderRadius: '10px',
+                  padding: '10px',
                 }}
-              />
-              <p
-                className={`fw-bold mt-2 ${
-                  category === item.category_name ? 'text-primary' : 'text-dark'
-                }`}
               >
-                {item.category_name}
-              </p>
+                <img
+                  src={item.category_image}
+                  alt={item.category_name}
+                  className="card-img-top"
+                  style={{
+                    height: '100px',
+                    objectFit: 'cover',
+                    borderRadius: '10px',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                  }}
+                />
+              </div>
+              <p className="fw-bold mt-2 text-dark">{item.category_name}</p>
             </div>
           </div>
         ))}

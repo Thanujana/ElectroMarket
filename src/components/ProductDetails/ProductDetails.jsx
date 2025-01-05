@@ -6,8 +6,8 @@ import { StoreContext } from "../../Context/StoreContext"; // Import the context
 
 const ProductDetails = () => {
   const { product_name } = useParams();
-  const navigate = useNavigate(); // Used to navigate to the cart page
-  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext); // Use context functions
+  const navigate = useNavigate(); // Used to navigate to the cart or login page
+  const { cartItems, addToCart, removeFromCart, isLoggedIn } = useContext(StoreContext); // Use context functions
 
   const formattedName = decodeURIComponent(product_name);
 
@@ -18,6 +18,15 @@ const ProductDetails = () => {
 
   // Fetch product varieties
   const varieties = varieties_list[formattedName.toLowerCase()] || [];
+
+  const handleCheckout = () => {
+    if (!isLoggedIn) {
+      alert("Please log in before proceeding to checkout!");
+      navigate("/role"); // Navigate to the login page
+    } else {
+      navigate("/cart"); // Navigate to the cart page if logged in
+    }
+  };
 
   return (
     <div className="product-details">
@@ -69,10 +78,7 @@ const ProductDetails = () => {
 
           {/* Checkout Button */}
           <div className="checkout-container">
-            <button
-              className="checkout-btn"
-              onClick={() => navigate("/cart")}
-            >
+            <button className="checkout-btn" onClick={handleCheckout}>
               Checkout
             </button>
           </div>
