@@ -22,7 +22,7 @@ const Sidebar = () => {
         <ul className="nav flex-column">
           <li className="nav-item mb-2">
             <NavLink
-              to="//dashboard"
+              to="/admin/dashboard"
               className={({ isActive }) =>
                 `nav-link px-3 py-2 ${isActive ? "text-warning" : "text-white"}`
               }
