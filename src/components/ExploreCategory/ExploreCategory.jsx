@@ -13,7 +13,7 @@ const ExploreCategory = ({ category, setCategory }) => {
     <div
       className="container-fluid py-5"
       style={{
-        background: 'linear-gradient(135deg, #ADD8E6 50%, #dbeafe 50%)', // Replace white with soft gradient
+        background: 'linear-gradient(135deg, #ADD8E6 50%, #dbeafe 50%)', 
         borderRadius: '20px',
         boxShadow: '0 8px 20px rgba(0, 0, 0, 0.1)',
       }}

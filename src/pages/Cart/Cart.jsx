@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Cart.css";
 import { StoreContext } from "../../Context/StoreContext";
 import { varieties_list } from "../../assets/assets";
 

@@ -11,7 +11,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="d-flex">
-      <Sidebar />
       <div className="container-fluid p-4">
         <h2 className="mb-4 text-center">Admin Dashboard</h2>
 

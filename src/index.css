@@ -1,42 +1,23 @@
-/* Full-Width Navbar and Footer */
-.full-width {
-  width: 100%;
+body {
+  margin: 0;
+  padding: 0 50px; /* White space added to the left and right */
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-/* Header Section */
 .header-container {
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  padding: 40px 20px;
-}
-
-/* Video Section */
-.video-section {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-/* Section Titles */
-.section-title {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f3f3f3;
   text-align: center;
-  color: #333;
 }
 
-/* Footer Styling */
+.video-section {
+  padding: 20px;
+}
+
 .footer {
   background-color: #1e293b;
   color: white;
-}
-
-.footer-logo {
-  max-width: 150px;
-}
-
-.footer p {
-  margin: 0;
+  padding: 20px;
+  text-align: center;
 }

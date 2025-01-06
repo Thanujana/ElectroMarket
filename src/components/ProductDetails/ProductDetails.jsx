@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./ProductDetails.css";
+import "../../style/ProductDetails.css";
 import { varieties_list } from "../../assets/assets";
 import { StoreContext } from "../../Context/StoreContext"; // Import the context
 
@@ -28,6 +28,18 @@ const ProductDetails = () => {
     }
   };
 
+  const incrementItem = (varietyId) => {
+    addToCart(varietyId); // Call the context's addToCart for increment
+  };
+
+  const decrementItem = (varietyId) => {
+    if (cartItems[varietyId] > 1) {
+      removeFromCart(varietyId); // Call removeFromCart to decrement
+    } else {
+      removeFromCart(varietyId); // Remove the item if quantity is 1
+    }
+  };
+
   return (
     <div className="product-details">
       <h1 className="title">{displayName}</h1>
@@ -51,14 +63,14 @@ const ProductDetails = () => {
                     <div className="quantity-controls">
                       <button
                         className="remove-btn"
-                        onClick={() => removeFromCart(variety.id)}
+                        onClick={() => decrementItem(variety.id)}
                       >
                         -
                       </button>
                       <span className="cart-count">{cartItems[variety.id]}</span>
                       <button
                         className="add-btn"
-                        onClick={() => addToCart(variety.id)}
+                        onClick={() => incrementItem(variety.id)}
                       >
                         +
                       </button>
@@ -66,7 +78,7 @@ const ProductDetails = () => {
                   ) : (
                     <button
                       className="add-to-picks-btn"
-                      onClick={() => addToCart(variety.id)}
+                      onClick={() => incrementItem(variety.id)}
                     >
                       Add to My Picks
                     </button>

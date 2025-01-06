@@ -1,0 +1,47 @@
+.custom-navbar {
+  background-color: #1E293B; /* Dark navy blue */
+  color: white;
+  padding: 10px 20px;
+}
+
+.logo {
+  width: 100px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #FFD700; /* Gold for active links */
+  font-weight: bold;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-input {
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 14px;
+  width: 200px;
+}
+
+.search-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}

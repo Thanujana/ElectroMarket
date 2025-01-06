@@ -40,6 +40,27 @@ const ProductList = () => {
     },
   ]);
 
+  const addProduct = (categoryId, subcategoryId, product) => {
+    setCategories((prevCategories) =>
+      prevCategories.map((category) =>
+        category.id === categoryId
+          ? {
+              ...category,
+              subcategories: category.subcategories.map((subcategory) =>
+                subcategory.id === subcategoryId
+                  ? {
+                      ...subcategory,
+                      products: [...subcategory.products, product],
+                    }
+                  : subcategory
+              ),
+            }
+          : category
+      )
+    );
+  };
+
+
   const [showModal, setShowModal] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(null);
   const [currentSubcategory, setCurrentSubcategory] = useState(null);

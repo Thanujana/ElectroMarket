@@ -4,16 +4,10 @@ import Sidebar from "../components/Sidebar";
 const AdminLayout = ({ children }) => {
   return (
     <div className="d-flex">
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* Main Content */}
+      <Sidebar /> {/* Sidebar always visible */}
       <div
-        className="flex-grow-1 p-4"
-        style={{
-          backgroundColor: "#F8F9FA", // Light background for content
-          minHeight: "100vh", // Full height
-        }}
+        className="admin-content"
+        style={{ flex: 1, padding: "20px", backgroundColor: "#f8f9fa" }}
       >
         {children}
       </div>

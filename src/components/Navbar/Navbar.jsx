@@ -1,41 +1,46 @@
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Navbar.css'; // Custom CSS
+import React, { useState } from "react";
+import '../../style/navbar.css';
+import { NavLink, useNavigate } from "react-router-dom";
+import ApiService from "../../service/ApiService"; // Ensure the service file exists and has the required methods
 import logo from "../../assets/logo.png";
-import searchIcon from "../../assets/search_icon.png";
-import basketIcon from "../../assets/basket_icon.png";
-import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ setShowLogin }) => {
-  const [menu, setMenu] = useState('home');
+const Navbar = () => {
+  const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
-  const handleScroll = (sectionId) => {
-    // Check if the user is already on the home page
-    if (location.pathname === '/') {
-      // Scroll to the section
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      // Navigate to home and then scroll to the section
-      navigate('/');
-      setTimeout(() => {
-        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-      }, 300); // Delay to ensure page has loaded
-    }
-    setMenu(sectionId); // Update the active menu item
+  const isAdmin = ApiService.isAdmin();
+  const isAuthenticated = ApiService.isAuthenticated();
+
+  const handleSearchChange = (e) => {
+    setSearchValue(e.target.value);
   };
 
-  const handleNavigation = (route, menuName) => {
-    navigate(route); // Navigate to the route
-    setMenu(menuName); // Update the active menu item
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/?search=${searchValue}`);
+  };
+
+  const handleLogout = () => {
+    const confirm = window.confirm("Are you sure you want to logout?");
+    if (confirm) {
+      ApiService.logout();
+      setTimeout(() => {
+        navigate("/login");
+      }, 500);
+    }
   };
 
   return (
     <nav className="navbar navbar-expand-lg custom-navbar">
       <div className="container-fluid">
-        <a className="navbar-brand d-flex align-items-center" href="#">
-          <img src={logo} alt="Logo" className="logo me-2" />
-        </a>
+        {/* Brand Logo */}
+        <div className="navbar-brand">
+          <NavLink to="/">
+            <img src={logo} alt="Electro Mart" className="logo" />
+          </NavLink>
+        </div>
+
+        {/* Navbar Toggler for Mobile View */}
         <button
           className="navbar-toggler"
           type="button"
@@ -47,62 +52,84 @@ const Navbar = ({ setShowLogin }) => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+
+        {/* Navbar Links */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-          <li className="nav-item">
-              <a
-                className={`nav-link ${menu === 'header-section' ? 'active' : ''}`}
-                onClick={() => handleScroll('header-section')}
-                
-              >
+            <li className="nav-item">
+              <NavLink to="/" className="nav-link">
                 Home
-              </a>
+              </NavLink>
             </li>
-            {/* Menu Navigation */}
+            {isAuthenticated && (
+              <li className="nav-item">
+                <NavLink to="/profile" className="nav-link">
+                  My Account
+                </NavLink>
+              </li>
+            )}
+            {isAdmin && (
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="adminDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Admin
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="adminDropdown">
+                  <li>
+                    <NavLink to="/admin/categories" className="dropdown-item">
+                      Categories
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/admin/orders" className="dropdown-item">
+                      Orders
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/admin/products" className="dropdown-item">
+                      Products
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+            )}
+            {!isAuthenticated && (
+              <li className="nav-item">
+                <NavLink to="/role" className="nav-link">
+                  Login
+                </NavLink>
+              </li>
+            )}
+            {isAuthenticated && (
+              <li className="nav-item">
+                <NavLink to="/" onClick={handleLogout} className="nav-link">
+                  Logout
+                </NavLink>
+              </li>
+            )}
             <li className="nav-item">
-              <a
-                className={`nav-link ${menu === 'explore-category' ? 'active' : ''}`}
-                onClick={() => handleScroll('explore-category')} // Scroll to Explore Categories
-              >
-                Menu
-              </a>
-            </li>
-
-            {/* Contact Us Navigation */}
-            <li className="nav-item">
-              <a
-                className={`nav-link ${menu === 'footer-section' ? 'active' : ''}`}
-                onClick={() => handleScroll('footer-section')} // Scroll to Footer
-              >
-                Contact Us
-              </a>
+              <NavLink to="/cart" className="nav-link">
+                Cart
+              </NavLink>
             </li>
           </ul>
-          <div className="search-wrapper d-flex align-items-center me-3">
+
+          {/* Search Form */}
+          <form className="d-flex search-wrapper" onSubmit={handleSearchSubmit}>
             <input
               type="text"
-              placeholder="Search here..."
-              className="form-control search-input"
+              placeholder="Search products"
+              value={searchValue}
+              onChange={handleSearchChange}
+              className="form-control search-input me-2"
             />
-            <img src={searchIcon} alt="Search" className="icon search-icon" />
-          </div>
-          <img
-            src={basketIcon}
-            alt="Basket"
-            className="icon me-3"
-            onClick={() => navigate('/cart')} // Add navigation to Cart page
-            style={{ cursor: "pointer" }} // Make it visually clear the icon is clickable
-          />
-
-          <button
-          className="btn btn-sm custom-signin-btn"
-           onClick={() => navigate('/role')}
-          >
-  Login
-</button>
-
-
-
+          </form>
         </div>
       </div>
     </nav>

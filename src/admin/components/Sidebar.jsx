@@ -22,11 +22,9 @@ const Sidebar = () => {
         <ul className="nav flex-column">
           <li className="nav-item mb-2">
             <NavLink
-              to="/seller/dashboard"
+              to="//dashboard"
               className={({ isActive }) =>
-                `nav-link px-3 py-2 ${
-                  isActive ? "text-warning" : "text-white"
-                }`
+                `nav-link px-3 py-2 ${isActive ? "text-warning" : "text-white"}`
               }
             >
               Dashboard
@@ -36,9 +34,7 @@ const Sidebar = () => {
             <NavLink
               to="/admin/categories"
               className={({ isActive }) =>
-                `nav-link px-3 py-2 ${
-                  isActive ? "text-warning" : "text-white"
-                }`
+                `nav-link px-3 py-2 ${isActive ? "text-warning" : "text-white"}`
               }
             >
               Manage Categories
@@ -48,9 +44,7 @@ const Sidebar = () => {
             <NavLink
               to="/admin/products"
               className={({ isActive }) =>
-                `nav-link px-3 py-2 ${
-                  isActive ? "text-warning" : "text-white"
-                }`
+                `nav-link px-3 py-2 ${isActive ? "text-warning" : "text-white"}`
               }
             >
               Manage Products
@@ -60,9 +54,7 @@ const Sidebar = () => {
             <NavLink
               to="/admin/orders"
               className={({ isActive }) =>
-                `nav-link px-3 py-2 ${
-                  isActive ? "text-warning" : "text-white"
-                }`
+                `nav-link px-3 py-2 ${isActive ? "text-warning" : "text-white"}`
               }
             >
               Manage Orders

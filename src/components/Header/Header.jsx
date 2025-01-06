@@ -1,7 +1,7 @@
 import React from 'react';
-import './Header.css';
-import sideImage from '/header_img.png'; // Replace with your side image path
-import bgImage from '/bg_image.jpg'; // Replace with your background image path
+import '../../style/Header.css';
+import sideImage from '/header_img.png'; 
+import bgImage from '/bg_image.jpg'; 
 
 const Header = () => {
   return (
@@ -17,7 +17,7 @@ const Header = () => {
           <p className="glass-description">
           Explore the ultimate destination for cutting-edge electronics -all in one seamless online marketplace.
           </p>
-          <button className="glass-button"onClick={() => document.getElementById('explore-category').scrollIntoView({ behavior: 'smooth' })}>
+          <button className="glass-button" onClick={() => document.getElementById('explore-category').scrollIntoView({ behavior: 'smooth' })}>
             Explore Now
           </button>
 

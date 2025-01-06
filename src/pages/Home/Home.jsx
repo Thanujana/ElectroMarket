@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import "./Home.css";
 import Header from "../../components/Header/Header";
 import ExploreCategory from "../../components/ExploreCategory/ExploreCategory";
 import ItemDisplay from "../../components/ItemDisplay/ItemDisplay";
-import Footer from '../../components/Footer/Footer';
 
 const Home = () => {
   // State to store the selected category
@@ -25,13 +23,8 @@ const Home = () => {
       <div id="item-display">
         <ItemDisplay />
       </div>
+ </div>
 
-   
-      {/* Footer */}
-      <div id="footer-section">
-        <Footer />
-      </div>
-    </div>
   );
 };
 
