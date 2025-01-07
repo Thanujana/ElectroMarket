@@ -1,5 +1,12 @@
+.footer {
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
+
 .footer-logo {
-  width: 150px; /* Adjust logo size */
+  width: 150px;
 }
 
 .social-icon {
@@ -9,5 +16,24 @@
 }
 
 .social-icon:hover {
-  opacity: 0.8; /* Add hover effect */
+  opacity: 0.8;
+}
+
+.footer-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.footer-link:hover {
+  color: #ffcc00; /* Highlight color */
+}
+
+.list-unstyled {
+  padding: 0;
+  list-style: none;
+}
+
+.border-secondary {
+  border-color: rgba(255, 255, 255, 0.2) !important;
 }
