@@ -1,82 +1,34 @@
-.landing-page {
-  font-family: Arial, sans-serif;
-  color: #333;
-}
-
-/* Hero Banner */
+/* Hero Section */
 .hero-banner {
   position: relative;
   height: 400px;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Places the video behind the content */
 }
 
 .hero-overlay {
+  position: relative;
+  z-index: 1; /* Places content above the video */
   text-align: center;
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
-  color: #fff;
+  border-radius: 10px;
 }
 
-.shop-now-btn {
-  background-color: #ff6347;
+.hero-overlay h1 {
+  font-size: 2.5rem;
   color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
 }
 
-.shop-now-btn:hover {
-  background-color: #e5533d;
-}
-
-/* About Us Section */
-.about-section {
-  padding: 20px;
-  text-align: center;
-  background-color: #f9f9f9;
-}
-
-.about-section h2 {
-  margin-bottom: 10px;
-}
-
-/* Contact Us Section */
-.contact-section {
-  padding: 20px;
-  text-align: center;
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 80%;
-  max-width: 400px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.contact-form button {
-  background-color: #ff6347;
+.hero-overlay p {
   color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.contact-form button:hover {
-  background-color: #e5533d;
 }
