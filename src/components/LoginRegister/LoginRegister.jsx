@@ -105,7 +105,7 @@ const LoginForm = ({ role, navigate, setMode }) => {
     if (savedData?.email === formData.email && savedData?.password === formData.password) {
       // Navigate based on the role
       if (role === "buyer") {
-        navigate("/"); // Navigate to Home for buyers
+        navigate("/buyer/dashboard"); // Navigate to Home for buyers
       } else if (role === "seller") {
         navigate("/seller/dashboard"); // Navigate to AdminDashboard for sellers
       }

@@ -19,6 +19,7 @@ import AdminOrderList from "./admin/AdminOrderPage/OrderList";
 import Role from "./components/RoleSelection/Role";
 import AddProduct from "./admin/AdminProductPage/AddProduct";
 import OrderStatus from "./pages/OrderStatus/OrderStatus";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 const App = () => {
   return (
@@ -27,7 +28,8 @@ const App = () => {
         <Navbar />
         <Routes>
           {/* Customer Routes */}
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/buyer/dashboard" element={<Home />} />
           <Route path="/role" element={<Role />} />
           <Route path="/login/:role" element={<LoginRegister />} />
           <Route path="/register/:role" element={<LoginRegister />} />

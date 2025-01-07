@@ -1,62 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "./LandingPage.css";
+import '../../style/LandingPage.css';
 
 const LandingPage = () => {
-  const navigate = useNavigate();
-
   const bannerImages = [
-    "https://images.unsplash.com/photo-1517059224940-d4af9eec41b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920",
-    "https://images.unsplash.com/photo-1521334884684-d80222895322?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920",
-    "https://images.unsplash.com/photo-1610484827713-fc4972ebfb34?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920",
-  ];
-
-  const categories = [
-    {
-      id: 1,
-      name: "Electronics",
-      image: "https://images.unsplash.com/photo-1587202372775-0dbe94b505bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-      link: "/category/electronics",
-    },
-    {
-      id: 2,
-      name: "Fashion",
-      image: "https://images.unsplash.com/photo-1521334884684-d80222895322?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-      link: "/category/fashion",
-    },
-    {
-      id: 3,
-      name: "Home Appliances",
-      image: "https://images.unsplash.com/photo-1610484827713-fc4972ebfb34?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-      link: "/category/home",
-    },
-    {
-      id: 4,
-      name: "Beauty",
-      image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-      link: "/category/beauty",
-    },
-  ];
-
-  const hotDeals = [
-    {
-      id: 1,
-      name: "Smartphone",
-      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-      link: "/product/1",
-    },
-    {
-      id: 2,
-      name: "Headphones",
-      image: "https://images.unsplash.com/photo-1602524813674-835ef17f3c36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-      link: "/product/2",
-    },
-    {
-      id: 3,
-      name: "Smart TV",
-      image: "https://images.unsplash.com/photo-1617392299361-c07b8dc49bac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-      link: "/product/3",
-    },
+    "/photo1.jpg",
+    "/photo2.jpg",
+    "/photo3.jpg",
+    "/photo4.jpg",
   ];
 
   const [currentBanner, setCurrentBanner] = useState(0);
@@ -79,42 +29,28 @@ const LandingPage = () => {
       >
         <div className="hero-overlay">
           <h1>Welcome to ElectroMart</h1>
-          <p>Shop amazing deals and products!</p>
+          <p>Your one-stop shop for cutting-edge electronics!</p>
+          <button className="shop-now-btn">Shop Now</button>
         </div>
       </div>
 
-      {/* Categories Section */}
-      <div className="categories-section">
-        <h2>Shop by Categories</h2>
-        <div className="categories-container">
-          {categories.map((category) => (
-            <div
-              key={category.id}
-              className="category-card"
-              onClick={() => navigate(category.link)}
-            >
-              <img src={category.image} alt={category.name} />
-              <p>{category.name}</p>
-            </div>
-          ))}
-        </div>
+      {/* About Us Section */}
+      <div className="about-section">
+        <h2>About Us</h2>
+        <p>
+          ElectroMart is your trusted partner for high-quality electronics. We aim to deliver top-notch products with unbeatable customer service, ensuring a seamless shopping experience for every customer.
+        </p>
       </div>
 
-      {/* Hot Deals Section */}
-      <div className="promotions-section">
-        <h2>Hot Deals</h2>
-        <div className="promotions-carousel">
-          {hotDeals.map((deal) => (
-            <div
-              className="promotion-card"
-              key={deal.id}
-              onClick={() => navigate(deal.link)}
-            >
-              <img src={deal.image} alt={deal.name} />
-              <p>{deal.name}</p>
-            </div>
-          ))}
-        </div>
+      {/* Contact Us Section */}
+      <div className="contact-section">
+        <h2>Contact Us</h2>
+        <form className="contact-form">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
       </div>
     </div>
   );

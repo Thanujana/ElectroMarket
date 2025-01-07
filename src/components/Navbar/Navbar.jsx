@@ -35,7 +35,7 @@ const Navbar = () => {
       <div className="container-fluid">
         {/* Brand Logo */}
         <div className="navbar-brand">
-          <NavLink to="/">
+          <NavLink to="/buyer/dashboard">
             <img src={logo} alt="Electro Mart" className="logo" />
           </NavLink>
         </div>
@@ -57,7 +57,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink to="/" className="nav-link">
+              <NavLink to="/buyer/dashboard" className="nav-link">
                 Home
               </NavLink>
             </li>
