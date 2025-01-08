@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { gsap } from "gsap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
 import "../../style/LandingPage.css";
 
 const LandingPage = () => {
+  const navigate = useNavigate(); 
   useEffect(() => {
     // Animations for text elements
     gsap.fromTo(
@@ -25,6 +27,10 @@ const LandingPage = () => {
     );
   }, []);
 
+  const handleButtonClick = () => {
+    navigate("/buyer/dashboard");
+  };
+
   return (
     <div>
       {/* Hero Section */}
@@ -37,7 +43,12 @@ const LandingPage = () => {
             <p className="subtitle-text mt-3">
               Your one-stop destination for cutting-edge electronics!
             </p>
-            <button className="cta-button btn btn-primary btn-lg mt-4">See What's New</button>
+            <button
+              className="cta-button btn btn-primary btn-lg mt-4"
+              onClick={handleButtonClick}
+            >
+              See What's New
+            </button>
           </div>
           <div className="video-section d-flex justify-content-center align-items-center">
             <video
@@ -52,10 +63,10 @@ const LandingPage = () => {
         </div>
       </div>
 {/* About Us Section */}
-<div className="about-us-section py-5 text-center bg-light">
+<div id="about" className="about-us-section py-5 text-center bg-light">
   <div className="container">
     <h2 className="mb-4">About Us</h2>
-    <p className="mb-5">
+    <p className="mb-5" style={{ fontSize: "18px" }}>
       Elecshop is one of the largest e-commerce platforms facilitating the
       distribution of electrical, communications, and data networking products.
     </p>
@@ -69,7 +80,7 @@ const LandingPage = () => {
           />
           <div className="card-body">
             <h5 className="card-title">What We Really Do</h5>
-            <p className="card-text">
+            <p className="card-text" style={{ fontSize: "16px" }}>
               We strive to make customers' lives easier by offering high-quality
               electronic products and solutions tailored to their needs.
             </p>
@@ -85,7 +96,7 @@ const LandingPage = () => {
           />
           <div className="card-body">
             <h5 className="card-title">Our Vision</h5>
-            <p className="card-text">
+            <p className="card-text" style={{ fontSize: "16px" }}>
               Our vision is to lead the market with innovative products and a
               customer-first approach, setting benchmarks in the e-commerce space.
             </p>
@@ -101,7 +112,7 @@ const LandingPage = () => {
           />
           <div className="card-body">
             <h5 className="card-title">History of Beginning</h5>
-            <p className="card-text">
+            <p className="card-text" style={{ fontSize: "16px" }}>
               Established in 2024, Elecshop has built its reputation as a reliable
               platform for all things electronics.
             </p>
@@ -114,62 +125,147 @@ const LandingPage = () => {
 
 
 {/* Contact Us Section */}
-<div className="contact-us-section py-5">
+<div id="contact" className="contact-us-section py-5">
   <div className="container">
-    <div className="row align-items-center">
-      {/* Video Section */}
-      <div className="col-md-6 video-section d-flex justify-content-center align-items-center">
-        <video
-          className="side-video shadow-lg"
-          src="/Video_1.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-        ></video>
+    <div className="row align-items-start">
+      {/* Contact Form Section */}
+      <div className="col-md-6">
+        <div className="form-section">
+          <h2 className="mb-4">Contact Us</h2>
+          <form className="p-4 rounded shadow">
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                placeholder="Enter your name"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                placeholder="Enter your email"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="message" className="form-label">
+                Message
+              </label>
+              <textarea
+                className="form-control"
+                id="message"
+                rows="4"
+                placeholder="Write your message here"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary btn-lg btn-gradient"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
       </div>
 
-      {/* Contact Form */}
-      <div className="col-md-6 form-section">
-        <h2 className="mb-4">Contact Us</h2>
-        <form className="p-4 rounded shadow">
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">
-              Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              placeholder="Enter your name"
-            />
+      {/* Video + FAQ Section */}
+      <div className="col-md-6">
+        {/* Video Section */}
+        <div className="video-section mb-4">
+          <video
+            className="side-video rounded shadow w-100"
+            src="/Video_1.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        </div>
+
+        {/* FAQ Section */}
+        <div className="faq-section">
+          <h2 className="mb-4 text-center">What can we do for you?</h2>
+          <div className="accordion" id="faqAccordion">
+            {/* Support 24/7 */}
+            <div className="accordion-item">
+              <h2 className="accordion-header" id="headingOne">
+                <button
+                  className="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  Support 24/7
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                className="accordion-collapse collapse show"
+                aria-labelledby="headingOne"
+                data-bs-parent="#faqAccordion"
+              >
+                <div className="accordion-body">
+                  We consider every customer need as essential. Each customer
+                  contact is regarded as an opportunity to create sustainable
+                  business relationships. Thus our support is provided via
+                  phone, email, and chat 24/7.
+                </div>
+              </div>
+            </div>
+
+            {/* Other FAQ Items */}
+            {[
+              {
+                id: "collapseTwo",
+                header: "Best Quality",
+                body: "We ensure top-notch quality for all our products, maintaining excellence and reliability.",
+              },
+              {
+                id: "collapseThree",
+                header: "Fastest Delivery",
+                body: "Our delivery system ensures the fastest and most reliable service to your doorstep.",
+              },
+              {
+                id: "collapseFour",
+                header: "Customer Care",
+                body: "Our dedicated team is here to assist you with any questions or issues you may encounter.",
+              },
+            ].map((item, index) => (
+              <div className="accordion-item" key={index}>
+                <h2 className="accordion-header" id={`heading${index + 2}`}>
+                  <button
+                    className="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target={`#${item.id}`}
+                    aria-expanded="false"
+                    aria-controls={item.id}
+                  >
+                    {item.header}
+                  </button>
+                </h2>
+                <div
+                  id={item.id}
+                  className="accordion-collapse collapse"
+                  aria-labelledby={`heading${index + 2}`}
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div className="accordion-body">{item.body}</div>
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              placeholder="Enter your email"
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="message" className="form-label">
-              Message
-            </label>
-            <textarea
-              className="form-control"
-              id="message"
-              rows="4"
-              placeholder="Write your message here"
-            ></textarea>
-          </div>
-          <button type="submit" className="btn btn-primary btn-lg btn-gradient">
-            Send Message
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   </div>
