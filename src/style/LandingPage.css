@@ -283,17 +283,19 @@ form .form-control:focus {
   color: #333;
   padding: 12px 20px;
   transition: all 0.3s ease-in-out;
+  color: #000000;
+
 }
 
 .accordion-button:hover {
-  background-color: #e0f7fa; /* Hover light teal */
+  background-color: #c21b1e; /* Hover light teal */
   transform: scale(1.02); /* Slight zoom effect */
   box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
 }
 
 .accordion-button:not(.collapsed) {
   background-color: #007bff; /* Active state blue background */
-  color: #fff; /* White text for active state */
+  color: #a61e1e; /* White text for active state */
   border: 1px solid #007bff;
   box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
 }
