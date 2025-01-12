@@ -97,23 +97,26 @@ const LoginForm = ({ role, navigate, setMode }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
-    // Retrieve saved data from localStorage for the selected role
-    const savedData = JSON.parse(localStorage.getItem(`${role}Data`));
-  
-    // Check if credentials match the saved data
-    if (savedData?.email === formData.email && savedData?.password === formData.password) {
-      // Navigate based on the role
-      if (role === "buyer") {
-        navigate("/buyer/dashboard"); // Navigate to Home for buyers
-      } else if (role === "seller") {
-        navigate("/admin/dashboard"); // Navigate to AdminDashboard for sellers
-      }
-    } else {
-      // Show error message for invalid credentials
-      setError("Invalid email or password.");
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
     }
+  
+    // Save user data to localStorage
+    const userData = {
+      name: formData.name,
+      email: formData.email,
+      role: role, // Pass role as "admin" or "buyer"
+    };
+    localStorage.setItem("userData", JSON.stringify(userData));
+  
+    // Show success message and redirect
+    setSuccess("Registration successful! Redirecting to your account...");
+    setTimeout(() => {
+      navigate("/profile"); // Redirect to "My Account"
+    }, 1000);
   };
+  
   
   return (
     <form onSubmit={handleSubmit}>

@@ -20,7 +20,7 @@ import Role from "./components/RoleSelection/Role";
 import AddProduct from "./admin/AdminProductPage/AddProduct";
 import OrderStatus from "./pages/OrderStatus/OrderStatus";
 import LandingPage from "./pages/LandingPage/LandingPage";
-
+import Profile from "./components/Profile/Profile";
 const App = () => {
   return (
     <CartContextProvider>
@@ -33,6 +33,7 @@ const App = () => {
           <Route path="/role" element={<Role />} />
           <Route path="/login/:role" element={<LoginRegister />} />
           <Route path="/register/:role" element={<LoginRegister />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/place-order" element={<PlaceOrder />} />
           <Route path="/categories/:category_name" element={<CategoryItems />} />
