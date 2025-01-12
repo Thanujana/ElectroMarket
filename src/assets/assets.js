@@ -277,13 +277,13 @@ export const item_list =[
 ];
 export const varieties_list ={
   "refrigerators": [
-    { id: 23,type: 'Bottom Freezer', image: item_bottomfreezer, price: 499,description: 'Spacious bottom freezer refrigerator for easy access to fresh foods.,rating: 4'  },
-    { id: 24,type:'Four Door', image: item_fourdoor, price: 1399, description: 'Flexible four-door design with customizable storage options.rating: 4.5 '  },
-    { id: 25,type: 'French Door', image: item_frenchdoor, price: 1299, description: 'Elegant French door design with wide shelves and ample storage.rating: 5 '  },
-    { id: 26,type: 'Side by Side', image: item_sidebyside, price: 1099, description: 'Side-by-side refrigerator for organized fresh and frozen food storage.rating: 4.5 ' },
-    { id: 27,type: 'Top Freezer', image: item_topfreezer, price: 399,description:'Classic top freezer design with energy-efficient performance.rating: 5 '},
-    { id: 28,type: 'Top Freezer', image: item_topfreezer, price: 399,description:'Classic top freezer design with energy-efficient performance.rating: 5 '},
-    { id: 29,type: 'Top Freezer', image: item_topfreezer, price: 399,description:'Classic top freezer design with energy-efficient performance.rating: 5 '},
+    { id: 23,type: 'Bottom Freezer', image: item_bottomfreezer, price: 499,description: 'Spacious bottom freezer refrigerator for easy access to fresh foods.',rating: 4 },
+    { id: 24,type:'Four Door', image: item_fourdoor, price: 1399, description: 'Flexible four-door design with customizable storage options.',rating: 4.5   },
+    { id: 25,type: 'French Door', image: item_frenchdoor, price: 1299, description: 'Elegant French door design with wide shelves and ample storage',rating: 5 },
+    { id: 26,type: 'Side by Side', image: item_sidebyside, price: 1099, description: 'Side-by-side refrigerator for organized fresh and frozen food storage',rating: 4.5  },
+    { id: 27,type: 'Top Freezer', image: item_topfreezer, price: 399,description:'Classic top freezer design with energy-efficient performance.',rating: 5},
+    { id: 38,type: 'Top Freezer', image: item_topfreezer, price: 399,description:'Classic top freezer design with energy-efficient performance.',rating: 5 },
+    { id: 39,type: 'Top Freezer', image: item_topfreezer, price: 399,description:'Classic top freezer design with energy-efficient performance.',rating: 5 },
   ],
   "washing-machines": [
     {id: 28, type: 'Top Load', image: item_topload, price: 549, description: '1.6-5.3 Cu. Ft. Capacity with Agitator or Impeller.' },
@@ -291,7 +291,7 @@ export const varieties_list ={
     {id: 30, type: 'All In One', image: item_allinone, price: 799, description: 'Combination of washer and dryer in one unit.' },
     {id: 31, type: 'Laundry Center', image: item_laundrycenter, price: 999, description: 'Stacked washer and dryer combo.' },
     {id: 32,type: 'Laundry Set', image: item_laundryset, price: 1199, description: 'Matching washer and dryer set.' },
-    {id: 32,type: 'Laundry Set', image: item_laundryset, price: 1199, description: 'Matching washer and dryer set.' },
+    {id: 37,type: 'Laundry Set', image: item_laundryset, price: 1199, description: 'Matching washer and dryer set.' },
   ],
   "microwave-oven": [
     { id: 33,type: 'Over the Range', image: item_overtherange, price: 299, description: 'Convenient over-the-range microwave with exhaust fan.'  },

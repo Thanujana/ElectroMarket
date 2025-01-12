@@ -2,42 +2,59 @@ import React, { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../../style/ProductDetails.css";
 import { varieties_list } from "../../assets/assets";
-import { StoreContext } from "../../Context/StoreContext"; // Import the context
+import { StoreContext } from "../../Context/StoreContext";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 const ProductDetails = () => {
   const { product_name } = useParams();
-  const navigate = useNavigate(); // Used to navigate to the cart or login page
-  const { cartItems, addToCart, removeFromCart, isLoggedIn } = useContext(StoreContext); // Use context functions
+  const navigate = useNavigate();
+  const { cartItems, addToCart, removeFromCart, isLoggedIn } = useContext(StoreContext);
 
   const formattedName = decodeURIComponent(product_name);
-
-  // Capitalize and replace dashes
   const displayName = formattedName
     .replace(/-/g, " ")
     .replace(/\b\w/g, (c) => c.toUpperCase());
 
-  // Fetch product varieties
   const varieties = varieties_list[formattedName.toLowerCase()] || [];
 
   const handleCheckout = () => {
     if (!isLoggedIn) {
       alert("Please log in before proceeding to checkout!");
-      navigate("/role"); // Navigate to the login page
+      navigate("/role");
     } else {
-      navigate("/cart"); // Navigate to the cart page if logged in
+      navigate("/cart");
     }
   };
 
   const incrementItem = (varietyId) => {
-    addToCart(varietyId); // Call the context's addToCart for increment
+    addToCart(varietyId);
   };
 
   const decrementItem = (varietyId) => {
     if (cartItems[varietyId] > 1) {
-      removeFromCart(varietyId); // Call removeFromCart to decrement
+      removeFromCart(varietyId);
     } else {
-      removeFromCart(varietyId); // Remove the item if quantity is 1
+      removeFromCart(varietyId);
     }
+  };
+
+  const renderStars = (rating = 0) => {
+    const validRating = Math.min(Math.max(rating, 0), 5); // Ensure valid range
+    const fullStars = Math.floor(validRating);
+    const halfStar = validRating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+    return (
+      <>
+        {[...Array(fullStars)].map((_, i) => (
+          <FaStar key={`full-${i}`} className="star full-star" />
+        ))}
+        {halfStar && <FaStarHalfAlt className="star half-star" />}
+        {[...Array(emptyStars)].map((_, i) => (
+          <FaRegStar key={`empty-${i}`} className="star empty-star" />
+        ))}
+      </>
+    );
   };
 
   return (
@@ -56,8 +73,8 @@ const ProductDetails = () => {
                 <h2 className="product-name">{variety.type}</h2>
                 <p className="product-description">{variety.description}</p>
                 <div className="product-price">Price: ${variety.price}</div>
+                <div className="product-rating">{renderStars(variety.rating)}</div>
 
-                {/* Cart Actions */}
                 <div className="cart-actions">
                   {cartItems[variety.id] > 0 ? (
                     <div className="quantity-controls">
@@ -88,7 +105,6 @@ const ProductDetails = () => {
             ))}
           </div>
 
-          {/* Checkout Button */}
           <div className="checkout-container">
             <button className="checkout-btn" onClick={handleCheckout}>
               Checkout
