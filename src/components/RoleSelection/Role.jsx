@@ -28,26 +28,38 @@ const Role = () => {
           <p className="lead">Choose your role to log in or register:</p>
         </div>
         <div className="col-md-6 bg-white p-5 d-flex flex-column align-items-center">
-          <h2 className="mb-4"
-          style={{
-            color: "#003366", // Dark blue
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.4)", // Subtle shadow for depth
-          }} >Select Your Role</h2>
+          <h2
+            className="mb-4"
+            style={{
+              color: "#003366", // Dark blue
+              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.4)", // Subtle shadow for depth
+            }}
+          >
+            Select Your Role
+          </h2>
           <div
             className="card mb-3 p-3 w-75 text-center"
-            style={{ cursor: "pointer", borderRadius: "10px", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
-            onClick={() => navigate("/login/buyer")}
+            style={{
+              cursor: "pointer",
+              borderRadius: "10px",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            }}
+            onClick={() => navigate("/login?role=buyer")}
           >
             <h4>Buyer</h4>
             <p className="text-muted">Log in as a Buyer</p>
           </div>
           <div
             className="card p-3 w-75 text-center"
-            style={{ cursor: "pointer", borderRadius: "10px", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
-            onClick={() => navigate("/login/seller")}
+            style={{
+              cursor: "pointer",
+              borderRadius: "10px",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            }}
+            onClick={() => navigate("/login?role=admin")}
           >
-            <h4>Seller</h4>
-            <p className="text-muted">Log in as a Seller</p>
+            <h4>Admin</h4>
+            <p className="text-muted">Log in as a Admin</p>
           </div>
         </div>
       </div>

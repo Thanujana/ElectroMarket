@@ -2,11 +2,12 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 import Home from "./pages/Home/Home";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Cart from "./pages/Cart/Cart";
 import CategoryItems from "./components/CategoryItems/CategoryItems";
-import LoginRegister from "./components/LoginRegister/LoginRegister";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import CartContextProvider from "./Context/CartContext";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
@@ -31,8 +32,8 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/buyer/dashboard" element={<Home />} />
           <Route path="/role" element={<Role />} />
-          <Route path="/login/:role" element={<LoginRegister />} />
-          <Route path="/register/:role" element={<LoginRegister />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/place-order" element={<PlaceOrder />} />
