@@ -107,7 +107,7 @@ const LoginForm = ({ role, navigate, setMode }) => {
       if (role === "buyer") {
         navigate("/buyer/dashboard"); // Navigate to Home for buyers
       } else if (role === "seller") {
-        navigate("/seller/dashboard"); // Navigate to AdminDashboard for sellers
+        navigate("/admin/dashboard"); // Navigate to AdminDashboard for sellers
       }
     } else {
       // Show error message for invalid credentials
