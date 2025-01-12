@@ -158,11 +158,16 @@ const ProductList = () => {
               <h4 className="d-flex justify-content-between align-items-center">
                 {subcategory.name}
                 <button
-                  className="btn btn-sm btn-primary"
-                  onClick={() => navigate("/admin/products/add")}
-                >
-                  Add Product
-                </button>
+  className="btn btn-sm btn-primary"
+  onClick={() =>
+    navigate("/admin/products/add", {
+      state: { categoryId: category.id, subcategoryId: subcategory.id },
+    })
+  }
+>
+  Add Product
+</button>
+
               </h4>
               <ul className="list-group">
                 {subcategory.products.length > 0 ? (

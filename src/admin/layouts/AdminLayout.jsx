@@ -3,11 +3,20 @@ import Sidebar from "../components/Sidebar";
 
 const AdminLayout = ({ children }) => {
   return (
-    <div className="d-flex">
-      <Sidebar /> {/* Sidebar always visible */}
+    <div
+      className="d-flex"
+      style={{
+        height: "100vh", // Full viewport height
+        overflow: "hidden", // Prevent extra scrollbars
+      }}
+    >
+      <Sidebar />
       <div
-        className="admin-content"
-        style={{ flex: 1, padding: "20px", backgroundColor: "#f8f9fa" }}
+        className="flex-grow-1 p-4"
+        style={{
+          overflowY: "auto", // Allow vertical scrolling for content
+          backgroundColor: "#F8FAFC", // Light background for the content area
+        }}
       >
         {children}
       </div>

@@ -99,8 +99,10 @@ const AddProduct = ({ addProduct }) => {
     <div className="container mt-5">
       <div className="card shadow-lg">
         <div className="card-header bg-dark text-white">
-          <h2 className="mb-0">Add Product</h2>
-        </div>
+        <div className="card-header bg-dark">
+  <h2 className="mb-0" style={{ color: "#4a90e2" }}>Add Product</h2>
+</div>
+</div>
 
         <div className="card-body">
           {/* Step 1: Description */}

@@ -22,12 +22,13 @@ import AddProduct from "./admin/AdminProductPage/AddProduct";
 import OrderStatus from "./pages/OrderStatus/OrderStatus";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Profile from "./components/Profile/Profile";
+
 const App = () => {
   return (
     <CartContextProvider>
       <div className="app">
         <Navbar />
-        <Routes>
+        <Routes>1
           {/* Customer Routes */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/buyer/dashboard" element={<Home />} />
