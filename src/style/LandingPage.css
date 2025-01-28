@@ -32,63 +32,61 @@ body {
 
 /* Glass Effect Container */
 .glass-container {
-  position: relative;
-  background: rgba(255, 255, 255, 0.15); /* Softer transparency */
-  backdrop-filter: blur(12px); /* More blur for emphasis */
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 20px; /* Increased border-radius for smoother edges */
-  padding: 40px 30px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); /* Stronger shadow for a polished look */
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 50px 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1); /* Elegant transparent glass effect */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
-  max-width: 650px;
-  color: #fff;
+  max-width: 500px;
 }
 
 /* Title Text */
 .title-text {
-  font-size: 3rem;
-  font-weight: 700;
-  text-transform: uppercase; /* Professional uppercase for emphasis */
-  letter-spacing: 2px; /* Subtle spacing for readability */
-  color: #ffffff;
-  margin-bottom: 20px;
-}
-
-.title-text span {
-  display: inline-block;
-  margin: 0 8px;
-  color: #00bcd4; /* Accent color for highlights */
+  font-size: 3.2rem; /* Balanced size */
+  font-weight: 800;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ffffff; /* Pure white for professional look */
+  text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
 }
 
 /* Subtitle Text */
 .subtitle-text {
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: #cfe8f9; /* Softer color for subtitle */
-  margin-top: 10px;
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  color: #e0e0e0; /* Softer white for subtle contrast */
+  margin-top: 12px;
 }
 
 /* CTA Button */
 .cta-button {
-  margin-top: 30px;
-  padding: 12px 30px;
+  margin-top: 35px;
+  padding: 14px 34px;
   font-size: 1.2rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
   border-radius: 50px;
-  background: linear-gradient(90deg, #0288d1, #0077b6); /* Gradient for modern appeal */
-  color: #fff;
+  background: linear-gradient(90deg, #0052d4, #4364f7); /* Deep blue gradient */
+  color: #ffffff;
   border: none;
-  transition: all 0.4s ease-in-out;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 5px 15px rgba(0, 85, 255, 0.4);
   text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
 }
 
 .cta-button:hover {
-  background: linear-gradient(90deg, #0077b6, #0288d1); /* Reverse gradient on hover */
+  background: linear-gradient(90deg, #4364f7, #6b73ff);
   transform: translateY(-3px);
+  box-shadow: 0px 8px 20px rgba(0, 85, 255, 0.6);
 }
 
-/* About Us Section */
 /* About Us Section */
 .about-us-section {
   background: linear-gradient(135deg, #E0FFFF, #8db0cd); /* Rich dark gradient background */
