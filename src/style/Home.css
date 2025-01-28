@@ -1,0 +1,197 @@
+/* ========================= */
+/* 📌 HEADER SECTION */
+/* ========================= */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .glass-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 900px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    color: #fff;
+  }
+  
+  .glass-content {
+    flex: 1;
+    margin-right: 15px;
+  }
+  
+  .glass-title {
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #0d2e3c;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .glass-description {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+  }
+  
+  .glass-button {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .glass-button:hover {
+    background: linear-gradient(90deg, #0056b3, #007bff);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .glass-side-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .glass-side-image img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .glass-side-image img:hover {
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 768px) {
+    .glass-card {
+      flex-direction: column;
+      padding: 15px;
+      text-align: center;
+    }
+  
+    .glass-title {
+      font-size: 2rem;
+    }
+  
+    .glass-description {
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* ========================= */
+  /* 📌 CATEGORY SECTION */
+  /* ========================= */
+  .explore-category-container {
+    background: linear-gradient(135deg, #ADD8E6 50%, #dbeafe 50%);
+    padding: 40px 20px;
+    border-radius: 15px;
+    text-align: center;
+  }
+  
+  .explore-category-container h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #212529;
+  }
+  
+  .category-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(180deg, #ffffff, #f8f9fa);
+    cursor: pointer;
+  }
+  
+  .category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .category-card img {
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* ========================= */
+  /* 📌 ITEM DISPLAY SECTION */
+  /* ========================= */
+  .item-display {
+    margin-top: 30px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+    justify-content: center;
+  }
+  
+  .product-item {
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .product-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .product-item h3 {
+    font-size: 1.2rem;
+    margin: 10px 0 5px;
+    color: #333;
+  }
+  
+  .product-item-price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #000;
+    margin-top: 10px;
+  }
+  
+  @media (max-width: 576px) {
+    .category-card img {
+      height: 80px;
+    }
+  
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+  

@@ -1,50 +1,64 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
-import Home from "./pages/Home/Home";
-import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
-import Cart from "./pages/Cart/Cart";
-import CategoryItems from "./components/CategoryItems/CategoryItems";
-import ProductDetails from "./components/ProductDetails/ProductDetails";
-import CartContextProvider from "./Context/CartContext";
-import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
-import PaymentPage from "./pages/PaymentPage/PaymentPage";
-import AdminLayout from "./admin/layouts/AdminLayout"; // Admin Layout
-import AdminDashboard from "./admin/AdminDashboard";
-import CategoryList from "./admin/AdminCategoryPage/CategoryList";
-import AdminProductList from "./admin/AdminProductPage/ProductList";
-import AdminOrderList from "./admin/AdminOrderPage/OrderList";
-import Role from "./components/RoleSelection/Role";
-import AddProduct from "./admin/AdminProductPage/AddProduct";
-import OrderStatus from "./pages/OrderStatus/OrderStatus";
-import LandingPage from "./pages/LandingPage/LandingPage";
-import Profile from "./components/Profile/Profile";
+import Navbar from "./components/common/Navbar";
+import Footer from "./components/common/Footer";
+import Login from "./components/pages/Login";
+import Register from "./components/pages/Register";
+import Home from "./components/pages/Home";
+import PlaceOrder from "./components/pages/PlaceOrder";
+import Cart from "./components/pages/Cart";
+import CategoryItems from "./components/pages/CategoryItems";
+import ProductDetails from "./components/pages/ProductDetails";
+import CartContextProvider from "./components/Context/CartContext";
+import OrderConfirmation from "./components/pages/OrderConfirmation";
+import PaymentPage from "./components/pages/PaymentPage";
+import AdminLayout from "./components/admin/layouts/AdminLayout";
+import AdminDashboard from "./components/admin/AdminDashboard";
+import CategoryList from "./components/admin/AdminCategoryPage/CategoryList";
+import AdminProductList from "./components/admin/AdminProductPage/ProductList";
+import AdminOrderList from "./components/admin/AdminOrderPage/OrderList";
+import Role from "./components/common/Role";
+import AddProduct from "./components/admin/AdminProductPage/AddProduct";
+import OrderStatus from "./components/pages/OrderStatus";
+import LandingPage from "./components/pages/LandingPage";
+import Profile from "./components/pages/Profile";
+import SellerLayout from "./components/seller/layouts/SellerLayout";
+import SellerDashboard from "./components/seller/pages/SellerDashboard";
+import SellerProducts from "./components/seller/pages/SellerProducts";
+import SellerAddProduct from "./components/seller/pages/SellerAddProduct";
 
 const App = () => {
   return (
     <CartContextProvider>
       <div className="app">
-        <Navbar />
-        <Routes>1
+        <Routes>
           {/* Customer Routes */}
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/buyer/dashboard" element={<Home />} />
-          <Route path="/role" element={<Role />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/place-order" element={<PlaceOrder />} />
-          <Route path="/categories/:category_name" element={<CategoryItems />} />
-          <Route path="/products/:product_name" element={<ProductDetails />} />
-          <Route path="/order-confirmation" element={<OrderConfirmation />} />
-          <Route path="/payment" element={<PaymentPage />} />
-          <Route path="/order-status" element={<OrderStatus />} />
+          <Route
+            path="/*"
+            element={
+              <>
+                <Navbar />
+                <Routes>
+                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/buyer/dashboard" element={<Home />} />
+                  <Route path="/role" element={<Role />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/place-order" element={<PlaceOrder />} />
+                  <Route path="/categories/:category_name" element={<CategoryItems />} />
+                  <Route path="/products/:product_name" element={<ProductDetails />} />
+                  <Route path="/order-confirmation" element={<OrderConfirmation />} />
+                  <Route path="/payment" element={<PaymentPage />} />
+                  <Route path="/order-status" element={<OrderStatus />} />
+                </Routes>
+                <Footer />
+              </>
+            }
+          />
 
-          {/* Admin Routes Wrapped with AdminLayout */}
+          {/* Admin Routes */}
           <Route
             path="/admin/*"
             element={
@@ -59,8 +73,21 @@ const App = () => {
               </AdminLayout>
             }
           />
+
+          {/* Seller Routes (fixed imports) */}
+          <Route
+            path="/seller/*"
+            element={
+              <SellerLayout>
+                <Routes>
+                  <Route path="dashboard" element={<SellerDashboard />} />
+                  <Route path="products" element={<SellerProducts />} />
+                  <Route path="add-product" element={<SellerAddProduct />} />
+                </Routes>
+              </SellerLayout>
+            }
+          />
         </Routes>
-        <Footer />
       </div>
     </CartContextProvider>
   );
