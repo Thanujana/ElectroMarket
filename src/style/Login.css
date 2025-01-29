@@ -1,0 +1,119 @@
+/* Background Styling */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #9c62b5, #2980B9);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Login Box */
+.login-box {
+    background: linear-gradient(to right, #41B6E6, #2980B9);
+    padding: 40px;
+    width: 400px;
+    text-align: center;
+    border-radius: 50px 0px 0px 0px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.login-box:hover {
+    transform: scale(1.05);
+}
+
+/* Heading */
+.login-box h2 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Form Fields */
+.login-box .form-label {
+    font-weight: bold;
+    color: #ffffff;
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.login-box .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #000;
+    border-radius: 25px;
+    background: none;
+    color: #fff;
+    outline: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+.login-box .form-control::placeholder {
+    color: #fff;
+}
+
+/* Remember Me & Forgot Password */
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #fff;
+}
+
+/* Button Styling */
+.login-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 30px;
+    background: #000;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background: #333;
+}
+
+/* Register Link */
+.register-link {
+    cursor: pointer;
+    color: #ca1616;
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-top: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .login-box {
+        width: 90%;
+    }
+}

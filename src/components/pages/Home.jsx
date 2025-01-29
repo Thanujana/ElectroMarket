@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../style/Home.css"; // Add your CSS styles here if needed
+import "../../style/Home.css"; 
 import { StoreContext } from "../Context/StoreContext";
 import { category_list } from "../../assets/assets";
 import sideImage from "/header_img.png";
@@ -160,6 +160,30 @@ const Home = () => {
             </div>
           ) : (
             <p>No Flash Sale items available at the moment.</p>
+          )}
+        </section>
+        {/* Big Deals Section */}
+        <section className="big-deals mb-5">
+          <h2 className="section-title text-primary">Big Deals 🎉</h2>
+          {bigDeals.length > 0 ? (
+            <div className="row">
+              {bigDeals.map((item) => (
+                <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
+                  <div className="product-item card">
+                    <img src={item.image} alt={item.name} className="product-item-image card-img-top" />
+                    <div className="card-body">
+                      <h5 className="card-title">{item.name}</h5>
+                      <p className="card-text text-muted">{item.description}</p>
+                      <p className="product-item-price text-primary fw-bold">
+                        Rs {item.price} <small>(Special Offer!)</small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No Big Deals available at the moment.</p>
           )}
         </section>
       </div>
