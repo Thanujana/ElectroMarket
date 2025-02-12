@@ -61,6 +61,11 @@ const Navbar = () => {
               <NavLink to="/buyer/dashboard" className="nav-link">
                 Home
               </NavLink>
+              </li>
+              <li className="aboutus-item">
+              <NavLink to="/" className="nav-link">
+                AboutUs
+              </NavLink>
             </li>
             {!isAuthenticated && (
               <li className="nav-item">

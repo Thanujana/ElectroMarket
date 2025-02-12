@@ -2,21 +2,18 @@ import React from "react";
 
 const AdminDashboard = () => {
   const summaryData = [
-    { title: "Total Categories", value: 10, color: "primary" },
-    { title: "Total Products", value: 50, color: "success" },
-    { title: "Total Orders", value: 120, color: "warning" },
-    { title: "Total Sales", value: "$5000", color: "danger" },
-    { title: "Pending Orders", value: 15, color: "info" },
-    { title: "Shipped Orders", value: 25, color: "secondary" },
-    { title: "Delivered Orders", value: 80, color: "dark" },
-    { title: "Total Earnings", value: "$10000", color: "warning" },
+    { title: "Total Categories", value: 5, color: "primary" },
+    { title: "Total Products", value: 120, color: "success" },
+    { title: "Total Orders", value: 6, color: "warning" },
+    { title: "Total Sales", value: "$500", color: "danger" },
+
   ];
 
   const recentOrders = [
-    { id: 101, customer: "John Doe", total: "$150", status: "Pending" },
-    { id: 102, customer: "Jane Smith", total: "$200", status: "Shipped" },
-    { id: 103, customer: "Alice Johnson", total: "$120", status: "Delivered" },
-    { id: 104, customer: "Bob Brown", total: "$80", status: "Pending" },
+    { id: 101, customer: "Thana", total: "$150", status: "Pending" },
+    { id: 102, customer: "Neha", total: "$200", status: "Shipped" },
+    { id: 103, customer: "Karthik", total: "$120", status: "Delivered" },
+    { id: 104, customer: "Tharun", total: "$80", status: "Pending" },
   ];
 
   return (
@@ -79,7 +76,7 @@ const AdminDashboard = () => {
         <h3>Alerts/Notifications</h3>
         <ul className="list-group shadow-sm">
           <li className="list-group-item list-group-item-danger">
-            Low stock alert: Product XYZ has only 5 items left.
+            Low stock alert: Product Sensor has only 5 items left.
           </li>
           <li className="list-group-item list-group-item-warning">
             Reminder: 10 pending orders need approval.

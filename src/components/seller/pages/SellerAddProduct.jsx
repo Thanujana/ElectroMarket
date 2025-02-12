@@ -9,6 +9,7 @@ const SellerAddProduct = () => {
     stock: "",
     image: "",
   });
+  const [imageError, setImageError] = useState("");
 
   useEffect(() => {
     const savedProducts = JSON.parse(localStorage.getItem("sellerProducts")) || [];
@@ -21,10 +22,26 @@ const SellerAddProduct = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle Image Upload
+  // Handle Image Upload with Validation
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
+      // Validate image type (jpg, jpeg, png)
+      const validTypes = ["image/jpeg", "image/png", "image/jpg"];
+      if (!validTypes.includes(file.type)) {
+        setImageError("Please upload a valid image (jpg, jpeg, or png).");
+        return;
+      }
+
+      // Validate image size (max 5MB)
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      if (file.size > maxSize) {
+        setImageError("File size exceeds 5MB. Please upload a smaller image.");
+        return;
+      }
+
+      setImageError(""); // Reset error if validation passes
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setFormData({ ...formData, image: reader.result });
@@ -90,6 +107,9 @@ const SellerAddProduct = () => {
 
         <label>Product Image</label>
         <input type="file" className="form-control mb-3" onChange={handleImageUpload} />
+        
+        {imageError && <div className="text-danger">{imageError}</div>}
+
         {formData.image && (
           <img src={formData.image} alt="Preview" width="100" height="100" className="mt-2" />
         )}

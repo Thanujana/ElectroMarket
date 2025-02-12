@@ -20,7 +20,7 @@ const Cart = () => {
       return total + item.price * cartItems[itemId];
     }, 0);
 
-  const deliveryFee = 2; // Fixed delivery fee
+  const deliveryFee = 70; // Fixed delivery fee
 
   return (
     <div className="container my-5">

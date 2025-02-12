@@ -40,13 +40,13 @@ const SellerDashboard = () => {
             <tr>
               <td>201</td>
               <td>Smartphone</td>
-              <td>John Doe</td>
+              <td>John </td>
               <td><span className="badge bg-warning">Pending</span></td>
             </tr>
             <tr>
               <td>202</td>
               <td>Headphones</td>
-              <td>Jane Smith</td>
+              <td>Karthik</td>
               <td><span className="badge bg-success">Completed</span></td>
             </tr>
           </tbody>

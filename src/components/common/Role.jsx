@@ -18,10 +18,6 @@ const Role = () => {
         <button className="role-button seller" onClick={() => navigate("/login?role=seller")}>
           <FaStore /> Login as Seller
         </button>
-
-        <button className="role-button admin" onClick={() => navigate("/login?role=admin")}>
-          <FaUserShield /> Login as Admin
-        </button>
       </div>
     </div>
   );
