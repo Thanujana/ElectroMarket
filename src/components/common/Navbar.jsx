@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import '../../style/navbar.css';
+import "../../style/navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import ApiService from "../../service/ApiService"; // Ensure the service exists
+import ApiService from "../../service/ApiService"; // ✅ Ensure correct import path
 import logo from "../../assets/logo.png";
 
 const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
-  // Check if the user is authenticated
-  const isAuthenticated = ApiService.isAuthenticated();
+  // ✅ Call `isAuthenticated()` as a function
+  const isAuthenticated = ApiService.isAuthenticated(); 
 
   const handleSearchChange = (e) => {
     setSearchValue(e.target.value);
@@ -21,8 +21,8 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    const confirm = window.confirm("Are you sure you want to logout?");
-    if (confirm) {
+    const confirmLogout = window.confirm("Are you sure you want to logout?");
+    if (confirmLogout) {
       ApiService.logout();
       setTimeout(() => {
         navigate("/role");
@@ -56,17 +56,17 @@ const Navbar = () => {
         {/* Navbar Links */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {/* Default Links */}
             <li className="nav-item">
               <NavLink to="/buyer/dashboard" className="nav-link">
                 Home
               </NavLink>
-              </li>
-              <li className="aboutus-item">
+            </li>
+            <li className="aboutus-item">
               <NavLink to="/" className="nav-link">
-                AboutUs
+                About Us
               </NavLink>
             </li>
+
             {!isAuthenticated && (
               <li className="nav-item">
                 <NavLink to="/role" className="nav-link">
@@ -80,7 +80,6 @@ const Navbar = () => {
               </NavLink>
             </li>
 
-            {/* Authenticated Links */}
             {isAuthenticated && (
               <>
                 <li className="nav-item">

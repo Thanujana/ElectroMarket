@@ -4,90 +4,76 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to right, #9c62b5, #2980B9);
+    background: #B2E0D6;
     animation: fadeIn 1s ease-in-out;
 }
 
 /* Login Box */
 .login-box {
-    background: linear-gradient(to right, #41B6E6, #2980B9);
-    padding: 40px;
-    width: 400px;
+    background: #36454F;
+    padding: 50px;
+    width: 450px;
     text-align: center;
-    border-radius: 50px 0px 0px 0px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    box-shadow: 0px 15px 40px rgba(75, 208, 225, 0.2);
     transition: transform 0.3s ease-in-out;
 }
 
 .login-box:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 /* Heading */
 .login-box h2 {
-    font-size: 26px;
+    font-size: 30px;
     font-weight: bold;
     color: #ffffff;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 /* Form Fields */
-.login-box .form-label {
-    font-weight: bold;
-    color: #ffffff;
-    display: block;
-    text-align: left;
-    margin-bottom: 5px;
-}
-
 .login-box .form-control {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     font-size: 16px;
-    border: 2px solid #000;
+    border: none;
     border-radius: 25px;
-    background: none;
-    color: #fff;
+    background: #ffffff;
+    color: #bd2c2c;
     outline: none;
-    text-align: center;
-    font-weight: bold;
+    text-align: left;
+    font-weight: normal;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
 }
 
 .login-box .form-control::placeholder {
-    color: #fff;
-}
-
-/* Remember Me & Forgot Password */
-.remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-    font-size: 14px;
-    color: #fff;
+    color: #888;
 }
 
 /* Button Styling */
 .login-button {
     width: 100%;
-    padding: 15px;
-    font-size: 20px;
+    padding: 12px;
+    font-size: 18px;
     font-weight: bold;
-    color: #fff;
-    border-radius: 30px;
-    background: #000;
+    color: #ea0c0c;
+    border-radius: 25px;
+    background: #708090;
     transition: all 0.3s ease-in-out;
     border: none;
     cursor: pointer;
 }
 
 .login-button:hover {
-    background: #333;
+    background:#B2E0D6;
 }
 
-/* Register Link */
-.register-link {
+/* Forgot Password & Register Link */
+.forgot-password, .register-link {
     cursor: pointer;
-    color: #ca1616;
+    color: #ffffff;
     font-weight: bold;
     font-size: 14px;
     display: block;
@@ -95,7 +81,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-.register-link:hover {
+.forgot-password:hover, .register-link:hover {
     text-decoration: underline;
 }
 
@@ -116,4 +102,48 @@
     .login-box {
         width: 90%;
     }
+}
+/* Forgot Password Heading */
+.forgot-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1E88E5; /* Blue color for emphasis */
+    margin-bottom: 10px;
+}
+
+/* Forgot Password Description */
+.forgot-description {
+    font-size: 16px;
+    color: #3c89d6; /* Dark gray for readability */
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Input Fields */
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #F1F3F4;
+    padding: 12px;
+    border-radius: 25px;
+    margin: 10px 0;
+}
+/* Remember Me Text */
+.remember-forgot label {
+    font-size: 14px;
+    color: #4787c8; /* Dark gray for better contrast */
+    font-weight: normal;
+}
+
+/* Back to Login Link */
+.back-to-login {
+    font-size: 14px;
+    color: #1E88E5; /* Blue for clickable link */
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.back-to-login:hover {
+    text-decoration: underline;
 }

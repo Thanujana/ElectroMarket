@@ -1,14 +1,12 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const OrderConfirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { order } = location.state || {}; // Ensure order is retrieved safely
 
-  const { formData } = location.state || {};
-
-  if (!formData || !formData.cartItems || formData.cartItems.length === 0) {
+  if (!order) {
     return (
       <div className="container mt-5">
         <h1>Order Not Found</h1>
@@ -24,21 +22,23 @@ const OrderConfirmation = () => {
     <div className="container mt-5">
       <h1 className="text-center mb-4">Order Confirmation</h1>
       <div className="p-4 border rounded bg-light">
-        {/* Order Details */}
         <h4>Order Details</h4>
-        <p><strong>Full Name:</strong> {formData.fullName}</p>
-        <p><strong>Address:</strong> {formData.address}</p>
-        <p><strong>Phone Number:</strong> {formData.phoneNumber}</p>
-        <p><strong>Email:</strong> {formData.email}</p>
-        <p><strong>Postal Code:</strong> {formData.postalCode}</p>
-        {formData.deliveryInstructions && (
-          <p><strong>Delivery Instructions:</strong> {formData.deliveryInstructions}</p>
-        )}
+        <p><strong>Order ID:</strong> {order.id || "N/A"}</p>
+        <p><strong>Tracking ID:</strong> {order.trackingId || "N/A"}</p>
+        <p><strong>Status:</strong> {order.status || "Pending"}</p>
 
         <hr />
 
-        {/* Cart Details */}
-        <h4 className="mt-4">Cart Details</h4>
+        <h4>Shipping Address</h4>
+        <p><strong>Name:</strong> {order.shippingAddress?.fullName || "N/A"}</p>
+        <p><strong>Address:</strong> {order.shippingAddress?.address || "N/A"}</p>
+        <p><strong>Phone:</strong> {order.shippingAddress?.phoneNumber || "N/A"}</p>
+        <p><strong>Email:</strong> {order.shippingAddress?.email || "N/A"}</p>
+        <p><strong>Postal Code:</strong> {order.shippingAddress?.postalCode || "N/A"}</p>
+
+        <hr />
+
+        <h4>Order Items</h4>
         <div className="table-responsive">
           <table className="table table-bordered">
             <thead>
@@ -51,48 +51,39 @@ const OrderConfirmation = () => {
               </tr>
             </thead>
             <tbody>
-              {formData.cartItems.map((item) => (
-                <tr key={item.id}>
+              {order.items?.map((item, index) => (
+                <tr key={index}>
                   <td>
                     <img
-                      src={item.image}
-                      alt={item.title}
+                      src={item.imageUrl || "https://via.placeholder.com/50"}
+                      alt={item.name || "Product Image"}
                       style={{ width: "50px", height: "50px", objectFit: "cover" }}
                     />
                   </td>
-                  <td>{item.title}</td>
-                  <td>${item.price.toFixed(2)}</td>
-                  <td>{item.quantity}</td>
-                  <td>${(item.price * item.quantity).toFixed(2)}</td>
+                  <td>{item.name || "Unknown Item"}</td>
+                  <td>${item.price?.toFixed(2) || "0.00"}</td>
+                  <td>{item.quantity || 0}</td>
+                  <td>${((item.price || 0) * (item.quantity || 0)).toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        {/* Grand Total */}
         <h5 className="mt-3">
-          Grand Total: $
-          {formData.cartItems
-            .reduce((total, item) => total + item.price * item.quantity, 0)
-            .toFixed(2)}
+          Total Amount: ${order.totalAmount?.toFixed(2) || "0.00"}
         </h5>
 
-        {/* Actions */}
         <div className="d-flex justify-content-between mt-4">
-          <button
-            className="btn btn-secondary"
-            onClick={() => navigate("/cart")}
-          >
-            Cancel
+          <button className="btn btn-secondary" onClick={() => navigate("/")}>
+            Back to Home
           </button>
           <button
   className="btn btn-danger"
   onClick={() =>
     navigate("/payment", {
       state: {
-        totalAmount: formData.cartItems
-          .reduce((total, item) => total + item.price * item.quantity, 0), // Calculate total amount
+        totalAmount: order.totalAmount, // ✅ Pass the total amount
       },
     })
   }

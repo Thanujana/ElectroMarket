@@ -1,16 +1,24 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css"; 
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Sidebar = () => {
-  const isAdmin = true; // Assuming always an admin
-  const isAuthenticated = true; // Assuming logged in
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check for authentication token or session
+    const token = localStorage.getItem("authToken"); // Replace with your logic
+    setIsAuthenticated(!!token); // If token exists, user is authenticated
+  }, []);
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
+      // Clear the token on logout (or use your logout logic)
+      localStorage.removeItem("authToken"); // Example: removing token from localStorage
       setTimeout(() => {
-        window.location.href = "/login"; 
+        navigate("/login"); // Navigate to login page after logout
       }, 500);
     }
   };

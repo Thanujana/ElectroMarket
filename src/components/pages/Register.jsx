@@ -35,15 +35,16 @@ const Register = () => {
 
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8081/api/auth/register/${formData.role}`, {
+      const response = await fetch(`http://localhost:8080/api/auth/register/${formData.role === "buyer" ? "user" : "seller"}`, { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
+            userName: formData.name, 
+            email: formData.email,
+            password: formData.password,
         }),
-      });
+    });
+    
 
       if (response.ok) {
         setSuccess(true);

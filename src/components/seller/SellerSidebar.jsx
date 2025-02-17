@@ -1,15 +1,24 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const SellerSidebar = () => {
-  const isAuthenticated = true; // Assume seller is logged in
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Example: check authentication status from localStorage or state
+    const token = localStorage.getItem("authToken"); // Check if there's a token stored
+    setIsAuthenticated(!!token); // If token exists, consider the user authenticated
+  }, []);
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
+      // Clear authentication token (or use your logout function here)
+      localStorage.removeItem("authToken"); // For example, remove token from localStorage
       setTimeout(() => {
-        window.location.href = "/login";
+        navigate("/login"); // Redirect to login page
       }, 500);
     }
   };

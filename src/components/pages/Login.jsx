@@ -17,33 +17,32 @@ const Login = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
-
+  
     try {
-      const response = await fetch("http://localhost:8081/api/auth/login", {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+          requestedRole: role,
+        }),
       });
-
+  
       if (response.ok) {
-        const { token } = await response.json();
+        const { token, role } = await response.json();
         localStorage.setItem("authToken", token);
-
-        setSuccess(true); // Show success message before redirecting
-
+        localStorage.setItem("userRole", role);
+  
+        setSuccess(true);
         setTimeout(() => {
-          navigate(
-            role === "admin"
-              ? "/admin/dashboard"
-              : role === "seller"
-              ? "/seller/dashboard"
-              : "/buyer/dashboard"
-          );
+          navigate(role.includes("ROLE_ADMIN") ? "/admin/dashboard" :
+                   role.includes("ROLE_SELLER") ? "/seller/dashboard" :
+                   "/buyer/dashboard");
         }, 1500);
       } else {
         const errorText = await response.text();
@@ -55,6 +54,8 @@ const Login = () => {
       setLoading(false);
     }
   };
+  
+
 
   const handleForgotPasswordSubmit = async (e) => {
     e.preventDefault();
@@ -63,7 +64,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8081/api/auth/forgot-password", {
+      const response = await fetch("http://localhost:8080/api/auth/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: resetEmail }),
@@ -87,8 +88,8 @@ const Login = () => {
         {/* If user clicks "Forgot Password?", show reset form, otherwise show login form */}
         {isForgotPassword ? (
           <>
-            <h2>Forgot Password?</h2>
-            <p>Enter your email address, and we'll send you a reset link.</p>
+             <h2 className="forgot-title">Forgot Password?</h2>
+             <p className="forgot-description">Enter your email address, and we'll send you a reset link.</p>
 
             {success && <div className="alert alert-success">{success}</div>}
             {error && <div className="alert alert-danger">{error}</div>}

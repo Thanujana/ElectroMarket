@@ -1,47 +1,86 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const SellerProducts = () => {
-  const [products, setProducts] = useState([
-    { id: 1, productName: "Smartphone", price: 699, category: "Electronics", stock: 10, image: "" },
-    { id: 2, productName: "Laptop", price: 999, category: "Electronics", stock: 5, image: "" },
-  ]);
-
+  const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [formData, setFormData] = useState({
-    productName: "",
+    name: "",
     price: "",
+    description: "",  // ✅ Ensure this matches backend
     category: "",
     stock: "",
-    image: "",
+    imageUrl: "",  // ✅ Fix field name for backend consistency
   });
 
-  // Open Edit Modal
+  // ✅ Fetch products from backend when component loads
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/products/product", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`, // ✅ Ensure token is sent
+        },
+      });
+      setProducts(response.data);
+    } catch (error) {
+      console.error("❌ Error fetching products:", error);
+    }
+  };
+
+  // ✅ Open Edit Modal
   const handleEdit = (product) => {
     setSelectedProduct(product);
     setFormData(product);
     setShowModal(true);
   };
 
-  // Handle Input Change
+  // ✅ Handle Input Change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Save Edited Product
-  const handleSaveChanges = () => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === selectedProduct.id ? { ...formData, id: selectedProduct.id } : product
-      )
-    );
-    setShowModal(false);
+  // ✅ Save Edited Product (Update Backend)
+  const handleSaveChanges = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/products/${selectedProduct.id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.id === selectedProduct.id ? response.data : product
+        )
+      );
+      setShowModal(false);
+    } catch (error) {
+      console.error("❌ Error updating product:", error);
+    }
   };
 
-  // Delete Product
-  const handleDelete = (id) => {
-    setProducts(products.filter((product) => product.id !== id));
+  // ✅ Delete Product (Remove from Backend)
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/api/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      });
+      setProducts(products.filter((product) => product.id !== id));
+    } catch (error) {
+      console.error("❌ Error deleting product:", error);
+    }
   };
 
   return (
@@ -60,30 +99,38 @@ const SellerProducts = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.productName}</td>
-              <td>{product.category}</td>
-              <td>${product.price}</td>
-              <td>{product.stock}</td>
-              <td>
-                {product.image ? (
-                  <img src={product.image} alt="Product" width="50" height="50" />
-                ) : (
-                  "No Image"
-                )}
-              </td>
-              <td>
-                <button className="btn btn-warning btn-sm me-2" onClick={() => handleEdit(product)}>
-                  Edit
-                </button>
-                <button className="btn btn-danger btn-sm" onClick={() => handleDelete(product.id)}>
-                  Delete
-                </button>
+          {products.length > 0 ? (
+            products.map((product) => (
+              <tr key={product.id}>
+                <td>{product.id}</td>
+                <td>{product.name}</td>
+                <td>{product.category}</td>
+                <td>${product.price}</td>
+                <td>{product.stock}</td>
+                <td>
+                  {product.imageUrl ? (
+                    <img src={product.imageUrl} alt="Product" width="50" height="50" />
+                  ) : (
+                    "No Image"
+                  )}
+                </td>
+                <td>
+                  <button className="btn btn-warning btn-sm me-2" onClick={() => handleEdit(product)}>
+                    Edit
+                  </button>
+                  <button className="btn btn-danger btn-sm" onClick={() => handleDelete(product.id)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="7" className="text-center">
+                No products found.
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 
@@ -100,8 +147,8 @@ const SellerProducts = () => {
                 <label>Product Name</label>
                 <input
                   type="text"
-                  name="productName"
-                  value={formData.productName}
+                  name="name"
+                  value={formData.name}
                   onChange={handleInputChange}
                   className="form-control mb-3"
                 />
@@ -111,6 +158,15 @@ const SellerProducts = () => {
                   type="text"
                   name="price"
                   value={formData.price}
+                  onChange={handleInputChange}
+                  className="form-control mb-3"
+                />
+
+                <label>Description</label>
+                <input
+                  type="text"
+                  name="description"
+                  value={formData.description}
                   onChange={handleInputChange}
                   className="form-control mb-3"
                 />
