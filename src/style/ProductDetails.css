@@ -1,116 +1,152 @@
-.product-details {
+/* Container Styling */
+.product-details-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
   padding: 20px;
 }
 
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.product-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  text-align: center;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
+/* Image Styling */
 .product-image {
-  max-width: 100%;
+  width: 100%;
   height: auto;
-  border-radius: 8px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+  transition: transform 0.3s ease-in-out;
 }
 
-.product-name {
-  font-size: 1.2rem;
+.product-image:hover {
+  transform: scale(1.05);
+}
+
+/* Card Body Styling */
+.card-body {
+  padding: 30px;
+}
+
+/* Product Name */
+.card-title {
+  font-size: 2rem;
   font-weight: bold;
-  margin: 10px 0;
-}
-
-.product-description {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 10px;
-}
-
-.product-price {
-  font-size: 1.1rem;
-  color: #28a745;
+  color: #333;
   margin-bottom: 15px;
 }
 
-.cart-actions {
-  margin-top: 15px;
+/* Product Description */
+.card-text {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 15px;
 }
 
-.add-to-picks-btn {
-  background-color: #24a8a8;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+/* Price Styling */
+.text-success {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
-.add-to-picks-btn:hover {
-  background-color:#2929a3;
+/* Stock and Category */
+.text-muted, .text-info {
+  font-size: 1rem;
+  font-weight: 500;
 }
 
-.quantity-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.add-btn,
-.remove-btn {
-  background-color: #28a745;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-
-.remove-btn {
-  background-color: #dc3545;
-}
-
-.add-btn:hover {
-  background-color: #218838;
-}
-
-.remove-btn:hover {
-  background-color: #c82333;
-}
-
-.cart-count {
+/* Buttons */
+.btn {
   font-size: 1rem;
   font-weight: bold;
-  color: #333;
-}
-.checkout-container {
-  margin-top: 30px;
-  text-align: center;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  border-radius: 8px;
+  transition: background 0.3s ease-in-out, transform 0.2s;
 }
 
-.checkout-btn {
-  background-color:#5252e0;
-  color: #fff;
-  padding: 10px 20px;
+.btn-primary {
+  background: linear-gradient(45deg, #007bff, #0056b3);
   border: none;
-  border-radius: 4px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  color: white;
 }
 
-.checkout-btn:hover {
-  background-color: #0056b3;
+.btn-primary:hover {
+  background: linear-gradient(45deg, #0056b3, #003b80);
+  transform: translateY(-2px);
 }
 
+.btn-danger {
+  background: linear-gradient(45deg, #ff4b5c, #c50032);
+  border: none;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(45deg, #c50032, #a00028);
+  transform: translateY(-2px);
+}
+
+.btn-success {
+  background: linear-gradient(45deg, #28a745, #1e7e34);
+  border: none;
+  color: white;
+}
+
+.btn-success:hover {
+  background: linear-gradient(45deg, #1e7e34, #155724);
+  transform: translateY(-2px);
+}
+
+.btn-warning {
+  background: linear-gradient(45deg, #ffcc00, #ff9900);
+  border: none;
+  color: white;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(45deg, #ff9900, #cc7700);
+  transform: translateY(-2px);
+}
+
+/* Cart Buttons */
+.d-flex.align-items-center {
+  justify-content: center;
+  gap: 15px;
+}
+
+.mx-3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .product-details-card {
+      padding: 15px;
+  }
+
+  .card-title {
+      font-size: 1.8rem;
+  }
+
+  .card-text {
+      font-size: 0.95rem;
+  }
+
+  .text-success {
+      font-size: 1.3rem;
+  }
+
+  .btn {
+      font-size: 0.9rem;
+      padding: 10px 15px;
+  }
+
+  .d-flex.align-items-center {
+      flex-direction: column;
+      gap: 10px;
+  }
+}

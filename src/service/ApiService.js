@@ -146,7 +146,8 @@ const ApiService = {
       console.error(`❌ Error approving product with ID ${id}:`, error.response?.data || error.message);
       throw error;
     }
-  }
+  },
+  
 };
 
 export default ApiService;

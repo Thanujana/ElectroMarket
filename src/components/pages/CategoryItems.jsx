@@ -1,87 +1,61 @@
-import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom"; // Import Link
-import { item_list } from "../../assets/assets";
-
-
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css"; // ✅ Import Bootstrap
+import "../../style/CategoryItems.css"; // ✅ Import custom CSS
 
 const CategoryItems = () => {
-  const { category_name } = useParams(); // Get the category name from URL
-  const navigate = useNavigate();
+  const { category } = useParams();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  // Decode and format category name (handle URL-encoded characters)
-  const formattedCategory = decodeURIComponent(category_name);
+  useEffect(() => {
+    console.log(`🔵 Fetching products for category: ${category}`);
 
-  // Capitalize each word in the category name for display
-  const displayCategory = formattedCategory
-    .replace(/\b\w/g, (char) => char.toUpperCase())
-    .replace(/-/g, " ");
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/products/category/${category}`);
+        if (!response.ok) throw new Error("Failed to fetch products");
 
-  // Filter items based on the decoded category name
-  const filteredItems = item_list.filter(
-    (item) => item.category.toLowerCase() === formattedCategory.toLowerCase()
-  );
+        const data = await response.json();
+        console.log("✅ Category Products:", data);
+        setProducts(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [category]);
+
+  if (loading) return <p className="text-center text-primary mt-5">Loading products...</p>;
+  if (error) return <p className="text-center text-danger mt-5">❌ Error: {error}</p>;
 
   return (
-    <div className="container py-4">
-      {/* Category Title */}
-      <h1 className="text-center mb-4 text-primary">{displayCategory}</h1>
-
-      {/* Display Items */}
+    <div className="container mt-5">
+      <h2 className="text-center text-uppercase category-title">{category} Products</h2>
       <div className="row">
-        {filteredItems.length > 0 ? (
-          filteredItems.map((item) => (
-            <div key={item._id} className="col-md-4 mb-4">
-              <div
-                className="card shadow-sm border-0 h-100"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                {/* Image */}
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="card-img-top"
-                  style={{
-                    objectFit: "contain",
-                    width: "100%",
-                    height: "200px",
-                  }}
-                />
-
-                {/* Item Name and Description */}
-                <div className="card-body text-center">
-                  <h5 className="card-title fw-bold">{item.name}</h5>
-                  <p
-                    className="card-text text-muted"
-                    style={{ fontSize: "14px" }}
-                  >
-                    {item.description}
-                  </p>
-                </div>
-
-                {/* Explore Button */}
-                <div className="card-footer bg-white text-center border-0">
-                <Link
-                  to={`/products/${item.name.toLowerCase().replace(/ /g, "-")}`}
-                   className="btn btn-outline-primary btn-sm"
-                     >
-                     Explore
-                  </Link>
-
-                  
-                </div>
+        {products.map((product) => (
+          <div key={product.id || product._id} className="col-md-4 col-lg-3 mb-4">
+            <div className="card shadow-sm product-card">
+              {/* ✅ Ensure proper image rendering with a default fallback */}
+              <img 
+                src={product.imageUrl || "https://via.placeholder.com/250"} 
+                alt={product.name} 
+                className="card-img-top product-image" 
+              />
+              <div className="card-body text-center">
+                <h5 className="card-title">{product.name}</h5>
+                <p className="text-muted">{product.description?.substring(0, 50)}...</p>
+                <Link to={`/products/${product.id || product._id}`} className="btn btn-primary explore-btn">
+                  Explore Now
+                </Link>
               </div>
             </div>
-          ))
-        ) : (
-          <p className="text-center text-muted">
-            No items found in this category.
-          </p>
-        )}
+          </div>
+        ))}
       </div>
     </div>
   );

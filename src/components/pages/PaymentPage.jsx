@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import '../../style/Payment.css';
+import "../../style/Payment.css";
 
 const Payment = () => {
   const location = useLocation();
@@ -11,9 +11,10 @@ const Payment = () => {
 
   // Track the selected payment method
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleCashOnDelivery = () => {
-    alert("Order confirmed with Cash on Delivery!");
+    alert("✅ Order confirmed with Cash on Delivery!");
     navigate("/order-status", {
       state: {
         totalAmount,
@@ -24,14 +25,36 @@ const Payment = () => {
   };
 
   const handleCardPayment = () => {
-    alert("Card Payment initiated!");
-    navigate("/order-status", {
-      state: {
-        totalAmount,
-        paymentMethod: "Credit/Debit Card",
-        status: ["Ordered", "Shipped", "Out for Delivery", "Delivered"], // Example status steps
-      },
-    });
+    // Validate card details before proceeding
+    if (!validateCardDetails()) {
+      alert("⚠️ Please enter valid card details.");
+      return;
+    }
+
+    setIsProcessing(true);
+    setTimeout(() => {
+      alert("✅ Payment successful!");
+      navigate("/order-status", {
+        state: {
+          totalAmount,
+          paymentMethod: "Credit/Debit Card",
+          status: ["Ordered", "Shipped", "Out for Delivery", "Delivered"], // Example status steps
+        },
+      });
+    }, 2000); // Simulate a 2-second processing time
+  };
+
+  const validateCardDetails = () => {
+    const cardNumber = document.getElementById("cardNumber")?.value.trim();
+    const expiryDate = document.getElementById("expiryDate")?.value.trim();
+    const cvv = document.getElementById("cvv")?.value.trim();
+
+    return (
+      cardNumber.length >= 13 &&
+      cardNumber.length <= 19 &&
+      expiryDate.match(/^(0[1-9]|1[0-2])\/\d{2}$/) &&
+      cvv.length === 3
+    );
   };
 
   return (
@@ -75,22 +98,9 @@ const Payment = () => {
             <p>
               <strong>Total Amount:</strong> Rs. {totalAmount}
             </p>
-            <button
-  className="btn btn-success w-100"
-  onClick={() =>
-    navigate("/order-status", {
-      state: {
-        paymentMethod: "Cash on Delivery",
-        totalAmount,
-        status: ["Ordered", "Shipped", "Out for Delivery", "Delivered"], // Example status steps
-      },
-    })
-  }
->
-  Confirm Order
-</button>
-
-
+            <button className="btn btn-success w-100" onClick={handleCashOnDelivery}>
+              Confirm Order
+            </button>
           </div>
         </div>
       )}
@@ -102,7 +112,7 @@ const Payment = () => {
             <form>
               <div className="mb-3">
                 <label className="form-label">Card Number</label>
-                <input type="text" className="form-control" placeholder="Enter card number" />
+                <input type="text" id="cardNumber" className="form-control" placeholder="Enter card number" maxLength="19"/>
               </div>
               <div className="mb-3">
                 <label className="form-label">Name on Card</label>
@@ -111,11 +121,11 @@ const Payment = () => {
               <div className="row">
                 <div className="col-md-6">
                   <label className="form-label">Expiry Date</label>
-                  <input type="text" className="form-control" placeholder="MM/YY" />
+                  <input type="text" id="expiryDate" className="form-control" placeholder="MM/YY" maxLength="5"/>
                 </div>
                 <div className="col-md-6">
                   <label className="form-label">CVV</label>
-                  <input type="text" className="form-control" placeholder="CVV" />
+                  <input type="text" id="cvv" className="form-control" placeholder="CVV" maxLength="3"/>
                 </div>
               </div>
             </form>
@@ -124,20 +134,12 @@ const Payment = () => {
               <strong>Total Amount:</strong> Rs. {totalAmount}
             </p>
             <button
-  className="btn btn-success w-100"
-  onClick={() =>
-    navigate("/order-status", {
-      state: {
-        paymentMethod: "Credit/Debit Card",
-        totalAmount,
-        status: ["Ordered", "Shipped", "Out for Delivery", "Delivered"], // Example status steps
-      },
-    })
-  }
->
-  Pay Now
-</button>
-
+              className="btn btn-success w-100"
+              onClick={handleCardPayment}
+              disabled={isProcessing}
+            >
+              {isProcessing ? "Processing..." : "Pay Now"}
+            </button>
           </div>
         </div>
       )}

@@ -1,191 +1,141 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { StoreContext } from "../Context/StoreContext";
-
-const API_BASE_URL = "http://localhost:8080/api/carts"; // Backend API for cart
+import { useCart } from "../Context/CartContext";
 
 const Cart = () => {
-  const { cartItems, setCartItems, removeFromCart, clearCart } = useContext(StoreContext);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const userId = localStorage.getItem("userId"); // Assume userId is stored
+    const navigate = useNavigate();
+    const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
 
-  // Fetch Cart Data from Backend
-  useEffect(() => {
-    if (!userId) {
-      setLoading(false);
-      return;
-    }
+    // ✅ Quick Category Navigation
+    const categories = [
+        { name: "Home Appliances", path: "/categories/home-appliances" },
+        { name: "Consumer Electronics", path: "/categories/consumer-electronics" },
+        { name: "Computer Components", path: "/categories/computer-components" },
+        { name: "Smart Home Products", path: "/categories/smart-home-products" },
+        { name: "Industrial & Specialized Electronics", path: "/categories/industrial-specialized-electronics" },
+    ];
 
-    const fetchCart = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/${userId}`);
-        if (response.data.productQuantities) {
-          setCartItems(response.data.productQuantities);
+    // ✅ Ensure cart is always an array
+    const cartItems = Array.isArray(cart) ? cart : [];
+
+    // ✅ Calculate Total Price
+    const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
+    // ✅ Ensure Token is Valid Before Checkout
+    const isTokenExpired = () => {
+        const token = localStorage.getItem("authToken");
+        if (!token) return true;
+        try {
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            return payload.exp * 1000 < Date.now();
+        } catch (error) {
+            return true;
         }
-      } catch (err) {
-        console.error("❌ Error fetching cart:", err);
-        setError("Failed to load cart.");
-      } finally {
-        setLoading(false);
-      }
     };
 
-    fetchCart();
-  }, [userId, setCartItems]);
+    // ✅ Save Cart to Database
+    const saveCartToDB = async () => {
+        if (isTokenExpired()) {
+            alert("⚠️ Session expired. Please log in again.");
+            localStorage.clear();
+            navigate("/login");
+            return;
+        }
 
-  // Function to Save Cart to Backend
-  const saveCartToBackend = async () => {
-    if (!userId) return;
+        const authToken = localStorage.getItem("authToken");
+        const userId = localStorage.getItem("userId");
 
-    try {
-      await axios.post(`${API_BASE_URL}/${userId}`, cartItems);
-      console.log("✅ Cart saved successfully.");
-    } catch (error) {
-      console.error("❌ Error saving cart:", error);
-    }
-  };
+        if (!authToken || !userId) {
+            alert("⚠️ You need to log in before saving the cart.");
+            navigate("/login");
+            return;
+        }
 
-  useEffect(() => {
-    if (Object.keys(cartItems).length > 0) {
-      saveCartToBackend();
-    }
-  }, [cartItems]);
+        const cartData = {
+            userId: userId,
+            items: cartItems.map(item => ({
+                productId: item.id,
+                quantity: item.quantity,
+            })),
+        };
 
-  // Calculate Total
-  const getSubtotal = () => {
-    return Object.keys(cartItems).reduce((total, itemId) => {
-      const item = cartItems[itemId];
-      const price = item?.price || 0; // ✅ Ensure price is defined
-      return total + price * cartItems[itemId];
-    }, 0);
-  };
+        try {
+            await axios.post("http://localhost:8080/api/carts/add", cartData, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${authToken}`,
+                },
+            });
+            alert("🛍️ Cart successfully updated!");
+        } catch (error) {
+            alert("⚠️ Failed to save cart. Please try again.");
+        }
+    };
 
- // Function to calculate delivery fee dynamically
-const calculateDeliveryFee = () => {
-  const subtotal = getSubtotal();
+    // ✅ Handle Checkout
+    const handleCheckout = () => {
+        if (cartItems.length === 0) {
+            alert("⚠️ Your cart is empty. Add items before proceeding.");
+            return;
+        }
+        navigate("/place-order", {
+            state: { cartItems }, // ✅ Ensure cart items are correctly passed
+        });
+    };
 
-  if (subtotal === 0) return 0; // No delivery fee if cart is empty
-  if (subtotal >= 500) return 0; // Free delivery for orders above Rs 500
-  if (subtotal >= 200) return 30; // Rs 30 delivery fee for orders between Rs 200 - Rs 500
-  return 70; // Default Rs 70 for orders below Rs 200
-};
+    return (
+        <div className="container mt-5">
+            <h2 className="text-center">🛒 Your Cart</h2>
 
-// Call this function where you need the delivery fee
-const deliveryFee = calculateDeliveryFee();
-
-  if (loading) return <p className="loading">Loading cart...</p>;
-  if (error) return <p className="error-message">{error}</p>;
-
-  return (
-    <div className="container my-5">
-      <h1 className="text-center mb-4">Shopping Cart</h1>
-      {Object.keys(cartItems).length === 0 ? (
-        <p className="text-center text-muted">Your cart is empty.</p>
-      ) : (
-        <div className="row">
-          {/* Cart Items Table */}
-          <div className="col-md-8">
-            <div className="table-responsive">
-              <table className="table table-bordered text-center align-middle">
-                <thead className="table-light">
-                  <tr>
-                    <th>Item</th>
-                    <th>Title</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                    <th>Remove</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.keys(cartItems).map((itemId) => {
-                    const item = cartItems[itemId];
-                    if (!item) return null; // ✅ Skip if item is missing
-
-                    const price = item?.price || 0; // ✅ Ensure price is defined
-                    const quantity = cartItems[itemId] || 0;
-
-                    return (
-                      <tr key={itemId}>
-                        <td>
-                          <img
-                            src={item.imageUrl || "default-image.jpg"} // ✅ Fallback image
-                            alt={item.name}
-                            className="img-thumbnail"
-                            style={{ maxWidth: "100px" }}
-                          />
-                        </td>
-                        <td>{item.name || "Unknown Item"}</td>
-                        <td>${price.toFixed(2)}</td>
-                        <td>{quantity}</td>
-                        <td>${(price * quantity).toFixed(2)}</td>
-                        <td>
-                          <button
-                            className="btn btn-danger btn-sm"
-                            onClick={() => removeFromCart(itemId)}
-                          >
-                            &times;
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+            {/* ✅ Quick Category Navigation */}
+            <div className="text-center my-3">
+                <h5>Continue Shopping:</h5>
+                {categories.map((category) => (
+                    <button
+                        key={category.path}
+                        className="btn btn-outline-secondary m-2"
+                        onClick={() => navigate(category.path)}
+                    >
+                        {category.name}
+                    </button>
+                ))}
+                <button className="btn btn-outline-primary m-2" onClick={() => navigate("/buyer/dashboard")}>
+                    🔙 Back to Dashboard
+                </button>
             </div>
-          </div>
 
-          {/* Cart Totals Section */}
-          <div className="col-md-4">
-            <div className="border p-3">
-              <h4 className="mb-3">Cart Totals</h4>
-              <div className="d-flex justify-content-between">
-                <p>Subtotal:</p>
-                <p>${getSubtotal().toFixed(2)}</p>
-              </div>
-              <div className="d-flex justify-content-between">
-                <p>Delivery Fee:</p>
-                <p>${deliveryFee.toFixed(2)}</p>
-              </div>
-              <div className="d-flex justify-content-between fw-bold">
-                <p>Total:</p>
-                <p>${(getSubtotal() + deliveryFee).toFixed(2)}</p>
-              </div>
-              <button
-                className="btn btn-danger w-100 mt-3"
-                onClick={() =>
-                  navigate("/place-order", {
-                    state: {
-                      cartItems: Object.keys(cartItems).map((itemId) => ({
-                        id: itemId,
-                        title: cartItems[itemId]?.name || "Unknown",
-                        image: cartItems[itemId]?.imageUrl || "default-image.jpg",
-                        price: cartItems[itemId]?.price || 0,
-                        quantity: cartItems[itemId] || 0,
-                      })),
-                    },
-                  })
-                }
-              >
-                Proceed to Checkout
-              </button>
-
-              <button
-                className="btn btn-outline-danger w-100 mt-2"
-                onClick={clearCart}
-              >
-                Clear Cart
-              </button>
-            </div>
-          </div>
+            {cartItems.length === 0 ? (
+                <p className="text-center mt-3">Your cart is empty 😔</p>
+            ) : (
+                <div className="cart-items">
+                    {cartItems.map((item) => (
+                        <div key={item.id} className="card mb-3 p-3 shadow-sm">
+                            <div className="row">
+                                <div className="col-md-2">
+                                    <img src={item.image || "/images/default-product.png"} alt={item.name} className="img-fluid rounded" style={{ maxWidth: "100px" }} />
+                                </div>
+                                <div className="col-md-6">
+                                    <h5>{item.name}</h5>
+                                    <p className="text-muted">$ {item.price.toFixed(2)}</p>
+                                </div>
+                                <div className="col-md-2">
+                                    <input type="number" className="form-control" value={item.quantity} onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))} min="1" />
+                                </div>
+                                <div className="col-md-2 text-end">
+                                    <button className="btn btn-danger" onClick={() => removeFromCart(item.id)}>Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                    <h4 className="text-end">Total: Rs {totalAmount.toFixed(2)}</h4>
+                    <button className="btn btn-primary w-100 mt-3" onClick={saveCartToDB}>Save Cart</button>
+                    <button className="btn btn-success w-100 mt-3" onClick={handleCheckout}>Proceed to Checkout</button>
+                    <button className="btn btn-outline-danger w-100 mt-2" onClick={clearCart}>Clear Cart</button>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default Cart;

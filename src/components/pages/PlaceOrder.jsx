@@ -41,7 +41,7 @@ const PlaceOrder = () => {
       userId: localStorage.getItem("userId"), // Ensure userId is retrieved
       items: cartItems.map((item) => ({
         productId: item.id,
-        name: item.title,
+        name: item.name,
         imageUrl: item.image,
         price: item.price,
         quantity: item.quantity,

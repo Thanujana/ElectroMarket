@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import category_list from "../../../assets/assets"; 
+
 
 const SellerAddProduct = () => {
   const [products, setProducts] = useState([]);
@@ -57,33 +59,41 @@ const SellerAddProduct = () => {
 
   const handleSubmit = async () => {
     if (!formData.name || !formData.price || !formData.description || !formData.category || !formData.stock || !formData.imageUrl) {
-      alert("⚠️ Please fill all fields, including image.");
-      return;
+        alert("⚠️ Please fill all fields, including image.");
+        return;
     }
 
     try {
-      const authToken = localStorage.getItem("authToken"); // ✅ Fix: Get auth token
-
-      const response = await axios.post(
-        "http://localhost:8080/api/products/add",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${authToken}`, // ✅ Fix: Send authentication token
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
+        const authToken = localStorage.getItem("authToken");
+        if (!authToken) {
+            alert("⚠️ Please log in first.");
+            return;
         }
-      );
 
-      alert("✅ Product Added Successfully!");
-      setProducts([...products, response.data]);  
-      setFormData({ name: "", price: "", description: "", category: "", stock: "", imageUrl: "" });
+        console.log("📤 Sending Product Data:", JSON.stringify(formData, null, 2)); // ✅ Debugging
+        console.log("🔑 Auth Token:", authToken); // ✅ Debugging
+
+        const response = await axios.post(
+            "http://localhost:8080/api/products/add",
+            formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${authToken}`, // ✅ Ensure correct token format
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
+        console.log("✅ Product Added:", response.data);
+        alert("✅ Product Added Successfully!");
+        setProducts([...products, response.data]);  
+        setFormData({ name: "", price: "", description: "", category: "", stock: "", imageUrl: "" });
     } catch (error) {
-      console.error("❌ Error adding product:", error.response?.data || error.message);
-      alert("⚠️ Failed to add product. Please check console for details.");
+        console.error("❌ Error adding product:", error.response?.data || error.message);
+        alert(`⚠️ Failed to add product: ${error.response?.data || "Check Console for details."}`);
     }
-  };
+};
+
 
   return (
     <div className="container mt-5">
@@ -99,7 +109,20 @@ const SellerAddProduct = () => {
         <input type="text" name="description" value={formData.description} onChange={handleInputChange} className="form-control mb-3" />
 
         <label>Category</label>
-        <input type="text" name="category" value={formData.category} onChange={handleInputChange} className="form-control mb-3" />
+<select 
+    name="category" 
+    value={formData.category} 
+    onChange={handleInputChange} 
+    className="form-control mb-3"
+>
+    <option value="">-- Select Category --</option>
+    {category_list.map((cat, index) => (
+        <option key={index} value={cat.category_name}>
+            {cat.category_name.replace(/-/g, " ")} {/* Display category names properly */}
+        </option>
+    ))}
+</select>
+
 
         <label>Stock</label>
         <input type="number" name="stock" value={formData.stock} onChange={handleInputChange} className="form-control mb-3" />

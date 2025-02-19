@@ -1,121 +1,138 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../../style/ProductDetails.css";
-import { varieties_list } from "../../assets/assets";
-import { StoreContext } from "../Context/StoreContext";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { useCart } from "../Context/CartContext";
 
 const ProductDetails = () => {
-  const { product_name } = useParams();
-  const navigate = useNavigate();
-  const { cartItems, addToCart, removeFromCart, isLoggedIn } = useContext(StoreContext);
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const { cart, addToCart, removeFromCart, updateQuantity } = useCart();
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-  const formattedName = decodeURIComponent(product_name);
-  const displayName = formattedName
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+    const placeholderImage = "https://dummyimage.com/250x250/cccccc/000000&text=No+Image";
 
-  const varieties = varieties_list[formattedName.toLowerCase()] || [];
+    useEffect(() => {
+        if (!id || id === "undefined") {
+            setError("Invalid product ID.");
+            setLoading(false);
+            return;
+        }
 
-  const handleCheckout = () => {
-    if (!isLoggedIn) {
-      alert("Please log in before proceeding to checkout!");
-      navigate("/role");
-    } else {
-      navigate("/cart");
-    }
-  };
+        const fetchProductDetails = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/api/products/${id}`);
+                if (!response.ok) throw new Error("Error fetching product");
 
-  const incrementItem = (varietyId) => {
-    addToCart(varietyId);
-  };
+                const data = await response.json();
 
-  const decrementItem = (varietyId) => {
-    if (cartItems[varietyId] > 1) {
-      removeFromCart(varietyId);
-    } else {
-      removeFromCart(varietyId);
-    }
-  };
+                if (!data || (!data.name && !data.id)) {
+                    throw new Error("⚠️ Invalid product data received!");
+                }
 
-  const renderStars = (rating = 0) => {
-    const validRating = Math.min(Math.max(rating, 0), 5); // Ensure valid range
-    const fullStars = Math.floor(validRating);
-    const halfStar = validRating % 1 >= 0.5;
-    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+                setProduct(data);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProductDetails();
+    }, [id]);
+
+    const cartItem = cart.find((item) => item.id === id);
+
+    const handleAddToCart = () => {
+        const authToken = localStorage.getItem("authToken");
+        if (!authToken) {
+            alert("⚠️ You need to log in to add items to the cart.");
+            navigate("/login");
+            return;
+        }
+
+        if (cartItem) {
+            updateQuantity(id, cartItem.quantity + 1);
+        } else {
+            addToCart({
+                id,
+                name: product?.name,
+                price: product?.price,
+                image: product?.imageUrl,
+                quantity: 1,
+            });
+        }
+    };
+
+    const handleIncrease = () => {
+        updateQuantity(id, (cartItem?.quantity || 1) + 1);
+    };
+
+    const handleDecrease = () => {
+        if (cartItem?.quantity > 1) {
+            updateQuantity(id, cartItem.quantity - 1);
+        } else {
+            removeFromCart(id);
+        }
+    };
+
+    if (loading) return <p className="text-center text-primary mt-5">Loading product details...</p>;
+    if (error) return <p className="text-center text-danger mt-5">❌ Error: {error}</p>;
+    if (!product) return <p className="text-center text-warning mt-5">⚠️ No product found!</p>;
 
     return (
-      <>
-        {[...Array(fullStars)].map((_, i) => (
-          <FaStar key={`full-${i}`} className="star full-star" />
-        ))}
-        {halfStar && <FaStarHalfAlt className="star half-star" />}
-        {[...Array(emptyStars)].map((_, i) => (
-          <FaRegStar key={`empty-${i}`} className="star empty-star" />
-        ))}
-      </>
-    );
-  };
-
-  return (
-    <div className="product-details">
-      <h1 className="title">{displayName}</h1>
-      {varieties.length > 0 ? (
-        <>
-          <div className="products-grid">
-            {varieties.map((variety) => (
-              <div className="product-card" key={variety.id}>
-                <img
-                  src={variety.image}
-                  alt={variety.type}
-                  className="product-image"
-                />
-                <h2 className="product-name">{variety.type}</h2>
-                <p className="product-description">{variety.description}</p>
-                <div className="product-price">Price: ${variety.price}</div>
-                <div className="product-rating">{renderStars(variety.rating)}</div>
-
-                <div className="cart-actions">
-                  {cartItems[variety.id] > 0 ? (
-                    <div className="quantity-controls">
-                      <button
-                        className="remove-btn"
-                        onClick={() => decrementItem(variety.id)}
-                      >
-                        -
-                      </button>
-                      <span className="cart-count">{cartItems[variety.id]}</span>
-                      <button
-                        className="add-btn"
-                        onClick={() => incrementItem(variety.id)}
-                      >
-                        +
-                      </button>
+        <div className="container mt-5">
+            <div className="card shadow-lg product-details-card">
+                <div className="row g-0">
+                    <div className="col-md-5">
+                        <img
+                            src={product?.imageUrl || placeholderImage}
+                            alt={product?.name || "Product Image"}
+                            className="img-fluid product-image"
+                            onError={(e) => {
+                                console.error("❌ Image load failed:", e);
+                                e.target.src = placeholderImage;
+                            }}
+                        />
                     </div>
-                  ) : (
-                    <button
-                      className="add-to-picks-btn"
-                      onClick={() => incrementItem(variety.id)}
-                    >
-                      Add to My Picks
-                    </button>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+                    <div className="col-md-7">
+                        <div className="card-body">
+                            <h2 className="card-title">{product?.name}</h2>
+                            <p className="card-text">{product?.description}</p>
+                            <h4 className="text-success">Price: $ {product?.price?.toFixed(2)}</h4>
 
-          <div className="checkout-container">
-            <button className="checkout-btn" onClick={handleCheckout}>
-              Checkout
-            </button>
-          </div>
-        </>
-      ) : (
-        <p className="no-varieties">No varieties available for this product.</p>
-      )}
-    </div>
-  );
+                            {/* ✅ Display Stock and Category */}
+                            <p className="text-muted">
+                                <strong>Stock:</strong> {product?.stock ? `${product.stock} units available` : "Out of stock"}
+                            </p>
+                            <p className="text-info">
+                                <strong>Category:</strong> {product?.category || "Uncategorized"}
+                            </p>
+
+                            {/* ✅ Show +/- Controls If Already in Cart */}
+                            {cartItem ? (
+                                <div className="d-flex align-items-center mt-3">
+                                    <button className="btn btn-danger" onClick={handleDecrease}>-</button>
+                                    <span className="mx-3">{cartItem.quantity}</span>
+                                    <button className="btn btn-success" onClick={handleIncrease}>+</button>
+                                </div>
+                            ) : (
+                                <button className="btn btn-primary w-100 mt-3" onClick={handleAddToCart}>
+                                    Add to Cart
+                                </button>
+                            )}
+
+                            <button className="btn btn-warning w-100 mt-3" onClick={() => navigate("/cart")}>
+                                Go to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default ProductDetails;

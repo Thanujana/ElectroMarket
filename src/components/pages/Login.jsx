@@ -34,15 +34,25 @@ const Login = () => {
       });
   
       if (response.ok) {
-        const { token, role } = await response.json();
+        const { token, role, userId } = await response.json(); // ✅ Extract userId
+  
+        if (!userId || userId === "undefined") {
+          throw new Error("User ID is missing in the response.");
+        }
+  
+        // ✅ Save token, role, and userId correctly
         localStorage.setItem("authToken", token);
         localStorage.setItem("userRole", role);
+        localStorage.setItem("userId", userId); // ✅ Fix: Ensure userId is stored
   
         setSuccess(true);
+  
         setTimeout(() => {
-          navigate(role.includes("ROLE_ADMIN") ? "/admin/dashboard" :
-                   role.includes("ROLE_SELLER") ? "/seller/dashboard" :
-                   "/buyer/dashboard");
+          navigate(
+            role.includes("ROLE_ADMIN") ? "/admin/dashboard" :
+            role.includes("ROLE_SELLER") ? "/seller/dashboard" :
+            "/buyer/dashboard"
+          );
         }, 1500);
       } else {
         const errorText = await response.text();

@@ -47,8 +47,9 @@ const App = () => {
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/place-order" element={<PlaceOrder />} />
-                  <Route path="/categories/:category_name" element={<CategoryItems />} />
-                  <Route path="/products/:product_name" element={<ProductDetails />} />
+                  <Route path="/categories/:category" element={<CategoryItems />} />
+                  <Route path="/products/:id" element={<ProductDetails />} />
+
                   <Route path="/order-confirmation" element={<OrderConfirmation />} />
                   <Route path="/payment" element={<PaymentPage />} />
                   <Route path="/order-status" element={<OrderStatus />} />
