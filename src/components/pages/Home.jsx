@@ -1,4 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react"; 
+import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 import "../../style/Home.css"; 
 import { StoreContext } from "../Context/StoreContext";
@@ -6,23 +8,34 @@ import { category_list } from "../../assets/assets";
 import sideImage from "/header_img.png";
 import bgImage from "/bg_image.jpg";
 
+const API_BASE_URL = "http://localhost:8080/api/products/product"; // Backend API
+
 const Home = () => {
-  // State to store the selected category
-  const [category, setCategory] = useState("All");
-  const { item_list = [] } = useContext(StoreContext);
+  const [topItems, setTopItems] = useState([]);
+  const [flashSales, setFlashSales] = useState([]);
+  const [bigDeals, setBigDeals] = useState([]);
   const navigate = useNavigate();
 
-  console.log(`Selected Category: ${category}`); // Debugging log
-
-  // Function to handle category selection
+  // Fetch products from backend
+  const fetchProducts = async (type, setState) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}?type=${type}`);
+      setState(response.data);
+    } catch (error) {
+      console.error(`❌ Error fetching ${type} products:`, error);
+    }
+  };
   const handleCategoryClick = (item) => {
     navigate(`/categories/${item.category_name}`);
   };
 
-  // Filter items into different sections
-  const topItems = item_list.slice(0, 8); // Top picks (first 8 items)
-  const flashSales = item_list.slice(8, 12); // Flash sale (next 4 items)
-  const bigDeals = item_list.slice(12, 16); // Big deals (next 4 items)
+
+
+  useEffect(() => {
+    fetchProducts("top-picks", setTopItems);
+    fetchProducts("flash-sale", setFlashSales);
+    fetchProducts("big-deals", setBigDeals);
+  }, []);
 
   return (
     <div>
@@ -123,11 +136,21 @@ const Home = () => {
               {topItems.map((item) => (
                 <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
                   <div className="product-item card">
-                    <img src={item.image} alt={item.name} className="product-item-image card-img-top" />
+                  <img
+  src={item.imageUrl.startsWith("data:image") ? item.imageUrl : "https://via.placeholder.com/250"}
+  alt={item.name || "Product Image"}
+  className="card-img-top product-image"
+  onError={(e) => {
+    console.error(`⚠️ Failed to load image for: ${item.name}`);
+    e.target.src = "https://via.placeholder.com/250";
+    e.target.onerror = null;
+  }}
+/>
+
                     <div className="card-body">
                       <h5 className="card-title">{item.name}</h5>
                       <p className="card-text text-muted">{item.description}</p>
-                      <p className="product-item-price fw-bold">Rs {item.price}</p>
+                      <p className="product-item-price fw-bold"> $ {item.price}</p>
                     </div>
                   </div>
                 </div>
@@ -146,12 +169,22 @@ const Home = () => {
               {flashSales.map((item) => (
                 <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
                   <div className="product-item card">
-                    <img src={item.image} alt={item.name} className="product-item-image card-img-top" />
+                  <img
+  src={item.imageUrl.startsWith("data:image") ? item.imageUrl : "https://via.placeholder.com/250"}
+  alt={item.name || "Product Image"}
+  className="product-item-image card-img-top"
+  onError={(e) => {
+    console.error(`⚠️ Failed to load image for: ${item.name}`);
+    e.target.src = "https://via.placeholder.com/250";
+    e.target.onerror = null;
+  }}
+/>
+
                     <div className="card-body">
                       <h5 className="card-title">{item.name}</h5>
                       <p className="card-text text-muted">{item.description}</p>
                       <p className="product-item-price text-danger fw-bold">
-                        Rs {item.price} <small>(Limited Time Offer!)</small>
+                        $ {item.price} <small>(Limited Time Offer!)</small>
                       </p>
                     </div>
                   </div>
@@ -170,12 +203,22 @@ const Home = () => {
               {bigDeals.map((item) => (
                 <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
                   <div className="product-item card">
-                    <img src={item.image} alt={item.name} className="product-item-image card-img-top" />
+                   <img
+  src={item.imageUrl.startsWith("data:image") ? item.imageUrl : "https://via.placeholder.com/250"}
+  alt={item.name || "Product Image"}
+  className="product-item-image card-img-top"
+  onError={(e) => {
+    console.error(`⚠️ Failed to load image for: ${item.name}`);
+    e.target.src = "https://via.placeholder.com/250";
+    e.target.onerror = null;
+  }}
+/>
+
                     <div className="card-body">
                       <h5 className="card-title">{item.name}</h5>
                       <p className="card-text text-muted">{item.description}</p>
                       <p className="product-item-price text-primary fw-bold">
-                        Rs {item.price} <small>(Special Offer!)</small>
+                        $ {item.price} <small>(Special Offer!)</small>
                       </p>
                     </div>
                   </div>

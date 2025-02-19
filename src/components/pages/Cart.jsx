@@ -128,7 +128,7 @@ const Cart = () => {
                             </div>
                         </div>
                     ))}
-                    <h4 className="text-end">Total: Rs {totalAmount.toFixed(2)}</h4>
+                    <h4 className="text-end">Total: $ {totalAmount.toFixed(2)}</h4>
                     <button className="btn btn-primary w-100 mt-3" onClick={saveCartToDB}>Save Cart</button>
                     <button className="btn btn-success w-100 mt-3" onClick={handleCheckout}>Proceed to Checkout</button>
                     <button className="btn btn-outline-danger w-100 mt-2" onClick={clearCart}>Clear Cart</button>

@@ -14,7 +14,9 @@ const CategoryItems = () => {
 
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/products/category/${category}`);
+        const response = await fetch(
+          `http://localhost:8080/api/products/category/${category}`
+        );
         if (!response.ok) throw new Error("Failed to fetch products");
 
         const data = await response.json();
@@ -30,32 +32,56 @@ const CategoryItems = () => {
     fetchProducts();
   }, [category]);
 
-  if (loading) return <p className="text-center text-primary mt-5">Loading products...</p>;
-  if (error) return <p className="text-center text-danger mt-5">❌ Error: {error}</p>;
+  if (loading)
+    return (
+      <div className="text-center mt-5">
+        <div className="spinner-border text-light" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <p className="text-primary mt-3">Fetching products...</p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <p className="text-center text-danger mt-5">
+        ❌ Error: {error}
+      </p>
+    );
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center text-uppercase category-title">{category} Products</h2>
+      <h2 className="category-title">{category} Products</h2>
       <div className="row">
-        {products.map((product) => (
-          <div key={product.id || product._id} className="col-md-4 col-lg-3 mb-4">
-            <div className="card shadow-sm product-card">
-              {/* ✅ Ensure proper image rendering with a default fallback */}
-              <img 
-                src={product.imageUrl || "https://via.placeholder.com/250"} 
-                alt={product.name} 
-                className="card-img-top product-image" 
-              />
-              <div className="card-body text-center">
-                <h5 className="card-title">{product.name}</h5>
-                <p className="text-muted">{product.description?.substring(0, 50)}...</p>
-                <Link to={`/products/${product.id || product._id}`} className="btn btn-primary explore-btn">
-                  Explore Now
-                </Link>
+        {products.length > 0 ? (
+          products.map((product) => (
+            <div key={product.id || product._id} className="col-md-6 col-lg-4 col-xl-3 mb-4">
+              <div className="card product-card">
+                <img
+                  src={product.imageUrl || "https://via.placeholder.com/250"}
+                  alt={product.name}
+                  className="card-img-top product-image"
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{product.name}</h5>
+                  <p className="text-muted">
+                    {product.description?.substring(0, 60)}...
+                  </p>
+                  <Link
+                    to={`/products/${product.id || product._id}`}
+                    className="btn explore-btn w-100"
+                  >
+                    Explore Now
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="text-center text-warning mt-4">
+            ⚠️ No products found in this category.
+          </p>
+        )}
       </div>
     </div>
   );

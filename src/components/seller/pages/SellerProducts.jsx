@@ -115,12 +115,15 @@ const SellerProducts = () => {
                   )}
                 </td>
                 <td>
-                  <button className="btn btn-warning btn-sm me-2" onClick={() => handleEdit(product)}>
-                    Edit
-                  </button>
-                  <button className="btn btn-danger btn-sm" onClick={() => handleDelete(product.id)}>
-                    Delete
-                  </button>
+                <div className="d-flex justify-content-center gap-2">
+  <button className="btn btn-warning btn-sm px-1" onClick={() => handleEdit(product)}>
+    ✏️ Edit
+  </button>
+  <button className="btn btn-danger btn-sm px-1" onClick={() => handleDelete(product.id)}>
+    🗑️ Delete
+  </button>
+</div>
+
                 </td>
               </tr>
             ))

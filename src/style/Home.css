@@ -137,61 +137,102 @@
   /* ========================= */
   /* 📌 ITEM DISPLAY SECTION */
   /* ========================= */
-  .item-display {
-    margin-top: 30px;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .item-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 30px;
-    justify-content: center;
-  }
-  
-  .product-item {
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .product-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .product-item img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .product-item h3 {
-    font-size: 1.2rem;
-    margin: 10px 0 5px;
-    color: #333;
-  }
-  
-  .product-item-price {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #000;
-    margin-top: 10px;
-  }
-  
-  @media (max-width: 576px) {
-    .category-card img {
-      height: 80px;
-    }
-  
-    h1 {
-      font-size: 1.5rem;
-    }
-  }
-  
+  /* Item Display Section */
+.item-display {
+  background: #eff6ff;
+  padding: 40px 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #16b3ab;
+  border-bottom: 3px solid #117c87;
+  display: inline-block;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+/* Product Cards */
+.product-item {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background: linear-gradient(180deg, #122e3d, #93c5fd);
+  color: white;
+}
+
+.product-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.product-item-image {
+  border-radius: 10px;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.product-item-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Flash Sale Section */
+.flash-sale {
+
+  padding: 40px 20px;
+  border-radius: 15px;
+  color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.flash-sale .section-title {
+  border-bottom: 3px solid #251f06;
+}
+
+/* Big Deals Section */
+.big-deals {
+
+  padding: 40px 20px;
+  border-radius: 15px;
+  color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.big-deals .section-title {
+  border-bottom: 3px solid #facc15;
+}
+
+/* Product Cards (Same for Flash Sale & Big Deals) */
+.product-item {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background: linear-gradient(180deg, #122e3d, #93c5fd);
+  color: white;
+}
+
+.product-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.product-item-image {
+  border-radius: 10px;
+  max-height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.product-item-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #facc15; /* Gold price color for contrast */
+}

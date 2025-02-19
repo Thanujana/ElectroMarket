@@ -107,7 +107,7 @@ const ProductDetails = () => {
                             <p className="text-muted">
                                 <strong>Stock:</strong> {product?.stock ? `${product.stock} units available` : "Out of stock"}
                             </p>
-                            <p className="text-info">
+                            <p className="text-danger">
                                 <strong>Category:</strong> {product?.category || "Uncategorized"}
                             </p>
 
