@@ -34,7 +34,7 @@ body {
 .glass-container {
   padding: 50px 40px;
   border-radius: 20px;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(20px);
   background: rgba(255, 255, 255, 0.1); /* Elegant transparent glass effect */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -50,7 +50,7 @@ body {
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #ffffff; /* Pure white for professional look */
+  color: #6a0e06; /* Pure white for professional look */
   text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
 }
 
@@ -59,7 +59,7 @@ body {
   font-size: 1.4rem;
   font-weight: 400;
   font-family: "Roboto", sans-serif;
-  color: #e0e0e0; /* Softer white for subtle contrast */
+  color: #e0de3e; /* Softer white for subtle contrast */
   margin-top: 12px;
 }
 
@@ -71,11 +71,11 @@ body {
   font-weight: 600;
   font-family: "Poppins", sans-serif;
   border-radius: 50px;
-  background: linear-gradient(90deg, #0052d4, #4364f7); /* Deep blue gradient */
+  background: linear-gradient(90deg, #2db5cd, #114450); /* Deep blue gradient */
   color: #ffffff;
   border: none;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0px 5px 15px rgba(0, 85, 255, 0.4);
+  box-shadow: 0px 5px 15px rgba(22, 41, 79, 0.4);
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;

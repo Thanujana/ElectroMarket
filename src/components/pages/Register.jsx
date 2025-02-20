@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../style/Register.css";
-import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaLock, FaRocket, FaPhone } from "react-icons/fa";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -10,6 +10,7 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    phone:"",
     role: "buyer",
   });
 
@@ -17,17 +18,15 @@ const Register = () => {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Handle form change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    
+
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match.");
       return;
@@ -44,11 +43,10 @@ const Register = () => {
             password: formData.password,
         }),
     });
-    
 
       if (response.ok) {
         setSuccess(true);
-        setTimeout(() => navigate(`/login?role=${formData.role}`), 2500); // Redirect after 2.5 seconds
+        setTimeout(() => navigate(`/login?role=${formData.role}`), 2500);
       } else {
         setError(await response.text());
       }
@@ -62,49 +60,60 @@ const Register = () => {
   return (
     <div className="register-container">
       <div className="register-box">
-        {/* Left Side - Image */}
-        <div className="image-section"></div>
+        {/* Left Side - Gradient Background with Blur Box */}
+        <div className="left-section">
+          <FaRocket className="icon" />
+          <h2>Welcome</h2>
+          <p>Start shopping for your dream electronics today!</p>
+          <button className="login-button" onClick={() => navigate("/login")}>Login</button>
+        </div>
 
         {/* Right Side - Form */}
-        <div className="form-section">
+        <div className="right-section">
           <h2>Register Here</h2>
 
           {success ? (
             <div className="success-message">
-              🎉 Registration Successful! <br />
-              Redirecting to {formData.role.charAt(0).toUpperCase() + formData.role.slice(1)} Login...
+              🎉 Registration Successful! Redirecting to {formData.role.charAt(0).toUpperCase() + formData.role.slice(1)} Login...
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
               {error && <p className="error-message">{error}</p>}
 
-              <div className="input-group">
-                <FaUser />
-                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required />
-              </div>
+              <div className="form-grid">
+                <div className="input-group">
+                  <FaUser />
+                  <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required />
+                </div>
 
-              <div className="input-group">
-                <FaEnvelope />
-                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" required />
-              </div>
+                <div className="input-group">
+                  <FaEnvelope />
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Your Email" required />
+                </div>
 
-              <div className="input-group">
+                <div className="input-group">
+                <FaPhone />
+                  <input type="text" name="phone" placeholder="Your Phone" required />
+                </div>
+
+                <div className="input-group">
+                  <FaLock />
+                  <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
+                </div>
+
+                <div className="input-group">
                 <FaLock />
-                <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
-              </div>
+                  <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="Confirm Password" required />
+                </div>
 
-              <div className="input-group">
-                <FaLock />
-                <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="Confirm Password" required />
-              </div>
-
-              <div className="mb-3">
+                <div className="mb-3">
                 <label className="form-label">Register As:</label>
                 <select name="role" value={formData.role} onChange={handleChange} className="form-control">
                   <option value="buyer">Buyer</option>
                   <option value="seller">Seller</option>
                 </select>
               </div>
+</div>
 
               <button type="submit" className="register-button" disabled={loading}>
                 {loading ? "Processing..." : "Register"}
@@ -113,7 +122,7 @@ const Register = () => {
           )}
 
           {!success && (
-            <p className="login-link" onClick={() => navigate(`/login?role=${formData.role}`)}>
+            <p className="login-link" onClick={() => navigate("/login")}>
               Already have an account? Login here
             </p>
           )}

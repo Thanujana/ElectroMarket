@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #B2E0D6;
+    background: linear-gradient(to right, #076296, #a0eacf);
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -25,11 +25,14 @@
 
 /* Heading */
 .login-box h2 {
-    font-size: 30px;
+    font-size: 50px;
     font-weight: bold;
-    color: #ffffff;
+    color: #1898b2;
+    text-shadow: 2px 2px 4px #005f73, 4px 4px 8px #003f5c;
     margin-bottom: 15px;
 }
+
+
 
 /* Form Fields */
 .login-box .form-control {
@@ -58,7 +61,7 @@
     padding: 12px;
     font-size: 18px;
     font-weight: bold;
-    color: #ea0c0c;
+    color: #ff1212;
     border-radius: 25px;
     background: #708090;
     transition: all 0.3s ease-in-out;
@@ -67,7 +70,7 @@
 }
 
 .login-button:hover {
-    background:#B2E0D6;
+    background:#dde6e4;
 }
 
 /* Forgot Password & Register Link */
