@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css"; // ✅ Import Bootstrap
 import "../../style/CategoryItems.css"; // ✅ Import custom CSS
+import { FaStar, FaStarHalfAlt, FaRegStar,  FaArrowRight } from "react-icons/fa"; // Import rating & cart icon
 
 const CategoryItems = () => {
   const { category } = useParams();
@@ -64,14 +65,13 @@ const CategoryItems = () => {
                 />
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
-                  <p className="text-muted">
-                    {product.description?.substring(0, 60)}...
-                  </p>
-                  <Link
-                    to={`/products/${product.id || product._id}`}
-                    className="btn explore-btn w-100"
-                  >
-                    Explore Now
+                  
+                  {/* ⭐ Rating System */}
+                  <div className="rating">{generateStars(product.rating)}</div>
+
+                  {/* Instead of "Explore Now" button, use an icon */}
+                  <Link to={`/products/${product.id || product._id}`} className="icon-button">
+                    <FaArrowRight className="icon-style" />
                   </Link>
                 </div>
               </div>
@@ -86,5 +86,28 @@ const CategoryItems = () => {
     </div>
   );
 };
+
+/* Function to Generate Star Ratings */
+const generateStars = (rating) => {
+  if (!rating || rating < 0) rating = 0; // Handle undefined/null/negative values
+  if (rating > 5) rating = 5; // Ensure rating does not exceed 5
+
+  const fullStars = Math.floor(rating);
+  const halfStar = rating % 1 !== 0;
+  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+  return (
+    <>
+      {[...Array(fullStars)].map((_, i) => (
+        <FaStar key={i} color="#FFD700" />
+      ))}
+      {halfStar && <FaStarHalfAlt color="#FFD700" />}
+      {[...Array(emptyStars)].map((_, i) => (
+        <FaRegStar key={i} color="#DDD" />
+      ))}
+    </>
+  );
+};
+
 
 export default CategoryItems;

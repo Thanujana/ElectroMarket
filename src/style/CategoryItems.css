@@ -15,7 +15,7 @@
     overflow: hidden;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     border: none;
-    background: #58b1c1;
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #00c6ff); /* Blue Gradient */
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -41,7 +41,7 @@
 .card-title {
     font-size: 1.3rem;
     font-weight: bold;
-    color: #c7c1c1;
+    color: #4e4d4d;
     margin-bottom: 10px;
 }
 
@@ -52,20 +52,34 @@
     margin-bottom: 15px;
 }
 
-/* Explore Button */
-.explore-btn {
-    font-size: 1rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 10px 20px;
-    background:#053c46;
-    border: none;
-    color: white;
-    border-radius: 25px;
+/* Icon Button - Circular & Hover Effect */
+.icon-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;  /* Set fixed width */
+    height: 35px; /* Set fixed height */
+    background: linear-gradient(135deg, #cb0808, #c44444, #ed6868); /* Blue Gradient */
+    border-radius: 50%;
+    text-decoration: none;
     transition: background 0.3s ease-in-out, transform 0.2s;
-}
-
-.explore-btn:hover {
-    background:#3d5264;
-    transform: translateY(-3px);
-}
+    margin-top: 8px;
+  }
+  
+  /* Icon Styling */
+  .icon-style {
+    font-size: 18px;
+    color: white;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  /* Hover Effect - Slight Scale & Change Color */
+  .icon-button:hover {
+    background: linear-gradient(135deg, #26c418, #168116, #1e3c72);
+    transform: scale(1.1);
+  }
+  
+  .icon-button:hover .icon-style {
+    transform: translateX(3px); /* Move icon slightly */
+  }
+  

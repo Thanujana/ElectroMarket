@@ -156,83 +156,85 @@
 }
 
 /* Product Cards */
+/* Product Cards - Smaller Size */
 .product-item {
+  width: 220px; /* Reduce card width */
+  height: 320px; /* Reduce card height */
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   background: linear-gradient(180deg, #122e3d, #93c5fd);
   color: white;
+  padding: 15px;
 }
 
 .product-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  transform: scale(1.03);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Reduce Image Size */
 .product-item-image {
-  border-radius: 10px;
-  max-height: 200px;
-  object-fit: cover;
-}
-
-.product-item-price {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-/* Flash Sale Section */
-.flash-sale {
-
-  padding: 40px 20px;
-  border-radius: 15px;
-  color: white;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.flash-sale .section-title {
-  border-bottom: 3px solid #251f06;
-}
-
-/* Big Deals Section */
-.big-deals {
-
-  padding: 40px 20px;
-  border-radius: 15px;
-  color: white;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.big-deals .section-title {
-  border-bottom: 3px solid #facc15;
-}
-
-/* Product Cards (Same for Flash Sale & Big Deals) */
-.product-item {
-  border: none;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  background: linear-gradient(180deg, #122e3d, #93c5fd);
-  color: white;
-}
-
-.product-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-}
-
-.product-item-image {
-  border-radius: 10px;
-  max-height: 200px;
-  object-fit: cover;
+  border-radius: 8px;
+  max-height: 120px; /* Reduce image height */
   width: 100%;
+  object-fit: contain;
 }
 
-.product-item-price {
-  font-size: 1.2rem;
+/* Reduce Font Sizes */
+.product-item h3 {
+  font-size: 1rem; /* Smaller title */
   font-weight: bold;
-  margin-top: 10px;
-  color: #facc15; /* Gold price color for contrast */
+  text-align: center;
+}
+
+.product-item p {
+  font-size: 0.8rem; /* Smaller description */
+  text-align: center;
+}
+
+/* Price Styling */
+.product-item-price {
+  font-size: 1rem; /* Smaller price */
+  font-weight: bold;
+  text-align: center;
+  color: #facc15; /* Gold for contrast */
+}
+
+/* Reduce Section Spacing */
+.item-display {
+  padding: 20px;
+}
+
+/* Adjust the Layout for Smaller Cards */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-item {
+    width: 180px; /* Further reduce size for small screens */
+    height: 280px;
+  }
+
+  .product-item-image {
+    max-height: 100px;
+  }
+
+  .product-item h3 {
+    font-size: 0.9rem;
+  }
+
+  .product-item p {
+    font-size: 0.7rem;
+  }
+
+  .product-item-price {
+    font-size: 0.9rem;
+  }
 }
