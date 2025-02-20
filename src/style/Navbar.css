@@ -1,6 +1,6 @@
 /* Navbar Wrapper */
 .custom-navbar {
-  background-color: #1E293B;; /* Dark background */
+  background-color: #1E293B; /* Dark background */
   padding: 0.8rem 1.5rem;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -9,6 +9,7 @@
   width: 100%;
 }
 
+/* Logo Styling */
 .custom-navbar .navbar-brand .logo {
   height: 50px; /* Adjust the size of the logo */
   transition: transform 0.3s ease;
@@ -26,7 +27,8 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-.navbar-nav .nav-item .nav-link  {
+/* Navbar Links */
+.navbar-nav .nav-item .nav-link {
   color: #ffffff; /* White text */
   margin: 0 0.5rem;
   font-size: 1.1rem;
@@ -39,6 +41,12 @@
   transform: scale(1.1);
 }
 
+/* Active Nav Item */
+.navbar-nav .nav-item .nav-link.active {
+  color: #17a2b8; /* Active state color */
+}
+
+/* Dropdown Menu */
 .navbar-nav .nav-item .dropdown-menu {
   background-color: #444;
   border: none;
@@ -55,10 +63,7 @@
   color: #ffffff;
 }
 
-.navbar-nav .nav-item .nav-link.active {
-  color: #17a2b8; /* Active state color */
-}
-
+/* Search Wrapper */
 .search-wrapper {
   position: relative;
 }
@@ -78,21 +83,44 @@
   border-color: #17a2b8;
 }
 
-.navbar-nav .nav-item:last-child {
-  margin-left: auto;
+/* Profile Image Styling */
+.profile-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-@media (max-width: 992px) {
-  .search-wrapper {
-    margin-top: 1rem;
-  }
-  .navbar-nav {
-    text-align: center;
-  }
-  .search-input {
-    width: 100%;
-  }
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
+
+.profile-pic:hover {
+  transform: scale(1.1);
+  border-color: #17a2b8;
+}
+
+/* Profile Dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  min-width: 150px;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
 /* About Us Item Styling */
 .aboutus-item .nav-link {
   color: #ffffff; /* White text */
@@ -109,4 +137,44 @@
 
 .aboutus-item .nav-link.active {
   color: #21bed6; /* Active state color */
+}
+
+/* Ensure last item in navbar (profile/login) stays right-aligned */
+.navbar-nav .nav-item:last-child {
+  margin-left: auto;
+}
+
+/* Mobile Responsive Fix */
+@media (max-width: 992px) {
+  .search-wrapper {
+    margin-top: 1rem;
+  }
+
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .profile-wrapper {
+    margin-top: 1rem;
+    justify-content: center;
+  }
+}
+.custom-login-btn {
+  background-color: #0d9b84; /* Orange color */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.custom-login-btn:hover {
+  background-color: #0c5c3f; /* Darker orange on hover */
+  transform: scale(1.05);
 }
