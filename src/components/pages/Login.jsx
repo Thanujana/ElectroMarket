@@ -5,7 +5,7 @@ import "../../style/Login.css";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const role = new URLSearchParams(location.search).get("role") || "buyer"; // Default to buyer
+  const queryRole = new URLSearchParams(location.search).get("role") || "buyer"; // Default role
 
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [resetEmail, setResetEmail] = useState(""); // Email for password reset
@@ -17,11 +17,12 @@ const Login = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
-  
+
     try {
       const response = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
@@ -29,43 +30,43 @@ const Login = () => {
         body: JSON.stringify({
           email: formData.email,
           password: formData.password,
-          requestedRole: role,
+          requestedRole: queryRole, // Role from URL parameter
         }),
       });
-  
-      if (response.ok) {
-        const { token, role, userId } = await response.json(); // ✅ Extract userId
-  
-        if (!userId || userId === "undefined") {
-          throw new Error("User ID is missing in the response.");
-        }
-  
-        // ✅ Save token, role, and userId correctly
-        localStorage.setItem("authToken", token);
-        localStorage.setItem("userRole", role);
-        localStorage.setItem("userId", userId); // ✅ Fix: Ensure userId is stored
-  
-        setSuccess(true);
-  
-        setTimeout(() => {
-          navigate(
-            role.includes("ROLE_ADMIN") ? "/admin/dashboard" :
-            role.includes("ROLE_SELLER") ? "/seller/dashboard" :
-            "/buyer/dashboard"
-          );
-        }, 1500);
-      } else {
+
+      if (!response.ok) {
         const errorText = await response.text();
-        setError(errorText || "Invalid credentials");
+        throw new Error(errorText || "Invalid credentials");
       }
+
+      const { token, role: serverRole, userId } = await response.json();
+
+      if (!userId) {
+        throw new Error("User ID is missing in the response.");
+      }
+
+      // ✅ Use Role from Backend, NOT from URL to prevent manipulation
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("userRole", serverRole);
+      localStorage.setItem("userId", userId);
+
+      setSuccess(true);
+
+      setTimeout(() => {
+        if (serverRole === "ROLE_ADMIN") {
+          navigate("/admin/dashboard");
+        } else if (serverRole === "ROLE_SELLER") {
+          navigate("/seller/dashboard");
+        } else {
+          navigate("/buyer/dashboard");
+        }
+      }, 1500);
     } catch (err) {
-      setError("An error occurred during login.");
+      setError(err.message || "An error occurred during login.");
     } finally {
       setLoading(false);
     }
   };
-  
-
 
   const handleForgotPasswordSubmit = async (e) => {
     e.preventDefault();
@@ -95,11 +96,10 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-box">
-        {/* If user clicks "Forgot Password?", show reset form, otherwise show login form */}
         {isForgotPassword ? (
           <>
-             <h2 className="forgot-title">Forgot Password?</h2>
-             <p className="forgot-description">Enter your email address, and we'll send you a reset link.</p>
+            <h2 className="forgot-title">Forgot Password?</h2>
+            <p className="forgot-description">Enter your email address, and we'll send you a reset link.</p>
 
             {success && <div className="alert alert-success">{success}</div>}
             {error && <div className="alert alert-danger">{error}</div>}
@@ -114,6 +114,7 @@ const Login = () => {
                   className="form-control"
                   placeholder="Enter your email"
                   required
+                  disabled={loading}
                 />
               </div>
 
@@ -135,15 +136,33 @@ const Login = () => {
 
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <input type="email" name="email" value={formData.email} onChange={handleChange} className="form-control" placeholder="Email Address" required />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="form-control"
+                  placeholder="Email Address"
+                  required
+                  disabled={loading}
+                />
               </div>
               <div className="mb-3">
-                <input type="password" name="password" value={formData.password} onChange={handleChange} className="form-control" placeholder="Password" required />
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="form-control"
+                  placeholder="Password"
+                  required
+                  disabled={loading}
+                />
               </div>
 
               <div className="remember-forgot">
                 <label>
-                  <input type="checkbox" /> Remember me
+                  <input type="checkbox" disabled={loading} /> Remember me
                 </label>
                 <span className="forgot-password" onClick={() => setIsForgotPassword(true)}>
                   Forgot Password?
@@ -155,7 +174,7 @@ const Login = () => {
               </button>
             </form>
 
-            <p className="register-link" onClick={() => navigate(`/register?role=${role}`)}>
+            <p className="register-link" onClick={() => navigate(`/register?role=${queryRole}`)}>
               Don't have an account? Register here
             </p>
           </>

@@ -133,4 +133,36 @@
     content: "✅"; /* Green check icon */
     font-size: 20px;
   }
+  .password-validation p {
+  font-size: 14px;
+  margin: 3px 0;
+  color: red;
+  display: none; /* Hide initially */
+}
+
+.password-validation .valid {
+  color: green;
+  display: block; /* Show when criteria is met */
+}
+
+.password-validation .invalid {
+  color: red;
+  display: block; /* Show when criteria is not met */
+}
+.right-section {
+    width: 65%;
+    padding: 30px;
+    overflow-y: visible; /* ✅ Prevents content from getting cut off */
+  }
+  .password-validation {
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .password-validation.hidden {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+  }
   

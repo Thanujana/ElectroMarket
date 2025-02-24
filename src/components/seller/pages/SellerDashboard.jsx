@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SellerDashboard = () => {
+  const navigate = useNavigate();
+  const userRole = localStorage.getItem("userRole");
+
+  useEffect(() => {
+    if (userRole !== "ROLE_SELLER") {
+      navigate("/login"); // Redirect if user is not a seller
+    }
+  }, [userRole, navigate]);
+
   const stats = [
     { title: "Total Products", value: 15, color: "primary" },
     { title: "Total Sales", value: "$4,500", color: "success" },
@@ -40,7 +50,7 @@ const SellerDashboard = () => {
             <tr>
               <td>201</td>
               <td>Smartphone</td>
-              <td>John </td>
+              <td>John</td>
               <td><span className="badge bg-warning">Pending</span></td>
             </tr>
             <tr>
