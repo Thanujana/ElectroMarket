@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ApiService from "../../service/ApiService";
 import { useNavigate } from "react-router-dom";
-import "../../style/Profile.css"; // Import the CSS file
+import "../../style/Profile.css";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -15,14 +15,14 @@ const Profile = () => {
     const fetchUserInfo = async () => {
       try {
         const data = await ApiService.getUserProfile();
-        console.log("✅ User data received:", data); // Debugging
+        console.log("✅ User data received:", data);
         if (!data) throw new Error("Session expired");
 
         setUserData(data);
         setUpdatedProfile(data);
       } catch (error) {
         console.error("❌ Error fetching user data:", error);
-        setError("Invalid session. Redirecting to login...");
+        setError(error.response?.data?.message || "Session expired. Redirecting to login...");
         setTimeout(() => navigate("/login"), 2000);
       } finally {
         setLoading(false);
@@ -34,11 +34,18 @@ const Profile = () => {
 
   const handleUpdate = async () => {
     try {
-      await ApiService.updateUserProfile(updatedProfile);
+      const updatedData = { ...updatedProfile };
+
+      if (!updatedData.password) {
+        delete updatedData.password;
+      }
+
+      await ApiService.updateUserProfile(updatedData);
       alert("Profile updated successfully!");
       setEditMode(false);
-      setUserData(updatedProfile);
+      setUserData(updatedData);
     } catch (error) {
+      console.error("❌ Failed to update profile:", error);
       alert("Failed to update profile.");
     }
   };
@@ -54,17 +61,21 @@ const Profile = () => {
 
       {editMode ? (
         <div className="edit-form">
+          <label>Username:</label>
           <input
             type="text"
             value={updatedProfile?.userName || ""}
             onChange={(e) => setUpdatedProfile({ ...updatedProfile, userName: e.target.value })}
             placeholder="Enter new username"
           />
+
+          <label>New Password (Optional):</label>
           <input
             type="password"
-            placeholder="New Password"
+            placeholder="Enter new password"
             onChange={(e) => setUpdatedProfile({ ...updatedProfile, password: e.target.value })}
           />
+
           <button className="btn-save" onClick={handleUpdate}>Save</button>
           <button className="btn-cancel" onClick={() => setEditMode(false)}>Cancel</button>
         </div>

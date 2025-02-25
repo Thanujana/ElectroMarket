@@ -3,13 +3,19 @@ import { useNavigate } from "react-router-dom";
 
 const SellerDashboard = () => {
   const navigate = useNavigate();
+  const token = localStorage.getItem("authToken");
   const userRole = localStorage.getItem("userRole");
 
   useEffect(() => {
-    if (userRole !== "ROLE_SELLER") {
-      navigate("/login"); // Redirect if user is not a seller
+    if (!token) {
+      navigate("/login"); // Redirect if user is not logged in
+    } else if (userRole !== "ROLE_SELLER") {
+      // Redirect buyers/admins to their respective dashboards
+      if (userRole === "ROLE_BUYER") navigate("/buyer/dashboard");
+      else if (userRole === "ROLE_ADMIN") navigate("/admin/dashboard");
     }
-  }, [userRole, navigate]);
+  }, [token, userRole, navigate]);
+
 
   const stats = [
     { title: "Total Products", value: 15, color: "primary" },

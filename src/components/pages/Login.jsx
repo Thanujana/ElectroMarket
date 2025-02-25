@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault();
     setError("");
     setLoading(true);
-
+  
     try {
       const response = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
@@ -30,32 +30,48 @@ const Login = () => {
         body: JSON.stringify({
           email: formData.email,
           password: formData.password,
-          requestedRole: queryRole, // Role from URL parameter
+          requestedRole: queryRole,
         }),
       });
-
+  
+      // ✅ Handle non-JSON error responses properly
+      const contentType = response.headers.get("content-type");
+  
       if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || "Invalid credentials");
+        let errorMessage = "Invalid credentials";
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          errorMessage = errorData.message || errorMessage;
+        } else {
+          errorMessage = await response.text();
+        }
+        throw new Error(errorMessage);
       }
-
-      const { token, role: serverRole, userId } = await response.json();
-
+  
+      // ✅ Parse response as JSON only once
+      const data = await response.json();
+      console.log("Login Response:", data); // Debugging
+  
+      const { token, role, userId } = data;
+  
       if (!userId) {
         throw new Error("User ID is missing in the response.");
       }
-
-      // ✅ Use Role from Backend, NOT from URL to prevent manipulation
+  
+      // ✅ Store values correctly
       localStorage.setItem("authToken", token);
-      localStorage.setItem("userRole", serverRole);
+      localStorage.setItem("userRole", role);
       localStorage.setItem("userId", userId);
-
+  
       setSuccess(true);
-
+  
+      // ✅ Debug role before redirection
+      console.log("User Role:", role);
+  
       setTimeout(() => {
-        if (serverRole === "ROLE_ADMIN") {
+        if (role === "ROLE_ADMIN") {
           navigate("/admin/dashboard");
-        } else if (serverRole === "ROLE_SELLER") {
+        } else if (role === "ROLE_SELLER") {
           navigate("/seller/dashboard");
         } else {
           navigate("/buyer/dashboard");
@@ -67,6 +83,7 @@ const Login = () => {
       setLoading(false);
     }
   };
+  
 
   const handleForgotPasswordSubmit = async (e) => {
     e.preventDefault();

@@ -1,6 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("authToken");
+  const userRole = localStorage.getItem("userRole");
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login"); // Redirect if user is not logged in
+    } else if (userRole !== "ROLE_ADMIN") {
+      // Redirect users to their respective dashboards
+      if (userRole === "ROLE_BUYER") navigate("/buyer/dashboard");
+      else if (userRole === "ROLE_SELLER") navigate("/seller/dashboard");
+    }
+  }, [token, userRole, navigate]);
   const summaryData = [
     { title: "Total Categories", value: 5, color: "primary" },
     { title: "Total Products", value: 120, color: "success" },
