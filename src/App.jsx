@@ -26,7 +26,7 @@ import SellerLayout from "./components/seller/layouts/SellerLayout";
 import SellerDashboard from "./components/seller/pages/SellerDashboard";
 import SellerProducts from "./components/seller/pages/SellerProducts";
 import SellerAddProduct from "./components/seller/pages/SellerAddProduct";
-
+import ProductList from "./components/pages/ProductList";
 const App = () => {
   return (
     <CartContextProvider>
@@ -49,7 +49,7 @@ const App = () => {
                   <Route path="/place-order" element={<PlaceOrder />} />
                   <Route path="/categories/:category" element={<CategoryItems />} />
                   <Route path="/products/:id" element={<ProductDetails />} />
-
+                  <Route path="/filter" element={<ProductList />} />
                   <Route path="/order-confirmation" element={<OrderConfirmation />} />
                   <Route path="/payment" element={<PaymentPage />} />
                   <Route path="/order-status" element={<OrderStatus />} />
