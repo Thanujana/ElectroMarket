@@ -7,7 +7,7 @@ import { category_list } from "../../assets/assets";
 import sideImage from "/header_img.png";
 import bgImage from "/bg_image.jpg";
 
-const API_BASE_URL = "http://localhost:8080/api/products/product"; // Backend API
+const API_BASE_URL = "http://localhost:8080/api/products"; // Backend API
 
 
 const Home = () => {
@@ -31,24 +31,35 @@ const Home = () => {
   }, [navigate]);
 
   // Fetch products from backend
-  const fetchProducts = async (type, setState) => {
+  const fetchProducts = async (endpoint, setState, limit = 4) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}?type=${type}`);
-      setState(response.data);
+      const response = await axios.get(`${API_BASE_URL}/${endpoint}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
+      });
+  
+      if (response.status === 204) {
+        setState([]); // No content, empty array
+      } else {
+        setState(response.data);
+      }
     } catch (error) {
-      console.error(`❌ Error fetching ${type} products:`, error);
+      console.error(`❌ Error fetching ${endpoint} products:`, error);
+      setState([]); // Handle errors by clearing the list
     }
   };
+  
+  
 
   const handleCategoryClick = (item) => {
     navigate(`/categories/${item.category_name}`);
   };
 
   useEffect(() => {
-    fetchProducts("top-picks", setTopItems);
-    fetchProducts("flash-sale", setFlashSales);
-    fetchProducts("big-deals", setBigDeals);
+    fetchProducts("top-picks", setTopItems, 4); // Limit to 4 top picks
+    fetchProducts("flash-sale", setFlashSales, 5); // Limit to 5 flash sales
+    fetchProducts("big-deals", setBigDeals, 6); // Limit to 6 big deals
   }, []);
+  
 
   return (
     <div>
@@ -143,105 +154,104 @@ const Home = () => {
       <div className="item-display container py-4" id="item-display">
         {/* Top Picks Section */}
         <section className="top-picks mb-5">
-          <h2 className="section-title">Top Picks Just for You</h2>
-          {topItems.length > 0 ? (
-            <div className="row">
-              {topItems.map((item) => (
-                <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
-                  <div className="product-item card">
-                  <img
-  src={item.imageUrl.startsWith("data:image") ? item.imageUrl : "https://via.placeholder.com/250"}
-  alt={item.name || "Product Image"}
-  className="card-img-top product-image"
-  onError={(e) => {
-    console.error(`⚠️ Failed to load image for: ${item.name}`);
-    e.target.src = "https://via.placeholder.com/250";
-    e.target.onerror = null;
-  }}
-/>
-
-                    <div className="card-body">
-                      <h5 className="card-title">{item.name}</h5>
-                      <p className="card-text text-muted">{item.description}</p>
-                      <p className="product-item-price fw-bold"> $ {item.price}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+  <h2 className="section-title">Top Picks Just for You ⭐</h2>
+  {topItems.length > 0 ? (
+    <div className="row">
+      {topItems.map((item) => (
+        <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div className="product-item card">
+            <img
+              src={item.imageUrl || "https://via.placeholder.com/250"}
+              alt={item.name || "Product Image"}
+              className="card-img-top product-image"
+              onError={(e) => {
+                console.error(`⚠️ Failed to load image for: ${item.name}`);
+                e.target.src = "https://via.placeholder.com/250";
+                e.target.onerror = null;
+              }}
+            />
+            <div className="card-body">
+              <h5 className="card-title">{item.name}</h5>
+              <p className="card-text text-muted">{item.description}</p>
+              <p className="product-item-price fw-bold"> $ {item.price}</p>
             </div>
-          ) : (
-            <p>No items available to display.</p>
-          )}
-        </section>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p>No Top Picks available at the moment.</p>
+  )}
+</section>
+
 
         {/* Flash Sale Section */}
         <section className="flash-sale mb-5">
-          <h2 className="section-title text-danger">Flash Sale 🔥</h2>
-          {flashSales.length > 0 ? (
-            <div className="row">
-              {flashSales.map((item) => (
-                <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
-                  <div className="product-item card">
-                  <img
-  src={item.imageUrl.startsWith("data:image") ? item.imageUrl : "https://via.placeholder.com/250"}
-  alt={item.name || "Product Image"}
-  className="product-item-image card-img-top"
-  onError={(e) => {
-    console.error(`⚠️ Failed to load image for: ${item.name}`);
-    e.target.src = "https://via.placeholder.com/250";
-    e.target.onerror = null;
-  }}
-/>
-
-                    <div className="card-body">
-                      <h5 className="card-title">{item.name}</h5>
-                      <p className="card-text text-muted">{item.description}</p>
-                      <p className="product-item-price text-danger fw-bold">
-                        $ {item.price} <small>(Limited Time Offer!)</small>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+  <h2 className="section-title text-danger">Flash Sale 🔥</h2>
+  {flashSales.length > 0 ? (
+    <div className="row">
+      {flashSales.map((item) => (
+        <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div className="product-item card">
+            <img
+              src={item.imageUrl || "https://via.placeholder.com/250"}
+              alt={item.name || "Product Image"}
+              className="card-img-top"
+              onError={(e) => {
+                console.error(`⚠️ Failed to load image for: ${item.name}`);
+                e.target.src = "https://via.placeholder.com/250";
+                e.target.onerror = null;
+              }}
+            />
+            <div className="card-body">
+              <h5 className="card-title">{item.name}</h5>
+              <p className="card-text text-muted">{item.description}</p>
+              <p className="product-item-price text-danger fw-bold">
+                $ {item.price} <small>(Limited Time Offer!)</small>
+              </p>
             </div>
-          ) : (
-            <p>No Flash Sale items available at the moment.</p>
-          )}
-        </section>
-        {/* Big Deals Section */}
-        <section className="big-deals mb-5">
-          <h2 className="section-title text-primary">Big Deals 🎉</h2>
-          {bigDeals.length > 0 ? (
-            <div className="row">
-              {bigDeals.map((item) => (
-                <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
-                  <div className="product-item card">
-                   <img
-  src={item.imageUrl.startsWith("data:image") ? item.imageUrl : "https://via.placeholder.com/250"}
-  alt={item.name || "Product Image"}
-  className="product-item-image card-img-top"
-  onError={(e) => {
-    console.error(`⚠️ Failed to load image for: ${item.name}`);
-    e.target.src = "https://via.placeholder.com/250";
-    e.target.onerror = null;
-  }}
-/>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p>No Flash Sale items available at the moment.</p>
+  )}
+</section>
 
-                    <div className="card-body">
-                      <h5 className="card-title">{item.name}</h5>
-                      <p className="card-text text-muted">{item.description}</p>
-                      <p className="product-item-price text-primary fw-bold">
-                        $ {item.price} <small>(Special Offer!)</small>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+<section className="big-deals mb-5">
+  <h2 className="section-title text-primary">Big Deals 🎉</h2>
+  {bigDeals.length > 0 ? (
+    <div className="row">
+      {bigDeals.map((item) => (
+        <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div className="product-item card">
+            <img
+              src={item.imageUrl || "https://via.placeholder.com/250"}
+              alt={item.name || "Product Image"}
+              className="card-img-top"
+              onError={(e) => {
+                console.error(`⚠️ Failed to load image for: ${item.name}`);
+                e.target.src = "https://via.placeholder.com/250";
+                e.target.onerror = null;
+              }}
+            />
+            <div className="card-body">
+              <h5 className="card-title">{item.name}</h5>
+              <p className="card-text text-muted">{item.description}</p>
+              <p className="product-item-price text-primary fw-bold">
+                $ {item.price} <small>(Special Offer!)</small>
+              </p>
             </div>
-          ) : (
-            <p>No Big Deals available at the moment.</p>
-          )}
-        </section>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p>No Big Deals available at the moment.</p>
+  )}
+</section>
+
       </div>
     </div>
   );

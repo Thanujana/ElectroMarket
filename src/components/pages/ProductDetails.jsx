@@ -101,7 +101,22 @@ const ProductDetails = () => {
                         <div className="card-body">
                             <h2 className="card-title">{product?.name}</h2>
                             <p className="card-text">{product?.description}</p>
-                            <h4 className="text-success">Price: $ {product?.price?.toFixed(2)}</h4>
+                            <h4 className="text-success">
+  {product.discountPercentage > 0 ? (
+    <>
+      <span style={{ textDecoration: "line-through", color: "red" }}>
+        ${product.price.toFixed(2)}
+      </span>
+      <br />
+      <span style={{ color: "green", fontSize: "1.5rem", fontWeight: "bold" }}>
+        ${ (product.price - (product.price * (product.discountPercentage / 100))).toFixed(2) }
+      </span>
+    </>
+  ) : (
+    `$ ${product.price.toFixed(2)}`
+  )}
+</h4>
+
 
                             {/* ✅ Display Stock and Category */}
                             <p className="text-muted">

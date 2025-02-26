@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";  // ⬅ Import useLocation
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../../style/navbar.css"; // Add styles for the dropdown suggestions
+
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
   const [category, setCategory] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
@@ -13,8 +16,9 @@ const ProductList = () => {
   const [order, setOrder] = useState("asc");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  
-  const location = useLocation(); // ⬅ Get the current URL
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // ✅ Read search term from URL when page loads
   useEffect(() => {
@@ -31,6 +35,23 @@ const ProductList = () => {
     fetchProducts();
   }, [search, category, minPrice, maxPrice, sortBy, order]);
 
+  // ✅ Fetch search suggestions
+  const fetchSuggestions = async (query) => {
+    if (query.length > 1) {
+      try {
+        const response = await axios.get("http://localhost:8080/api/products/suggestions", {
+          params: { query },
+        });
+        setSuggestions(response.data);
+      } catch (error) {
+        console.error("Error fetching suggestions", error);
+      }
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  // ✅ Fetch filtered products
   const fetchProducts = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/products/search", {
@@ -51,28 +72,63 @@ const ProductList = () => {
     }
   };
 
+  // ✅ Handle search input change
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    fetchSuggestions(value);
+    
+    if (window.location.pathname !== "/filter") {
+      navigate("/filter");
+    }
+  };
+
+  // ✅ Handle clicking on suggestion
+  const handleSuggestionClick = (suggestion) => {
+    setSearch(suggestion);
+    setSuggestions([]);
+    navigate(`/filter?search=${suggestion}`);
+  };
+
   return (
     <div className="container mt-4">
       <h2 className="mb-4">Product List</h2>
 
-      {/* 🔍 Search & Filters */}
+      {/* 🔍 Search Bar & Filters */}
       <div className="row mb-3">
-     
+        <div className="col-md-3 position-relative">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search by name..."
+            value={search}
+            onChange={handleSearchChange}
+          />
+          {suggestions.length > 0 && (
+            <ul className="suggestions-dropdown">
+              {suggestions.map((s, index) => (
+                <li key={index} onClick={() => handleSuggestionClick(s)}>
+                  {s}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
         <div className="col-md-2">
           <select className="form-select" onChange={(e) => setCategory(e.target.value)}>
             <option value="">All Categories</option>
-            <option value="home-appliances">home-appliances</option>
-            <option value="consumer-electronics">consumer-electronics</option>
-            <option value="computer-components">computer-components</option>
-            <option value="smart-home-products">smart-home-products</option>
-            <option value="industrial-specialized-electronics">industrial-specialized-electronics</option>
+            <option value="home-appliances">Home Appliances</option>
+            <option value="consumer-electronics">Consumer Electronics</option>
+            <option value="computer-components">Computer Components</option>
+            <option value="smart-home-products">Smart Home Products</option>
+            <option value="industrial-specialized-electronics">Industrial Electronics</option>
           </select>
         </div>
 
         <div className="col-md-2">
           <input
-            type="number"
+            type="text"
             className="form-control"
             placeholder="Min Price"
             value={minPrice}
@@ -82,7 +138,7 @@ const ProductList = () => {
 
         <div className="col-md-2">
           <input
-            type="number"
+            type="text"
             className="form-control"
             placeholder="Max Price"
             value={maxPrice}
@@ -95,13 +151,6 @@ const ProductList = () => {
             <option value="price">Sort: Price</option>
             <option value="rating">Sort: Best Rated</option>
             <option value="createdAt">Sort: Newest</option>
-          </select>
-        </div>
-
-        <div className="col-md-1">
-          <select className="form-select" onChange={(e) => setOrder(e.target.value)}>
-            <option value="asc">↑ Ascending</option>
-            <option value="desc">↓ Descending</option>
           </select>
         </div>
       </div>
