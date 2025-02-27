@@ -8,8 +8,8 @@
   
   .register-box {
     display: flex;
-    width: 900px;
-    height: 550px;
+    width: 1000px;
+    height: 600px;
     background-color: rgb(210, 230, 234);
     border-radius: 12px;
     overflow: hidden;

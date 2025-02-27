@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../style/Register.css";
-import { FaUser, FaEnvelope, FaLock, FaRocket, FaPhone } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaLock, FaRocket, FaPhone, FaStore, FaIdCard } from "react-icons/fa";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,13 +12,14 @@ const Register = () => {
     confirmPassword: "",
     phone: "",
     role: "buyer",
+    shopName: "",
+    taxNumber: "",
   });
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showPasswordRules, setShowPasswordRules] = useState(false);
-
   const [passwordValid, setPasswordValid] = useState({
     length: false,
     uppercase: false,
@@ -27,7 +28,7 @@ const Register = () => {
     specialChar: false,
   });
 
-  // Regex for password validation
+  // ✅ Password Validation
   const validatePassword = (password) => {
     const criteria = {
       length: password.length >= 8,
@@ -40,21 +41,19 @@ const Register = () => {
     return Object.values(criteria).every(Boolean);
   };
 
+  // ✅ Handle Input Change
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
     if (name === "password") {
-      setShowPasswordRules(true); // ✅ Show only while typing
+      setShowPasswordRules(true);
       const isValid = validatePassword(value);
-  
-      if (isValid) {
-        setTimeout(() => setShowPasswordRules(false), 500); // ✅ Hide after 500ms when valid
-      }
+      if (isValid) setTimeout(() => setShowPasswordRules(false), 500);
     }
   };
-  
 
+  // ✅ Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -63,37 +62,43 @@ const Register = () => {
       setError("Password does not meet the required criteria.");
       return;
     }
-
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
 
+    // ✅ Ensure required seller fields are filled
+    if (formData.role === "seller" && (!formData.shopName || !formData.taxNumber)) {
+      setError("Shop Name and Tax Number are required for sellers.");
+      return;
+    }
+
     setLoading(true);
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/auth/register/${
-          formData.role === "buyer" ? "user" : "seller"
-        }`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userName: formData.name,
-            email: formData.email,
-            password: formData.password,
+      const response = await fetch(`http://localhost:8080/api/auth/register/${formData.role === "buyer" ? "user" : "seller"}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userName: formData.name,
+          email: formData.email,
+          password: formData.password,
+          phoneNumber: formData.phone,
+          ...(formData.role === "seller" && {
+            shopName: formData.shopName,
+            taxNumber: formData.taxNumber,
           }),
-        }
-      );
+        }),
+      });
 
       if (response.ok) {
         setSuccess(true);
         setTimeout(() => navigate(`/login?role=${formData.role}`), 2500);
       } else {
-        setError(await response.text());
+        const errorMessage = await response.text();
+        setError(errorMessage || "Registration failed. Try again.");
       }
-    } catch (err) {
-      setError("An error occurred.");
+    } catch {
+      setError("An error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -118,8 +123,7 @@ const Register = () => {
 
           {success ? (
             <div className="success-message">
-              🎉 Registration Successful! Redirecting to{" "}
-              {formData.role.charAt(0).toUpperCase() + formData.role.slice(1)} Login...
+              🎉 Registration Successful! Redirecting to {formData.role.charAt(0).toUpperCase() + formData.role.slice(1)} Login...
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
@@ -128,67 +132,52 @@ const Register = () => {
               <div className="form-grid">
                 <div className="input-group">
                   <FaUser />
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Full Name"
-                    required
-                  />
+                  <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required />
                 </div>
 
                 <div className="input-group">
                   <FaEnvelope />
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Your Email"
-                    required
-                  />
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Your Email" required />
                 </div>
 
                 <div className="input-group">
                   <FaPhone />
-                  <input type="text" name="phone" placeholder="Your Phone" required />
+                  <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="Your Phone" required />
                 </div>
+
+                {formData.role === "seller" && (
+                  <>
+                    <div className="input-group">
+                      <FaStore />
+                      <input type="text" name="shopName" value={formData.shopName} onChange={handleChange} placeholder="Shop Name" required />
+                    </div>
+
+                    <div className="input-group">
+                      <FaIdCard />
+                      <input type="text" name="taxNumber" value={formData.taxNumber} onChange={handleChange} placeholder="Tax Number (GST)" required />
+                    </div>
+                  </>
+                )}
 
                 <div className="input-group">
                   <FaLock />
-                  <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    placeholder="Password"
-                    required
-                  />
+                  <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
                 </div>
 
-              {/* ✅ Only show validation while typing & hide after correct password */}
-{showPasswordRules && !Object.values(passwordValid).every(Boolean) && (
-  <div className="password-validation">
-    <p className={passwordValid.length ? "valid" : "invalid"}>At least 8 characters</p>
-    <p className={passwordValid.uppercase ? "valid" : "invalid"}>One uppercase letter</p>
-    <p className={passwordValid.lowercase ? "valid" : "invalid"}>One lowercase letter</p>
-    <p className={passwordValid.number ? "valid" : "invalid"}>One number</p>
-    <p className={passwordValid.specialChar ? "valid" : "invalid"}>One special character</p>
-  </div>
-)}
-
+                {/* ✅ Password Validation Messages */}
+                {showPasswordRules && !Object.values(passwordValid).every(Boolean) && (
+                  <div className="password-validation">
+                    <p className={passwordValid.length ? "valid" : "invalid"}>At least 8 characters</p>
+                    <p className={passwordValid.uppercase ? "valid" : "invalid"}>One uppercase letter</p>
+                    <p className={passwordValid.lowercase ? "valid" : "invalid"}>One lowercase letter</p>
+                    <p className={passwordValid.number ? "valid" : "invalid"}>One number</p>
+                    <p className={passwordValid.specialChar ? "valid" : "invalid"}>One special character</p>
+                  </div>
+                )}
 
                 <div className="input-group">
                   <FaLock />
-                  <input
-                    type="password"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    placeholder="Confirm Password"
-                    required
-                  />
+                  <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="Confirm Password" required />
                 </div>
 
                 <div className="mb-3">

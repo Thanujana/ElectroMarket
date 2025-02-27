@@ -22,7 +22,7 @@ const Home = () => {
     const userRole = localStorage.getItem("userRole");
 
     if (!token) {
-      navigate("/login"); // Redirect if user is not logged in
+      navigate("/buyer/dashboard"); // Redirect if user is not logged in
     } else if (userRole !== "ROLE_BUYER") {
       // Redirect sellers/admins to their respective dashboards
       if (userRole === "ROLE_SELLER") navigate("/seller/dashboard");
