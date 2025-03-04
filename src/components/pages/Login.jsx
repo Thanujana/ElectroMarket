@@ -5,14 +5,16 @@ import "../../style/Login.css";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const queryRole = new URLSearchParams(location.search).get("role") || "buyer"; // Default role
+  
+  // ✅ Extract the selected role from the URL query parameter
+  const queryRole = new URLSearchParams(location.search).get("role") || "buyer"; 
 
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [resetEmail, setResetEmail] = useState(""); // Email for password reset
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [isForgotPassword, setIsForgotPassword] = useState(false); // Toggle for forgot password form
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,21 +24,25 @@ const Login = () => {
     e.preventDefault();
     setError("");
     setLoading(true);
-  
+
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
+      // ✅ Dynamically set API endpoint based on role from URL
+      let apiEndpoint = "http://localhost:8080/api/auth/login"; // Default for buyers & sellers
+      if (queryRole === "admin") {
+        apiEndpoint = "http://localhost:8080/api/admins/login"; // Admin login API
+      }
+
+      const response = await fetch(apiEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: formData.email,
           password: formData.password,
-          requestedRole: queryRole,
         }),
       });
-  
-      // ✅ Handle non-JSON error responses properly
+
       const contentType = response.headers.get("content-type");
-  
+
       if (!response.ok) {
         let errorMessage = "Invalid credentials";
         if (contentType && contentType.includes("application/json")) {
@@ -47,27 +53,25 @@ const Login = () => {
         }
         throw new Error(errorMessage);
       }
-  
-      // ✅ Parse response as JSON only once
+
       const data = await response.json();
       console.log("Login Response:", data); // Debugging
-  
+
       const { token, role, userId } = data;
-  
+
       if (!userId) {
         throw new Error("User ID is missing in the response.");
       }
-  
-      // ✅ Store values correctly
+
+      // ✅ Store token, role, and user ID
       localStorage.setItem("authToken", token);
       localStorage.setItem("userRole", role);
       localStorage.setItem("userId", userId);
-  
+
       setSuccess(true);
-  
-      // ✅ Debug role before redirection
+
       console.log("User Role:", role);
-  
+
       setTimeout(() => {
         if (role === "ROLE_ADMIN") {
           navigate("/admin/dashboard");
@@ -83,32 +87,6 @@ const Login = () => {
       setLoading(false);
     }
   };
-  
-
-  const handleForgotPasswordSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setSuccess("");
-    setLoading(true);
-
-    try {
-      const response = await fetch("http://localhost:8080/api/auth/forgot-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: resetEmail }),
-      });
-
-      if (response.ok) {
-        setSuccess("A password reset link has been sent to your email.");
-      } else {
-        setError("Failed to send reset link. Please check your email.");
-      }
-    } catch (err) {
-      setError("An error occurred. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="login-container">
@@ -116,12 +94,12 @@ const Login = () => {
         {isForgotPassword ? (
           <>
             <h2 className="forgot-title">Forgot Password?</h2>
-            <p className="forgot-description">Enter your email address, and we'll send you a reset link.</p>
+            <p className="forgot-description">Enter your email, and we'll send you a reset link.</p>
 
             {success && <div className="alert alert-success">{success}</div>}
             {error && <div className="alert alert-danger">{error}</div>}
 
-            <form onSubmit={handleForgotPasswordSubmit}>
+            <form>
               <div className="mb-3">
                 <input
                   type="email"
@@ -146,7 +124,7 @@ const Login = () => {
           </>
         ) : (
           <>
-            <h2>LOGIN</h2>
+            <h2>LOGIN ({queryRole.toUpperCase()})</h2>
 
             {success && <div className="alert alert-success">Login Successful! Redirecting...</div>}
             {error && <p className="text-danger text-center">{error}</p>}

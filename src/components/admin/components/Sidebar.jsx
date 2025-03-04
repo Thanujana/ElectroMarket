@@ -8,17 +8,16 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check for authentication token or session
-    const token = localStorage.getItem("authToken"); // Replace with your logic
+    // ✅ Check authentication token
+    const token = localStorage.getItem("authToken");
     setIsAuthenticated(!!token); // If token exists, user is authenticated
   }, []);
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
-      // Clear the token on logout (or use your logout logic)
-      localStorage.removeItem("authToken"); // Example: removing token from localStorage
+      localStorage.removeItem("authToken"); // ✅ Remove token from storage
       setTimeout(() => {
-        navigate("/login"); // Navigate to login page after logout
+        navigate("/login"); // Redirect to login page
       }, 500);
     }
   };
@@ -28,7 +27,7 @@ const Sidebar = () => {
       className="d-flex flex-column vh-100"
       style={{
         width: "250px",
-        backgroundColor: "#1E293B", 
+        backgroundColor: "#1E293B",
         padding: "20px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
       }}
@@ -42,20 +41,25 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li className="nav-item mb-2">
-            <NavLink to="/admin/categories" className="nav-link text-white">
-              <i className="bi bi-tags me-2"></i> Categories
+            <NavLink to="/admin/products" className="nav-link text-white">
+              <i className="bi bi-box-seam me-2"></i> Manage Products
             </NavLink>
           </li>
           <li className="nav-item mb-2">
             <NavLink to="/admin/orders" className="nav-link text-white">
-              <i className="bi bi-card-checklist me-2"></i> Orders
+              <i className="bi bi-card-checklist me-2"></i> Manage Orders
             </NavLink>
           </li>
           <li className="nav-item mb-2">
-            <NavLink to="/admin/products" className="nav-link text-white">
-              <i className="bi bi-box-seam me-2"></i> Products
+            <NavLink to="/admin/users" className="nav-link text-white">
+              <i className="bi bi-people me-2"></i> Manage Users
             </NavLink>
           </li>
+          <li className="nav-item mb-2">
+  <NavLink to="/admin/users/approve" className="nav-link text-white">
+    <i className="bi bi-person-check me-2"></i> Approve Users
+  </NavLink>
+</li>
 
           {isAuthenticated && (
             <>

@@ -7,18 +7,19 @@ import Register from "./components/pages/Register";
 import Home from "./components/pages/Home";
 import PlaceOrder from "./components/pages/PlaceOrder";
 import Cart from "./components/pages/Cart";
-import CategoryItems from "./components/pages/CategoryItems";
 import ProductDetails from "./components/pages/ProductDetails";
 import CartContextProvider from "./components/Context/CartContext";
 import OrderConfirmation from "./components/pages/OrderConfirmation";
+import CategoryItems from "./components/pages/CategoryItems";
 import PaymentPage from "./components/pages/PaymentPage";
 import AdminLayout from "./components/admin/layouts/AdminLayout";
 import AdminDashboard from "./components/admin/AdminDashboard";
-import CategoryList from "./components/admin/AdminCategoryPage/CategoryList";
+import UserList from "./components/admin/AdminUserPage/UserList";
+import UserApproval from "./components/admin/AdminUserPage/UserApproval";
 import AdminProductList from "./components/admin/AdminProductPage/ProductList";
 import AdminOrderList from "./components/admin/AdminOrderPage/OrderList";
-import Role from "./components/common/Role";
 import AddProduct from "./components/admin/AdminProductPage/AddProduct";
+import Role from "./components/common/Role";
 import OrderStatus from "./components/pages/OrderStatus";
 import LandingPage from "./components/pages/LandingPage";
 import Profile from "./components/pages/Profile";
@@ -27,12 +28,13 @@ import SellerDashboard from "./components/seller/pages/SellerDashboard";
 import SellerProducts from "./components/seller/pages/SellerProducts";
 import SellerAddProduct from "./components/seller/pages/SellerAddProduct";
 import ProductList from "./components/pages/ProductList";
+
 const App = () => {
   return (
     <CartContextProvider>
       <div className="app">
         <Routes>
-          {/* Customer Routes */}
+          {/* 🛒 Customer Routes */}
           <Route
             path="/*"
             element={
@@ -59,23 +61,24 @@ const App = () => {
             }
           />
 
-          {/* Admin Routes */}
+          {/* 🛠️ Admin Routes */}
           <Route
             path="/admin/*"
             element={
               <AdminLayout>
                 <Routes>
                   <Route path="dashboard" element={<AdminDashboard />} />
-                  <Route path="categories" element={<CategoryList />} />
+                  <Route path="/admin/users" element={<UserList />} />
+                  <Route path="/admin/users/approve" element={<UserApproval />} />   
                   <Route path="products" element={<AdminProductList />} />
-                  <Route path="orders" element={<AdminOrderList />} />
                   <Route path="products/add" element={<AddProduct />} />
+                  <Route path="orders" element={<AdminOrderList />} />
                 </Routes>
               </AdminLayout>
             }
           />
 
-          {/* Seller Routes (fixed imports) */}
+          {/* 🏪 Seller Routes */}
           <Route
             path="/seller/*"
             element={
