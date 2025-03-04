@@ -23,16 +23,19 @@ body {
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Product Image */
+/* Ensure the image container has a fixed aspect ratio */
 .product-image {
-  width: 100%;
-  height: auto;
-  max-height: 400px;
-  object-fit: contain; /* Ensures full product image is visible */
+  width: 100%; /* Ensures it takes full width of the container */
+  max-width: 400px; /* Limits width */
+  height: 300px; /* Fix height to maintain consistency */
+  object-fit: contain; /* Ensures the full image is shown without cropping */
   border-radius: 12px;
-  background: #ffffff; /* White background for contrast */
-  padding: 10px;
+  background-color: #ffffff; /* White background to fill empty spaces */
+  padding: 5px;
+  display: block;
+  margin: auto;
 }
+
 
 /* Card Body */
 .card-body {
@@ -107,7 +110,7 @@ span.mx-3 {
   }
 
   .product-image {
-    max-height: 350px;
+    max-height: 400px;
   }
 
   .card-title {

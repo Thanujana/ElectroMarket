@@ -87,15 +87,16 @@ const ProductDetails = () => {
             <div className="card shadow-lg product-details-card">
                 <div className="row g-0">
                     <div className="col-md-5">
-                        <img
-                            src={product?.imageUrl || placeholderImage}
-                            alt={product?.name || "Product Image"}
-                            className="img-fluid product-image"
-                            onError={(e) => {
-                                console.error("❌ Image load failed:", e);
-                                e.target.src = placeholderImage;
-                            }}
-                        />
+                    <img
+    src={product?.imageUrl || "https://dummyimage.com/400x300/cccccc/000000&text=No+Image"}
+    alt={product?.name || "Product Image"}
+    className="img-fluid product-image"
+    style={{ width: "400px", height: "300px", objectFit: "contain" }}
+    onError={(e) => {
+        e.target.src = "https://dummyimage.com/400x300/cccccc/000000&text=Image+Not+Found";
+    }}
+/>
+
                     </div>
                     <div className="col-md-7">
                         <div className="card-body">
