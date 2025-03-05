@@ -7,14 +7,14 @@ const AdminDashboard = () => {
   const userRole = localStorage.getItem("userRole");
 
   useEffect(() => {
-    if (!token) {
-      navigate("/login"); // Redirect if not logged in
-    } else if (userRole !== "ROLE_ADMIN") {
+   // if (!token) {
+      navigate("/admin/dashboard"); // Redirect if not logged in
+    //} //else if (userRole !== "ROLE_ADMIN") {
       // Redirect unauthorized users
-      if (userRole === "ROLE_BUYER") navigate("/buyer/dashboard");
-      else if (userRole === "ROLE_SELLER") navigate("/seller/dashboard");
-    }
-  }, [token, userRole, navigate]);
+     // if (userRole === "ROLE_BUYER") navigate("/buyer/dashboard");
+     // else if (userRole === "ROLE_SELLER") navigate("/seller/dashboard");
+   // }
+  }, [ navigate]);
 
   return (
     <div>
