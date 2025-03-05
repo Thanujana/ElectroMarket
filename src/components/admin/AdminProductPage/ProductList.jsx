@@ -3,149 +3,28 @@ import { useNavigate } from "react-router-dom";
 
 const ProductList = () => {
   const navigate = useNavigate();
-  const [categories, setCategories] = useState([
-    {
-      id: 1,
-      name: "Home Appliances",
-      subcategories: [
-        {
-          id: 1,
-          name: "Washing Machines",
-          products: [
-            { id: 1, name: "Top Load", description: "Efficient top load washer", price: 549, image: "" },
-            { id: 2, name: "Front Load", description: "Deep clean washer", price: 699, image: "" },
-          ],
-        },
-        {
-          id: 2,
-          name: "Refrigerators",
-          products: [
-            { id: 3, name: "Double Door", description: "Spacious and efficient", price: 799, image: "" },
-          ],
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: "Consumer Electronics",
-      subcategories: [
-        {
-          id: 3,
-          name: "Televisions",
-          products: [
-            { id: 4, name: "4K TV", description: "Ultra HD television", price: 1199, image: "" },
-          ],
-        },
-      ],
-    },
-  ]);
+  const [categories, setCategories] = useState([]); // State to store fetched data
+  const [loading, setLoading] = useState(true); // Loading state
 
-  const addProduct = (categoryId, subcategoryId, product) => {
-    setCategories((prevCategories) =>
-      prevCategories.map((category) =>
-        category.id === categoryId
-          ? {
-              ...category,
-              subcategories: category.subcategories.map((subcategory) =>
-                subcategory.id === subcategoryId
-                  ? {
-                      ...subcategory,
-                      products: [...subcategory.products, product],
-                    }
-                  : subcategory
-              ),
-            }
-          : category
-      )
-    );
-  };
+  // Fetch products from the back end
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("/api/admin/products", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`, // Add auth token
+          },
+        });
+        const data = await response.json();
+        setCategories(data); // Update state with fetched data
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
 
-
-  const [showModal, setShowModal] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState(null);
-  const [currentSubcategory, setCurrentSubcategory] = useState(null);
-  const [currentProduct, setCurrentProduct] = useState(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    price: "",
-    image: "",
-  });
-
-  const handleDeleteProduct = (categoryId, subcategoryId, productId) => {
-    setCategories((prevCategories) =>
-      prevCategories.map((category) =>
-        category.id === categoryId
-          ? {
-              ...category,
-              subcategories: category.subcategories.map((subcategory) =>
-                subcategory.id === subcategoryId
-                  ? {
-                      ...subcategory,
-                      products: subcategory.products.filter(
-                        (product) => product.id !== productId
-                      ),
-                    }
-                  : subcategory
-              ),
-            }
-          : category
-      )
-    );
-  };
-
-  const handleEditProduct = (category, subcategory, product) => {
-    setCurrentCategory(category);
-    setCurrentSubcategory(subcategory);
-    setCurrentProduct(product);
-    setFormData({
-      name: product.name,
-      description: product.description,
-      price: product.price,
-      image: product.image,
-    });
-    setShowModal(true); // Open modal
-  };
-
-  const handleSaveProduct = () => {
-    const { name, description, price, image } = formData;
-
-    if (!name.trim() || !description.trim() || !price || !image.trim()) {
-      alert("All fields are required!");
-      return;
-    }
-
-    const updatedProduct = { ...currentProduct, ...formData, price: parseFloat(price) };
-
-    setCategories((prevCategories) =>
-      prevCategories.map((category) =>
-        category.id === currentCategory.id
-          ? {
-              ...category,
-              subcategories: category.subcategories.map((subcategory) =>
-                subcategory.id === currentSubcategory.id
-                  ? {
-                      ...subcategory,
-                      products: subcategory.products.map((product) =>
-                        product.id === currentProduct.id ? updatedProduct : product
-                      ),
-                    }
-                  : subcategory
-              ),
-            }
-          : category
-      )
-    );
-
-    setShowModal(false);
-    setFormData({ name: "", description: "", price: "", image: "" });
-    setCurrentProduct(null);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+   
 
   return (
     <div className="container mt-4">
