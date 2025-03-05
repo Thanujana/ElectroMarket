@@ -1,25 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("authToken");
-  const userRole = localStorage.getItem("userRole");
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login"); // Redirect if not logged in
-    } else if (userRole !== "ROLE_ADMIN") {
-      // Redirect unauthorized users
-      if (userRole === "ROLE_BUYER") navigate("/buyer/dashboard");
-      else if (userRole === "ROLE_SELLER") navigate("/seller/dashboard");
-    }
-  }, [token, userRole, navigate]);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   return (
     <div>
       <h1>Admin Dashboard</h1>
-      <p>Welcome to the admin dashboard.</p>
+      {loading ? (
+        <p>Loading dashboard...</p> // Show loading message
+      ) : (
+        <p>Welcome to the admin dashboard.</p>
+      )}
     </div>
   );
 };
