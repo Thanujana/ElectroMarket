@@ -73,6 +73,7 @@ const AddProduct = ({ addProduct }) => {
     });
   };
 
+  /*
   const handleSubmit = () => {
     if (validateStep()) {
       // Add the product to the list
@@ -92,6 +93,31 @@ const AddProduct = ({ addProduct }) => {
         photos: [],
       });
       navigate("/admin/products"); // Navigate to product list
+    }
+  };
+  */
+  const handleSubmit = async () => {
+    if (validateStep()) {
+      try {
+        const response = await fetch("/api/admin/products/add", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`, // Add auth token
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        if (response.ok) {
+          alert("Product added successfully!");
+          navigate("/admin/products"); // Navigate to product list
+        } else {
+          alert("Failed to add product. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error adding product:", error);
+        alert("An error occurred. Please try again.");
+      }
     }
   };
 
