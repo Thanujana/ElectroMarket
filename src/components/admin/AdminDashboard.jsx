@@ -8,13 +8,13 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     if (!token) {
-      navigate("/admin/dashboard"); // Redirect if not logged in
+      navigate("/login"); // Redirect if not logged in
     } else if (userRole !== "ROLE_ADMIN") {
       // Redirect unauthorized users
       if (userRole === "ROLE_BUYER") navigate("/buyer/dashboard");
       else if (userRole === "ROLE_SELLER") navigate("/seller/dashboard");
     }
-  }, [ navigate]);
+  }, [token, userRole, navigate]);
 
   return (
     <div>
