@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../../style/PlaceOrder.css"; 
+import "../../style/PlaceOrder.css";
 
 const API_BASE_URL = "http://localhost:8080/api/orders"; // Backend API
 
@@ -19,27 +19,63 @@ const PlaceOrder = () => {
     deliveryInstructions: "",
   });
 
+  const [errors, setErrors] = useState({});
+
+  // ✅ Handle Input Change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    // ✅ Clear errors when user starts typing
+    setErrors({ ...errors, [name]: "" });
   };
 
+  // ✅ Validation Function
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!formData.fullName.trim()) newErrors.fullName = "Full name is required.";
+    if (!formData.address.trim()) newErrors.address = "Address is required.";
+    
+    if (!formData.phoneNumber.trim()) {
+      newErrors.phoneNumber = "Phone number is required.";
+    } else if (!/^\d{10}$/.test(formData.phoneNumber)) {
+      newErrors.phoneNumber = "Phone number must be 10 digits.";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required.";
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = "Invalid email format.";
+    }
+
+    if (!formData.postalCode.trim()) {
+      newErrors.postalCode = "Postal code is required.";
+    } else if (!/^\d{5,6}$/.test(formData.postalCode)) {
+      newErrors.postalCode = "Invalid postal code.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // ✅ Return true if no errors
+  };
+
+  // ✅ Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const authToken = localStorage.getItem("authToken");
-    const userId = localStorage.getItem("userId");
-
-    if (!authToken) {
-        alert("⚠️ Authentication required! Please log in.");
-        console.error("❌ No auth token found in localStorage");
-        return;
+    if (!validateForm()) {
+      console.error("❌ Validation Failed");
+      return;
     }
 
-    console.log("🟢 Sending request with token:", authToken); // ✅ Debugging
+    const authToken = localStorage.getItem("authToken");
+    if (!authToken) {
+      alert("⚠️ Authentication required! Please log in.");
+      return;
+    }
 
     const orderData = {
-      userId: localStorage.getItem("userId"), // Ensure userId is retrieved
+      userId: localStorage.getItem("userId"),
       items: cartItems.map((item) => ({
         productId: item.id,
         name: item.name,
@@ -48,26 +84,24 @@ const PlaceOrder = () => {
         quantity: item.quantity,
       })),
       totalAmount: cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
-      shippingAddress: { ...formData }, // ✅ Ensure shippingAddress is properly sent
+      shippingAddress: { ...formData },
     };
-    
+
     try {
       const response = await axios.post(`${API_BASE_URL}/place`, orderData, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`, // Ensure the user is authenticated
+          Authorization: `Bearer ${authToken}`,
         },
       });
-    
+
       alert("✅ Order Placed Successfully!");
-      navigate("/order-confirmation", { state: { order: response.data } }); // ✅ Ensure the order data is passed
+      navigate("/order-confirmation", { state: { order: response.data } });
     } catch (error) {
       console.error("❌ Error placing order:", error);
       alert("⚠️ Failed to place order. Please check your authentication and try again.");
     }
-    
-};
-
+  };
 
   return (
     <div className="container mt-5">
@@ -76,27 +110,38 @@ const PlaceOrder = () => {
         <div className="mb-3">
           <label>Full Name:</label>
           <input type="text" name="fullName" className="form-control" value={formData.fullName} onChange={handleChange} required />
+          {errors.fullName && <p className="text-danger">{errors.fullName}</p>}
         </div>
+
         <div className="mb-3">
           <label>Address:</label>
           <input type="text" name="address" className="form-control" value={formData.address} onChange={handleChange} required />
+          {errors.address && <p className="text-danger">{errors.address}</p>}
         </div>
+
         <div className="mb-3">
           <label>Phone Number:</label>
           <input type="text" name="phoneNumber" className="form-control" value={formData.phoneNumber} onChange={handleChange} required />
+          {errors.phoneNumber && <p className="text-danger">{errors.phoneNumber}</p>}
         </div>
+
         <div className="mb-3">
           <label>Email:</label>
           <input type="email" name="email" className="form-control" value={formData.email} onChange={handleChange} required />
+          {errors.email && <p className="text-danger">{errors.email}</p>}
         </div>
+
         <div className="mb-3">
           <label>Postal Code:</label>
           <input type="text" name="postalCode" className="form-control" value={formData.postalCode} onChange={handleChange} required />
+          {errors.postalCode && <p className="text-danger">{errors.postalCode}</p>}
         </div>
+
         <div className="mb-3">
           <label>Delivery Instructions (Optional):</label>
           <textarea name="deliveryInstructions" className="form-control" value={formData.deliveryInstructions} onChange={handleChange} />
         </div>
+
         <button type="submit" className="btn btn-success w-100">Confirm Order</button>
       </form>
     </div>

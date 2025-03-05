@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../../style/navbar.css";
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ApiService from "../../service/ApiService"; 
 import logo from "../../assets/logo.png";
 import profilePic from "../../assets/profile_icon.png"; // Default profile image
@@ -9,22 +9,31 @@ const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation(); // ✅ Get current page URL
   const isAuthenticated = ApiService.isAuthenticated();
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef(null); // For clicking outside to close dropdown
 
-  // ✅ Handle search input change (navigate only if typing)
-  const handleSearchChange = (e) => {
-    const value = e.target.value;
-    setSearchValue(value);
+  // Handle search input change
+  const handleSearchChange = (e) => setSearchValue(e.target.value);
 
-    // ✅ Navigate to `/filter` ONLY when user starts typing (but NOT when deleting)
-    if (value.trim() !== "" && location.pathname !== "/filter") {
-      navigate("/filter");
+  // Handle search submit
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchValue.trim() !== "") {
+      navigate(`/filter?search=${searchValue}`); // ✅ FIX: Navigate correctly to product list
     }
   };
 
-  // ✅ Handle clicking outside to close dropdown
+  // Handle user logout
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      ApiService.logout();
+      setTimeout(() => {
+        navigate("/role");
+      }, 500);
+    }
+  };
+
+  // ✅ Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -77,7 +86,7 @@ const Navbar = () => {
           </ul>
 
           {/* 🔍 Search Bar */}
-          <form className="d-flex search-wrapper me-3">
+          <form className="d-flex search-wrapper me-3" onSubmit={handleSearchSubmit}>
             <input
               type="text"
               placeholder="Search products"
@@ -111,7 +120,7 @@ const Navbar = () => {
                     <NavLink to="/profile" className="dropdown-item">Account</NavLink>
                   </li>
                   <li>
-                    <button className="dropdown-item text-danger" onClick={() => ApiService.logout()}>
+                    <button className="dropdown-item text-danger" onClick={handleLogout}>
                       Logout
                     </button>
                   </li>
