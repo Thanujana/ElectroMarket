@@ -23,7 +23,15 @@ const ProductList = () => {
         setLoading(false); // Stop loading
       }
     };
+    fetchProducts();
+  }, []);
 
+  // Display loading message while fetching data
+  if (loading) {
+    return <p>Loading products...</p>;
+  }
+
+  // Display fetched data
    
 
   return (
