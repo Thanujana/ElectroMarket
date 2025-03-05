@@ -1,0 +1,189 @@
+/* General Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #ffffff; /* Dark navy background */
+  color: #D4D8DD; /* Light text for contrast */
+  margin: 0;
+  padding: 0;
+}
+
+/* Product Details Card */
+.product-details-card {
+  background:#46a9ae; /* Medium-dark blue */
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(231, 190, 190, 0.2);
+  padding: 20px;
+}
+
+.product-details-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure the image container has a fixed aspect ratio */
+.product-image {
+  width: 100%; /* Ensures it takes full width of the container */
+  max-width: 400px; /* Limits width */
+  height: 300px; /* Fix height to maintain consistency */
+  object-fit: contain; /* Ensures the full image is shown without cropping */
+  border-radius: 12px;
+  background-color: #ffffff; /* White background to fill empty spaces */
+  padding: 5px;
+  display: block;
+  margin: auto;
+}
+
+
+/* Card Body */
+.card-body {
+  padding: 20px;
+}
+
+/* Product Title */
+.card-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #D4D8DD; /* Light gray */
+}
+
+/* Product Description */
+.card-text {
+  font-size: 1rem;
+  color: #250a48;
+}
+
+/* Price */
+.text-success {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color:#d33428;
+}
+
+/* Stock and Category */
+.text-muted, .text-info {
+  font-size: 1rem;
+ 
+}
+
+/* Add to Cart Button */
+.btn-primary {
+  background: #D4D8DD;
+  border: none;
+  color: #1A2D42;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: background 0.3s ease-in-out, color 0.3s;
+}
+
+.btn-primary:hover {
+  background: #AAB7B7;
+  color: #1A2D42;
+  transform: scale(1.05);
+}
+
+/* Quantity Buttons */
+.btn-danger, .btn-success {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 8px 12px;
+}
+
+.btn-warning {
+  font-weight: 600;
+}
+
+/* Quantity Display */
+span.mx-3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #D4D8DD;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .product-details-card {
+    padding: 15px;
+  }
+
+  .product-image {
+    max-height: 400px;
+  }
+
+  .card-title {
+    font-size: 1.8rem;
+  }
+
+  .text-success {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-details-card {
+    padding: 10px;
+  }
+
+  .product-image {
+    max-height: 300px;
+  }
+
+  .card-title {
+    font-size: 1.6rem;
+  }
+
+  .text-success {
+    font-size: 1.2rem;
+  }
+
+  .btn-primary, .btn-warning {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .btn-danger, .btn-success {
+    font-size: 1rem;
+    padding: 6px 10px;
+  }
+
+  span.mx-3 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .product-details-card {
+    text-align: center;
+  }
+
+  .product-image {
+    max-height: 250px;
+    width: 80%;
+    margin: auto;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+  }
+
+  .text-success {
+    font-size: 1.1rem;
+  }
+
+  .btn-primary, .btn-warning {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .btn-danger, .btn-success {
+    font-size: 0.9rem;
+    padding: 5px 8px;
+  }
+
+  span.mx-3 {
+    font-size: 1rem;
+  }
+}

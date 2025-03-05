@@ -1,0 +1,85 @@
+/* Category Title */
+.category-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #7d0606;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+}
+
+/* Product Card */
+.product-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: none;
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #00c6ff); /* Blue Gradient */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Product Image */
+.product-image {
+    height: 250px;
+    object-fit: cover;
+    border-bottom: 3px solid #000000;
+}
+
+/* Card Body */
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Card Title */
+.card-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #4e4d4d;
+    margin-bottom: 10px;
+}
+
+/* Product Description */
+.text-muted {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Icon Button - Circular & Hover Effect */
+.icon-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;  /* Set fixed width */
+    height: 35px; /* Set fixed height */
+    background: linear-gradient(135deg, #cb0808, #c44444, #ed6868); /* Blue Gradient */
+    border-radius: 50%;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    margin-top: 8px;
+  }
+  
+  /* Icon Styling */
+  .icon-style {
+    font-size: 18px;
+    color: white;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  /* Hover Effect - Slight Scale & Change Color */
+  .icon-button:hover {
+    background: linear-gradient(135deg, #26c418, #168116, #1e3c72);
+    transform: scale(1.1);
+  }
+  
+  .icon-button:hover .icon-style {
+    transform: translateX(3px); /* Move icon slightly */
+  }
+  

@@ -1,0 +1,221 @@
+/* General Styling */
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #1A2D42; /* Dark navy background */
+    color: #D4D8DD; /* Light text for contrast */
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Cart Title */
+  h2.text-center {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #D4D8DD;
+  }
+  
+  /* Quick Navigation */
+  .text-center h5 {
+    color: #AAB7B7;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  /* Category Navigation Buttons */
+  .btn-outline-secondary,
+  .btn-outline-primary {
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+  }
+  
+  .btn-outline-secondary:hover,
+  .btn-outline-primary:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Cart Container */
+  .cart-items {
+    margin-top: 2rem;
+  }
+  
+  /* Cart Item Card */
+  .card {
+    background: #2E4156; /* Medium-dark blue */
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Product Image */
+  .card img {
+    width: 100%;
+    max-width: 100px;
+    object-fit: contain;
+    background: #ffffff;
+    padding: 5px;
+    border-radius: 8px;
+  }
+  
+  /* Product Details */
+  h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #D4D8DD;
+  }
+  
+  .text-muted {
+    font-size: 1rem;
+    color: #AAB7B7;
+  }
+  
+  /* Quantity Input */
+  input[type="number"] {
+    width: 80px;
+    text-align: center;
+    font-weight: 600;
+    background: #ffffff;
+    color: #1A2D42;
+    border: 2px solid #AAB7B7;
+    border-radius: 6px;
+    padding: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  input[type="number"]:focus {
+    border-color: #D4D8DD;
+    outline: none;
+  }
+  
+  /* Remove Button */
+  .btn-danger {
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-danger:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Total Price */
+  h4.text-end {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #D4D8DD;
+    margin-top: 20px;
+  }
+  
+  /* Action Buttons */
+  .btn-primary,
+  .btn-success,
+  .btn-outline-danger {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-primary:hover,
+  .btn-success:hover,
+  .btn-outline-danger:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 992px) {
+    h2.text-center {
+      font-size: 1.8rem;
+    }
+  
+    .cart-items {
+      padding: 10px;
+    }
+  
+    .card {
+      padding: 10px;
+    }
+  
+    h5 {
+      font-size: 1rem;
+    }
+  
+    input[type="number"] {
+      width: 70px;
+      font-size: 0.9rem;
+    }
+  
+    .btn-primary,
+    .btn-success,
+    .btn-outline-danger {
+      font-size: 1rem;
+      padding: 10px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    h2.text-center {
+      font-size: 1.6rem;
+    }
+  
+    .card {
+      flex-direction: column;
+      text-align: center;
+      padding: 10px;
+    }
+  
+    .card img {
+      margin-bottom: 10px;
+    }
+  
+    .text-muted {
+      font-size: 0.9rem;
+    }
+  
+    .btn-primary,
+    .btn-success,
+    .btn-outline-danger {
+      width: 100%;
+      font-size: 0.9rem;
+      padding: 8px;
+    }
+  
+    input[type="number"] {
+      width: 60px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    h2.text-center {
+      font-size: 1.4rem;
+    }
+  
+    .card {
+      padding: 8px;
+    }
+  
+    .text-muted {
+      font-size: 0.85rem;
+    }
+  
+    .btn-primary,
+    .btn-success,
+    .btn-outline-danger {
+      font-size: 0.85rem;
+      padding: 8px;
+    }
+  
+    input[type="number"] {
+      width: 50px;
+      font-size: 0.85rem;
+    }
+  }
+  

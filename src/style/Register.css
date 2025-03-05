@@ -1,0 +1,168 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+  }
+  
+  .register-box {
+    display: flex;
+    width: 1000px;
+    height: 600px;
+    background-color: rgb(210, 230, 234);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Left Section */
+  .left-section {
+    width: 35%;
+    background: linear-gradient(135deg, #0044cc, #00aaff);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .left-section .icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .left-section h2 {
+    margin-bottom: 10px;
+  }
+  
+  .left-section p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .login-button {
+    background: white;
+    color: #0044cc;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  /* Right Section */
+  .right-section {
+    width: 65%;
+    padding: 30px;
+  }
+  
+  .right-section h2 {
+    margin-bottom: 20px;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .input-group input, .input-group select {
+    width: 100%;
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+  
+  .gender-selection {
+    margin: 15px 0;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .register-button {
+    background: #0044cc;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .login-link {
+    margin-top: 10px;
+    text-align: center;
+    cursor: pointer;
+    color: #0044cc;
+  }
+  .success-message {
+    background: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #c3e6cb;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    width: 50%; /* Adjust width as needed */
+    max-width: 400px; /* Set max width */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Space between icon and text */
+    position: absolute; 
+    top: 50%; 
+    left: 60%;
+    transform: translate(-50%, -50%); /* Perfect Centering */
+  }
+  
+  .success-message::before {
+    content: "✅"; /* Green check icon */
+    font-size: 20px;
+  }
+  .password-validation p {
+  font-size: 14px;
+  margin: 3px 0;
+  color: red;
+  display: none; /* Hide initially */
+}
+
+.password-validation .valid {
+  color: green;
+  display: block; /* Show when criteria is met */
+}
+
+.password-validation .invalid {
+  color: red;
+  display: block; /* Show when criteria is not met */
+}
+.right-section {
+    width: 65%;
+    padding: 30px;
+    overflow-y: visible; /* ✅ Prevents content from getting cut off */
+  }
+  .password-validation {
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .password-validation.hidden {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+  }
+  

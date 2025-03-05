@@ -1,0 +1,152 @@
+/* Background Styling */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #076296, #a0eacf);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Login Box */
+.login-box {
+    background: #36454F;
+    padding: 50px;
+    width: 450px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0px 15px 40px rgba(75, 208, 225, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.login-box:hover {
+    transform: scale(1.03);
+}
+
+/* Heading */
+.login-box h2 {
+    font-size: 50px;
+    font-weight: bold;
+    color: #1898b2;
+    text-shadow: 2px 2px 4px #005f73, 4px 4px 8px #003f5c;
+    margin-bottom: 15px;
+}
+
+
+
+/* Form Fields */
+.login-box .form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    background: #ffffff;
+    color: #bd2c2c;
+    outline: none;
+    text-align: left;
+    font-weight: normal;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.login-box .form-control::placeholder {
+    color: #888;
+}
+
+/* Button Styling */
+.login-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff1212;
+    border-radius: 25px;
+    background: #708090;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background:#dde6e4;
+}
+
+/* Forgot Password & Register Link */
+.forgot-password, .register-link {
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-top: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.forgot-password:hover, .register-link:hover {
+    text-decoration: underline;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .login-box {
+        width: 90%;
+    }
+}
+/* Forgot Password Heading */
+.forgot-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1E88E5; /* Blue color for emphasis */
+    margin-bottom: 10px;
+}
+
+/* Forgot Password Description */
+.forgot-description {
+    font-size: 16px;
+    color: #3c89d6; /* Dark gray for readability */
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Input Fields */
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #F1F3F4;
+    padding: 12px;
+    border-radius: 25px;
+    margin: 10px 0;
+}
+/* Remember Me Text */
+.remember-forgot label {
+    font-size: 14px;
+    color: #4787c8; /* Dark gray for better contrast */
+    font-weight: normal;
+}
+
+/* Back to Login Link */
+.back-to-login {
+    font-size: 14px;
+    color: #1E88E5; /* Blue for clickable link */
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.back-to-login:hover {
+    text-decoration: underline;
+}

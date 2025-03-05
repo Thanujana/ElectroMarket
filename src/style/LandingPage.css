@@ -1,0 +1,568 @@
+/* General Styling */
+body {
+  font-family: 'Roboto', sans-serif; /* Modern and professional font */
+  margin: 0;
+  padding: 0;
+  background-color: #f4f7fc; /* Light background for better contrast */
+  color: #333; /* Default dark text for better readability */
+  line-height: 1.6;
+}
+
+/* Landing Page */
+.landing-page {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Background Video */
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(60%); /* Slight dimming for content visibility */
+}
+
+/* Glass Effect Container */
+.glass-container {
+  padding: 50px 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1); /* Elegant transparent glass effect */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  max-width: 500px;
+}
+
+/* Title Text */
+.title-text {
+  font-size: 3.2rem; /* Balanced size */
+  font-weight: 800;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #6a0e06; /* Pure white for professional look */
+  text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Subtitle Text */
+.subtitle-text {
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  color: #e0de3e; /* Softer white for subtle contrast */
+  margin-top: 12px;
+}
+
+/* CTA Button */
+.cta-button {
+  margin-top: 35px;
+  padding: 14px 34px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  border-radius: 50px;
+  background: linear-gradient(90deg, #2db5cd, #114450); /* Deep blue gradient */
+  color: #ffffff;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 5px 15px rgba(22, 41, 79, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background: linear-gradient(90deg, #4364f7, #6b73ff);
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 20px rgba(0, 85, 255, 0.6);
+}
+
+/* About Us Section */
+.about-us-section {
+  background: linear-gradient(135deg, #E0FFFF, #8db0cd); /* Rich dark gradient background */
+  color: #670f1c; /* Light text for better contrast */
+  padding: 80px 20px;
+  text-align: center;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #38bdf8; /* Cyan accent color */
+  margin-bottom: 20px;
+}
+
+/* Section Description */
+.section-description {
+  font-size: 1.2rem;
+  color: #640c0c; /* Muted gray text for paragraph */
+  margin-bottom: 50px;
+}
+
+/* About Card */
+.about-card {
+  background: #1e293b; /* Dark slate card background */
+  border-radius: 15px; /* Smooth corners */
+  overflow: hidden; /* Ensures the image and text fit within the card */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effects for Cards */
+.about-card:hover {
+  transform: translateY(-10px); /* Lift the card on hover */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9); /* Stronger shadow */
+}
+
+/* Card Image */
+.about-card .card-img-top {
+  height: 200px;
+  object-fit: cover; /* Ensures consistent image size */
+  filter: brightness(0.9); /* Slight dimming for text contrast */
+  transition: filter 0.3s ease;
+}
+
+.about-card:hover .card-img-top {
+  filter: brightness(1); /* Brighten image on hover */
+}
+
+/* Card Body */
+.about-card .card-body {
+  padding: 20px;
+}
+
+.about-card .card-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #7dd3fc; /* Lighter cyan for title */
+  margin-bottom: 10px;
+}
+
+.about-card .card-text {
+  font-size: 1rem;
+  color: #cbd5e1; /* Muted light text */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .about-card .card-img-top {
+    height: 150px; /* Adjust image height for smaller screens */
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .section-description {
+    font-size: 1rem;
+  }
+}
+
+
+/* FAQ Section */
+.faq-section {
+  background: #f4f7fc;
+  padding: 60px 20px;
+  color: #333;
+}
+
+.faq-section h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.accordion-button {
+  background-color: #ffffff;
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.accordion-button:hover {
+  background-color: #f1f5fc;
+}
+
+.accordion-item {
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.accordion-body {
+  font-size: 1rem;
+  color: #555;
+  padding: 20px;
+  background: #fafafa;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .glass-container {
+    max-width: 90%;
+    padding: 30px;
+  }
+
+  .title-text {
+    font-size: 2rem;
+  }
+
+  .subtitle-text {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    font-size: 1rem;
+    padding: 10px 25px;
+  }
+
+  .about-card .card-title {
+    font-size: 1.2rem;
+  }
+
+  .about-card .card-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* FAQ Section Styling */
+.faq-section {
+  background: linear-gradient(135deg, #ADD8E6, #B0C4DE); /* Vibrant gradient */
+  color: #e2e8f0; /* Light text for contrast */
+  position: relative;
+  padding: 80px 20px;
+  overflow: hidden;
+}
+
+/* Add a decorative overlay */
+.faq-section::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  filter: blur(50px);
+  z-index: 0;
+}
+
+.faq-section::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 250px;
+  height: 250px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+/* Section Header */
+.section-header {
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #0d506d; /* Cyan accent color */
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.decorative-bar {
+  width: 80px;
+  height: 5px;
+  background: #0d506d; /* Lighter accent color */
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* Accordion Customization */
+.advanced-accordion .accordion-item {
+  border: none;
+  border-radius: 8px;
+  background: #1e293b; /* Dark slate */
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Add depth */
+}
+
+.advanced-accordion .accordion-button {
+  background-color: #334155; /* Slightly lighter than the body */
+  color: #cbd5e1; /* Light text */
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 10px 20px;
+  border: none; /* Remove default border */
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.advanced-accordion .accordion-button:hover {
+  background-color: #475569; /* Hover effect */
+  color: #e2e8f0; /* Bright text */
+}
+
+.advanced-accordion .accordion-body {
+  background-color: #475569; /* Slightly lighter body */
+  color: #e2e8f0; /* Light text */
+  padding: 20px;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Side Video Styling */
+.side-video {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Add shadow to the video */
+  border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .faq-section {
+    padding: 50px 10px;
+  }
+}
+/* Contact Us Section */
+.contact-us-section {
+  background: linear-gradient(135deg, #6dd6d6, LightBlue); /* Dark gradient background */
+  color: #e2f0ec; /* Light text */
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative Blurred Elements */
+.contact-us-section::before,
+.contact-us-section::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.contact-us-section::before {
+  width: 250px;
+  height: 250px;
+  background: #FFC0CB; /* Soft red glow */
+  top: -50px;
+  left: -100px;
+}
+
+.contact-us-section::after {
+  width: 300px;
+  height: 300px;
+  background: #0c0f45; /* Soft purple glow */
+  bottom: -50px;
+  right: -150px;
+}
+
+/* Multi-Layered Box Shadow for Form */
+.multi-layer-box {
+  background:#B0C4DE; /* Dark slate form background */
+  border-radius: 15px;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.6), 
+    0 8px 30px rgba(0, 0, 0, 0.3); /* Multi-layered shadow for depth */
+  position: relative;
+  z-index: 1;
+}
+
+/* Custom Form Inputs */
+.input-custom {
+  background-color: #1a202c; /* Darker background for inputs */
+  border: 1px solid #4a5568; /* Subtle border */
+  color: #e2e8f0; /* Light text */
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.input-custom::placeholder {
+  color: #a0aec0; /* Muted placeholder */
+}
+
+.input-custom:focus {
+  outline: none;
+  border-color: #63b3ed; /* Cyan border on focus */
+  box-shadow: 0 0 8px rgba(99, 179, 237, 0.8);
+}
+
+/* Gradient Button */
+.btn-gradient {
+  background: linear-gradient(90deg, #011311, #078ea5); /* Blue-cyan gradient */
+  color: #f8fafc;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.6); /* Glow effect */
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(90deg, #348cb5, #299de4); /* Reverse gradient */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.8); /* Stronger glow on hover */
+}
+
+/* Lottie Envelope */
+.lottie-envelope {
+  width: 300px;
+  height: 300px;
+  z-index: 1;
+}
+
+/* Section Heading */
+h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #09083f; /* Accent color for title */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-us-section {
+    padding: 50px 10px;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .btn-gradient {
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+}
+/* Lottie Envelope - Increased Size */
+.lottie-envelope {
+  width: 100%; /* Use full width of its container */
+  max-width: 500px; /* Max width for larger screens */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 1;
+}
+/* Brand logos section styling */
+.brand-logos-section {
+  background-color: #708090; /* Dark navy background */
+  padding: 50px 0;
+}
+
+.brand-logos-section h2 {
+  color: #ffffff; /* White text for the title */
+  font-size: 28px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Slider container styles */
+.slick-slider {
+  position: relative;
+}
+
+/* Slick navigation buttons */
+.slick-prev,
+.slick-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  z-index: 1000;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background-color: #007bff;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Arrow positions */
+.slick-prev {
+  left: -60px;
+}
+
+.slick-next {
+  right: -60px;
+}
+
+/* Brand slide styling */
+.brand-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.brand-logo {
+  max-width: 120px;
+  max-height: 100px;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+  background-color: #ffffff; /* White background for better visibility */
+  padding: 10px;
+  border-radius: 8px; /* Rounded edges for logos */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .slick-prev,
+  .slick-next {
+    width: 30px;
+    height: 30px;
+  }
+
+  .brand-logo {
+    max-width: 100px;
+    max-height: 80px;
+    padding: 8px;
+  }
+
+
+  .brand-logo {
+    max-width: 80px;
+    max-height: 60px;
+  }
+}

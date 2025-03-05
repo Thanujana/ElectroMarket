@@ -1,0 +1,45 @@
+/* Labels */
+label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #680b0b; /* Dark gray for readability */
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+  
+  @media (max-width: 768px) {
+    label {
+      font-size: 13px;
+   
+    }
+  }
+  
+  @media (max-width: 576px) {
+    label {
+      font-size: 12px;
+    }
+  }
+  
+  /* Form Heading */
+h1.text-center {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #095855; /* Green color for a fresh look */
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  @media (max-width: 768px) {
+    h1.text-center {
+      font-size: 1.8rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    h1.text-center {
+      font-size: 1.5rem;
+    }
+  }
+  

@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  padding: 0 50px; /* White space added to the left and right */
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.header-container {
+  padding: 20px;
+  background-color: #f3f3f3;
+  text-align: center;
+}
+
+.video-section {
+  padding: 20px;
+}
+
+.footer {
+  background-color: #1e293b;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
