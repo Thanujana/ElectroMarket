@@ -30,15 +30,17 @@ const AdminDashboard = () => {
     <div>
       <h1>Admin Dashboard</h1>
       {loading ? (
-        <p>Loading dashboard...</p>
+        <div className="d-flex justify-content-center align-items-center" style={{ height: "50vh" }}>
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
       ) : (
         <div>
           <p>Welcome to the admin dashboard.</p>
           <pre>{JSON.stringify(dashboardData, null, 2)}</pre> {/* Display fetched data */}
         </div>
       )}
-    </div>
-  );
 };
 
 export default AdminDashboard;
