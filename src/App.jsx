@@ -14,11 +14,11 @@ import CategoryItems from "./components/pages/CategoryItems";
 import PaymentPage from "./components/pages/PaymentPage";
 import AdminLayout from "./components/admin/layouts/AdminLayout";
 import AdminDashboard from "./components/admin/AdminDashboard";
-import UserList from "./components/admin/AdminUserPage/UserList";
-import UserApproval from "./components/admin/AdminUserPage/UserApproval";
-import AdminProductList from "./components/admin/AdminProductPage/ProductList";
-import AdminOrderList from "./components/admin/AdminOrderPage/OrderList";
-import AddProduct from "./components/admin/AdminProductPage/AddProduct";
+import ManageUsers from "./components/admin/AdminUserPage/ManageUsers";
+
+import ManageProducts from "./components/admin/AdminProductPage/ManageProducts";
+
+
 import Role from "./components/common/Role";
 import OrderStatus from "./components/pages/OrderStatus";
 import LandingPage from "./components/pages/LandingPage";
@@ -34,7 +34,7 @@ const App = () => {
     <CartContextProvider>
       <div className="app">
         <Routes>
-          {/* 🛒 Customer Routes */}
+          {/*  Customer Routes */}
           <Route
             path="/*"
             element={
@@ -61,24 +61,22 @@ const App = () => {
             }
           />
 
-          {/* 🛠️ Admin Routes */}
+          {/*  Admin Routes */}
           <Route
-            path="/admin/*"
-            element={
-              <AdminLayout>
-                <Routes>
-                  <Route path="dashboard" element={<AdminDashboard />} />
-                  <Route path="/admin/users" element={<UserList />} />
-                  <Route path="/admin/users/approve" element={<UserApproval />} />   
-                  <Route path="products" element={<AdminProductList />} />
-                  <Route path="products/add" element={<AddProduct />} />
-                  <Route path="orders" element={<AdminOrderList />} />
-                </Routes>
-              </AdminLayout>
-            }
-          />
+  path="/admin/*"
+  element={
+    <AdminLayout>
+      <Routes>
+        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="users" element={<ManageUsers />} />
+        <Route path="products" element={<ManageProducts />} />
+      </Routes>
+    </AdminLayout>
+  }
+/>
 
-          {/* 🏪 Seller Routes */}
+
+          {/*  Seller Routes */}
           <Route
             path="/seller/*"
             element={

@@ -44,27 +44,35 @@ const ProductDetails = () => {
     }, [id]);
 
     const cartItem = cart.find((item) => item.id === id);
-
     const handleAddToCart = () => {
-        const authToken = localStorage.getItem("authToken");
-        if (!authToken) {
-            alert("⚠️ You need to log in to add items to the cart.");
-            navigate("/login");
-            return;
-        }
-
-        if (cartItem) {
-            updateQuantity(id, cartItem.quantity + 1);
-        } else {
-            addToCart({
-                id,
-                name: product?.name,
-                price: product?.price,
-                image: product?.imageUrl,
-                quantity: 1,
-            });
-        }
-    };
+      const authToken = localStorage.getItem("authToken");
+      if (!authToken) {
+          alert("⚠️ You need to log in to add items to the cart.");
+          navigate("/login");
+          return;
+      }
+  
+      if (cartItem) {
+          if (cartItem.quantity < product.stock) {
+              updateQuantity(id, cartItem.quantity + 1);
+          } else {
+              alert("⚠️ Cannot add more than available stock!");
+          }
+      } else {
+          if (product.stock > 0) {
+              addToCart({
+                  id,
+                  name: product?.name,
+                  price: product?.price,
+                  image: product?.imageUrl,
+                  quantity: 1,
+              });
+          } else {
+              alert("❌ This product is out of stock.");
+          }
+      }
+  };
+  
 
     const handleIncrease = () => {
         updateQuantity(id, (cartItem?.quantity || 1) + 1);
@@ -129,16 +137,23 @@ const ProductDetails = () => {
 
                             {/* ✅ Show +/- Controls If Already in Cart */}
                             {cartItem ? (
-                                <div className="d-flex align-items-center mt-3">
-                                    <button className="btn btn-danger" onClick={handleDecrease}>-</button>
-                                    <span className="mx-3">{cartItem.quantity}</span>
-                                    <button className="btn btn-success" onClick={handleIncrease}>+</button>
-                                </div>
-                            ) : (
-                                <button className="btn btn-primary w-100 mt-3" onClick={handleAddToCart}>
-                                    Add to Cart
-                                </button>
-                            )}
+    <div className="d-flex align-items-center mt-3">
+        <button className="btn btn-danger" onClick={handleDecrease}>-</button>
+        <span className="mx-3">{cartItem.quantity}</span>
+        <button
+            className="btn btn-success"
+            onClick={handleIncrease}
+            disabled={cartItem.quantity >= product.stock} // ✅ Disable button when max stock reached
+        >
+            +
+        </button>
+    </div>
+) : (
+    <button className="btn btn-primary w-100 mt-3" onClick={handleAddToCart}>
+        Add to Cart
+    </button>
+)}
+
 
                             <button className="btn btn-warning w-100 mt-3" onClick={() => navigate("/cart")}>
                                 Go to Cart

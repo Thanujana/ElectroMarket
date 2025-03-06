@@ -27,21 +27,29 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: -1;
-  filter: brightness(60%); /* Slight dimming for content visibility */
+  filter: brightness(100%); /* Slight dimming for content visibility */
 }
 
 /* Glass Effect Container */
 .glass-container {
-  padding: 50px 40px;
+  padding: 70px 40px;
   border-radius: 20px;
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.1); /* Elegant transparent glass effect */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3); /* Darker tint for better readability */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
   max-width: 500px;
+  color: white; /* Ensure text is visible */
+
+  /* Move to the left */
+  position: absolute; /* Or 'relative' if you need it inside a container */
+  left: 5%; /* Adjust as needed */
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
 }
+
 
 /* Title Text */
 .title-text {

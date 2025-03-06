@@ -45,21 +45,12 @@ const Sidebar = () => {
               <i className="bi bi-box-seam me-2"></i> Manage Products
             </NavLink>
           </li>
-          <li className="nav-item mb-2">
-            <NavLink to="/admin/orders" className="nav-link text-white">
-              <i className="bi bi-card-checklist me-2"></i> Manage Orders
-            </NavLink>
-          </li>
+         
           <li className="nav-item mb-2">
             <NavLink to="/admin/users" className="nav-link text-white">
               <i className="bi bi-people me-2"></i> Manage Users
             </NavLink>
           </li>
-          <li className="nav-item mb-2">
-  <NavLink to="/admin/users/approve" className="nav-link text-white">
-    <i className="bi bi-person-check me-2"></i> Approve Users
-  </NavLink>
-</li>
 
           {isAuthenticated && (
             <>

@@ -1,39 +1,59 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../../style/navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
+import "../../style/navbar.css";
 import ApiService from "../../service/ApiService"; 
 import logo from "../../assets/logo.png";
 import profilePic from "../../assets/profile_icon.png"; // Default profile image
 
 const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const isAuthenticated = ApiService.isAuthenticated();
-  const dropdownRef = useRef(null); // For clicking outside to close dropdown
 
-  // Handle search input change
-  const handleSearchChange = (e) => setSearchValue(e.target.value);
+  // ✅ Fetch search suggestions dynamically
+  const fetchSuggestions = async (query) => {
+    if (query.length > 1) {
+      try {
+        const response = await axios.get("http://localhost:8080/api/products/suggestions", {
+          params: { query },
+        });
+        setSuggestions(response.data);
+      } catch (error) {
+        console.error("Error fetching suggestions", error);
+      }
+    } else {
+      setSuggestions([]);
+    }
+  };
 
-  // Handle search submit
+  // ✅ Handle Search Input Change
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchValue(value);
+    fetchSuggestions(value);
+  };
+
+  // ✅ Handle Search Submit
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchValue.trim() !== "") {
-      navigate(`/filter?search=${searchValue}`); // ✅ FIX: Navigate correctly to product list
+      navigate(`/filter?search=${searchValue}`);
+      setSuggestions([]);
     }
   };
 
-  // Handle user logout
-  const handleLogout = () => {
-    if (window.confirm("Are you sure you want to logout?")) {
-      ApiService.logout();
-      setTimeout(() => {
-        navigate("/role");
-      }, 500);
-    }
+  // ✅ Handle Clicking on Suggestion
+  const handleSuggestionClick = (suggestion) => {
+    setSearchValue(suggestion);
+    setSuggestions([]);
+    navigate(`/filter?search=${suggestion}`);
   };
 
-  // ✅ Close dropdown when clicking outside
+  // ✅ Close Dropdown when Clicking Outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -94,6 +114,15 @@ const Navbar = () => {
               onChange={handleSearchChange}
               className="form-control search-input me-2"
             />
+            {suggestions.length > 0 && (
+              <ul className="suggestions-dropdown">
+                {suggestions.map((s, index) => (
+                  <li key={index} onClick={() => handleSuggestionClick(s)}>
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            )}
           </form>
 
           {/* 🔑 Show Login Button if Not Logged In */}
@@ -120,7 +149,7 @@ const Navbar = () => {
                     <NavLink to="/profile" className="dropdown-item">Account</NavLink>
                   </li>
                   <li>
-                    <button className="dropdown-item text-danger" onClick={handleLogout}>
+                    <button className="dropdown-item text-danger" onClick={() => ApiService.logout()}>
                       Logout
                     </button>
                   </li>

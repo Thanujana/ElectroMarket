@@ -6,6 +6,7 @@ import { StoreContext } from "../Context/StoreContext";
 import { category_list } from "../../assets/assets";
 import sideImage from "/header_img.png";
 import bgImage from "/bg_image.jpg";
+import { FaArrowRight } from "react-icons/fa";
 
 const API_BASE_URL = "http://localhost:8080/api/products"; // Backend API
 
@@ -174,6 +175,17 @@ const Home = () => {
               <h5 className="card-title">{item.name}</h5>
               <p className="card-text text-muted">{item.description}</p>
               <p className="product-item-price fw-bold"> $ {item.price}</p>
+
+               {/* Explore Button with Arrow Icon */}
+               <div className="text-end">
+                <button 
+                  className="btn btn-outline-primary explore-btn" 
+                  onClick={() => navigate(`/products/${item.id}`)}
+                >
+                  Explore <FaArrowRight />
+                </button>
+              </div>
+
             </div>
           </div>
         </div>
@@ -209,6 +221,15 @@ const Home = () => {
               <p className="product-item-price text-danger fw-bold">
                 $ {item.price} <small>(Limited Time Offer!)</small>
               </p>
+              <div className="text-end">
+  <button 
+    className="btn btn-outline-primary explore-btn" 
+    onClick={() => navigate(`/products/${item.id}`)}
+  >
+    Explore <FaArrowRight />
+  </button>
+</div>
+
             </div>
           </div>
         </div>
@@ -242,7 +263,17 @@ const Home = () => {
               <p className="product-item-price text-primary fw-bold">
                 $ {item.price} <small>(Special Offer!)</small>
               </p>
+              <div className="text-end">
+  <button 
+    className="btn btn-outline-primary explore-btn" 
+    onClick={() => navigate(`/products/${item.id}`)}
+  >
+    Explore <FaArrowRight />
+  </button>
+</div>
+
             </div>
+            
           </div>
         </div>
       ))}

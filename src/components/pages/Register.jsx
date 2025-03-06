@@ -44,14 +44,26 @@ const Register = () => {
   // ✅ Handle Input Change
   const handleChange = (e) => {
     const { name, value } = e.target;
+  
+    // ✅ Phone number validation: Only digits, must be 10 characters, starts with 6-9
+    if (name === "phone") {
+      if (!/^\d*$/.test(value)) {
+        return; // Prevent non-numeric input
+      }
+      if (value.length > 10) {
+        return; // Restrict to 10 digits
+      }
+    }
+  
     setFormData((prev) => ({ ...prev, [name]: value }));
-
+  
     if (name === "password") {
       setShowPasswordRules(true);
       const isValid = validatePassword(value);
       if (isValid) setTimeout(() => setShowPasswordRules(false), 500);
     }
   };
+  
 
   // ✅ Handle Form Submission
   const handleSubmit = async (e) => {
@@ -142,8 +154,16 @@ const Register = () => {
 
                 <div className="input-group">
                   <FaPhone />
-                  <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="Your Phone" required />
+                  <input
+                    type="text"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Your Phone"
+                    required
+                  />
                 </div>
+
 
                 {formData.role === "seller" && (
                   <>

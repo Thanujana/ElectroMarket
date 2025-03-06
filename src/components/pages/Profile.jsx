@@ -14,16 +14,28 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
+        console.log("🔍 Fetching user profile...");
+        
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+          throw new Error("No token found. User might be logged out.");
+        }
+
         const data = await ApiService.getUserProfile();
         console.log("✅ User data received:", data);
-        if (!data) throw new Error("Session expired");
+
+        if (!data) throw new Error("Session expired. No data received.");
 
         setUserData(data);
         setUpdatedProfile(data);
       } catch (error) {
-        console.error("❌ Error fetching user data:", error);
-        setError(error.response?.data?.message || "Session expired. Redirecting to login...");
-        setTimeout(() => navigate("/login"), 2000);
+        console.error("❌ Error fetching user data:", error.response || error);
+        const errorMessage =
+          error.response?.data?.message || "Session expired. Redirecting to login...";
+        setError(errorMessage);
+
+        // Wait 3 seconds before redirecting to allow debugging
+        setTimeout(() => navigate("/login"), 3000);
       } finally {
         setLoading(false);
       }
@@ -36,21 +48,29 @@ const Profile = () => {
     try {
       const updatedData = { ...updatedProfile };
 
+      // Remove password field if it's empty to avoid unnecessary updates
       if (!updatedData.password) {
         delete updatedData.password;
       }
 
       await ApiService.updateUserProfile(updatedData);
-      alert("Profile updated successfully!");
+      alert("✅ Profile updated successfully!");
       setEditMode(false);
       setUserData(updatedData);
     } catch (error) {
       console.error("❌ Failed to update profile:", error);
-      alert("Failed to update profile.");
+      alert("⚠️ Failed to update profile. Please try again.");
     }
   };
 
-  if (loading) return <p className="loading">Loading profile...</p>;
+  const handleLogout = () => {
+    console.log("🚪 Logging out user...");
+    ApiService.logout();
+    localStorage.removeItem("authToken"); // Ensure token is removed
+    navigate("/login");
+  };
+
+  if (loading) return <p className="loading">⏳ Loading profile...</p>;
   if (error) return <p className="error-message">{error}</p>;
 
   return (
@@ -83,10 +103,7 @@ const Profile = () => {
         <button className="btn-edit" onClick={() => setEditMode(true)}>Edit Profile</button>
       )}
 
-      <button className="btn-logout" onClick={() => {
-        ApiService.logout();
-        navigate("/login");
-      }}>
+      <button className="btn-logout" onClick={handleLogout}>
         Logout
       </button>
     </div>

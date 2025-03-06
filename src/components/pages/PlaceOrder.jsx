@@ -64,44 +64,66 @@ const PlaceOrder = () => {
     e.preventDefault();
 
     if (!validateForm()) {
-      console.error("❌ Validation Failed");
-      return;
+        console.error("❌ Validation Failed");
+        return;
     }
 
     const authToken = localStorage.getItem("authToken");
+
+    // ✅ Check if token is missing
     if (!authToken) {
-      alert("⚠️ Authentication required! Please log in.");
-      return;
+        alert("⚠️ Authentication required! Please log in.");
+        navigate("/login"); // Redirect user to login page
+        return;
     }
 
     const orderData = {
-      userId: localStorage.getItem("userId"),
-      items: cartItems.map((item) => ({
-        productId: item.id,
-        name: item.name,
-        imageUrl: item.image,
-        price: item.price,
-        quantity: item.quantity,
-      })),
-      totalAmount: cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
-      shippingAddress: { ...formData },
+        userId: localStorage.getItem("userId"),
+        items: cartItems?.map((item) => ({
+            productId: item.id,
+            name: item.name,
+            imageUrl: item.image,
+            price: item.price,
+            quantity: item.quantity,
+        })) || [],
+        totalAmount: cartItems?.reduce((total, item) => total + item.price * item.quantity, 0) || 0,
+        shippingAddress: { ...formData },
     };
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/place`, orderData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
+        const response = await axios.post(`${API_BASE_URL}/place`, orderData, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authToken}`,
+            },
+        });
 
-      alert("✅ Order Placed Successfully!");
-      navigate("/order-confirmation", { state: { order: response.data } });
+        if (response.status === 201 && response.data) {
+            alert("✅ Order Placed Successfully!");
+            navigate("/order-confirmation", { state: { order: response.data } });
+
+            // ✅ Clear cart after order is placed
+            localStorage.removeItem("cartItems");
+            window.dispatchEvent(new Event("cartUpdated"));
+        } else {
+            console.error("❌ Unexpected API response", response);
+            alert("⚠️ Something went wrong. Please try again.");
+        }
     } catch (error) {
-      console.error("❌ Error placing order:", error);
-      alert("⚠️ Failed to place order. Please check your authentication and try again.");
+        console.error("❌ Error placing order:", error);
+
+        // ✅ Specific handling for 403 error
+        if (error.response?.status === 403) {
+            alert("⚠️ Access Denied: Your session may have expired. Please log in again.");
+            localStorage.removeItem("authToken"); // Remove expired token
+            navigate("/login"); // Redirect to login
+        } else {
+            alert("⚠️ Failed to place order. Please try again.");
+        }
     }
-  };
+};
+
+
 
   return (
     <div className="container mt-5">

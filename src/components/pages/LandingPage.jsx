@@ -22,6 +22,7 @@ import Brand10 from "../../assets/brands/Brand_10.png";
 import Brand11 from "../../assets/brands/Brand_11.png";
 import Brand12 from "../../assets/brands/Brand_12.png";
 
+
 const LandingPage = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -118,7 +119,7 @@ const LandingPage = () => {
       <div className="welcome-section">
         <video
           className="background-video"
-          src="/Video_N.mp4"
+          src="/Video_4.mp4"
           autoPlay
           muted
           loop
