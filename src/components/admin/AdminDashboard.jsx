@@ -44,6 +44,9 @@ const AdminDashboard = () => {
             <p className="card-text">Here’s the latest data:</p>
             <pre className="bg-light p-3 rounded">{JSON.stringify(dashboardData, null, 2)}</pre>
           </div>
+          <div className="card-footer text-muted text-center">
+          © 2025 ElectroMart Admin
+        </div>
         </div>
       )}
     </div>
