@@ -68,8 +68,8 @@ const App = () => {
               <AdminLayout>
                 <Routes>
                   <Route path="dashboard" element={<AdminDashboard />} />
-                  <Route path="/admin/users" element={<UserList />} />
-                  <Route path="/admin/users/approve" element={<UserApproval />} />   
+                  <Route path="users" element={<UserList />} />
+                  <Route path="users/approve" element={<UserApproval />} />
                   <Route path="products" element={<AdminProductList />} />
                   <Route path="products/add" element={<AddProduct />} />
                   <Route path="orders" element={<AdminOrderList />} />

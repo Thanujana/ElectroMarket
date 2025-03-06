@@ -26,40 +26,28 @@ const AdminDashboard = () => {
     fetchDashboardData();
   }, []);
 
-  return (
-    <div className="container mt-4">
-      <h1 className="text-center mb-4">Admin Dashboard</h1>
-      {loading ? (
-        <div className="d-flex justify-content-center align-items-center" style={{ height: "50vh" }}>
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
+return (
+  <div className="container mt-4">
+    <h1 className="text-center mb-4">Admin Dashboard</h1>
+    {loading ? (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "50vh" }}>
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
         </div>
-      ) : (
-        <div className="card shadow">
-        <div className="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-            <h2 className="card-title">Welcome to the Admin Dashboard</h2>
-           <div>
-            <button className="btn btn-light" onClick={() => navigate(-1)}>
-              <i className="bi bi-arrow-left"></i> Back
-            </button>
-            {/* Logout Button */}
-            <button className="btn btn-danger" onClick={handleLogout}>
-                <i className="bi bi-box-arrow-right"></i> Logout
-              </button>
-              </div>
-          </div>
-          <div className="card-body">
-            <p className="card-text">Here’s the latest data:</p>
-            <pre className="bg-light p-3 rounded">{JSON.stringify(dashboardData, null, 2)}</pre>
-          </div>
-          <div className="card-footer text-muted text-center">
-          © 2025 ElectroMart Admin
+      </div>
+    ) : (
+      <div className="card shadow">
+        <div className="card-header bg-dark text-white">
+          <h2 className="card-title">Welcome to the Admin Dashboard</h2>
         </div>
+        <div className="card-body">
+          <p className="card-text">Here’s the latest data:</p>
+          <pre className="bg-light p-3 rounded">{JSON.stringify(dashboardData, null, 2)}</pre>
         </div>
-      )}
-    </div>
-  );
+      </div>
+    )}
+  </div>
+);
 };
 
 export default AdminDashboard;
