@@ -41,6 +41,8 @@ const AdminDashboard = () => {
           <pre>{JSON.stringify(dashboardData, null, 2)}</pre> {/* Display fetched data */}
         </div>
       )}
+      </div>
+  )
 };
 
 export default AdminDashboard;
