@@ -37,8 +37,11 @@ const AdminDashboard = () => {
         </div>
       ) : (
         <div className="card shadow">
-          <div className="card-header bg-dark text-white">
+        <div className="card-header bg-dark text-white ">
             <h2 className="card-title">Welcome to the Admin Dashboard</h2>
+            <button className="btn btn-light" onClick={() => navigate(-1)}>
+              <i className="bi bi-arrow-left"></i> Back
+            </button>
           </div>
           <div className="card-body">
             <p className="card-text">Here’s the latest data:</p>
