@@ -37,7 +37,7 @@ const AdminDashboard = () => {
         </div>
       ) : (
         <div className="card shadow">
-        <div className="card-header bg-dark text-white ">
+        <div className="card-header bg-dark text-white d-flex justify-content-between align-items-center">
             <h2 className="card-title">Welcome to the Admin Dashboard</h2>
             <button className="btn btn-light" onClick={() => navigate(-1)}>
               <i className="bi bi-arrow-left"></i> Back
