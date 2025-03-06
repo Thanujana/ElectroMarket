@@ -36,9 +36,14 @@ const AdminDashboard = () => {
           </div>
         </div>
       ) : (
-        <div>
-          <p>Welcome to the admin dashboard.</p>
-          <pre>{JSON.stringify(dashboardData, null, 2)}</pre> {/* Display fetched data */}
+        <div className="card shadow">
+          <div className="card-header bg-dark text-white">
+            <h2 className="card-title">Welcome to the Admin Dashboard</h2>
+          </div>
+          <div className="card-body">
+            <p className="card-text">Here’s the latest data:</p>
+            <pre className="bg-light p-3 rounded">{JSON.stringify(dashboardData, null, 2)}</pre>
+          </div>
         </div>
       )}
     </div>
