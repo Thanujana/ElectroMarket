@@ -39,9 +39,15 @@ const AdminDashboard = () => {
         <div className="card shadow">
         <div className="card-header bg-dark text-white d-flex justify-content-between align-items-center">
             <h2 className="card-title">Welcome to the Admin Dashboard</h2>
+           <div>
             <button className="btn btn-light" onClick={() => navigate(-1)}>
               <i className="bi bi-arrow-left"></i> Back
             </button>
+            {/* Logout Button */}
+            <button className="btn btn-danger" onClick={handleLogout}>
+                <i className="bi bi-box-arrow-right"></i> Logout
+              </button>
+              </div>
           </div>
           <div className="card-body">
             <p className="card-text">Here’s the latest data:</p>
