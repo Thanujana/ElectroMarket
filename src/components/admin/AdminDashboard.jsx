@@ -27,8 +27,8 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
+    <div className="container mt-4">
+      <h1 className="text-center mb-4">Admin Dashboard</h1>
       {loading ? (
         <div className="d-flex justify-content-center align-items-center" style={{ height: "50vh" }}>
           <div className="spinner-border text-primary" role="status">
