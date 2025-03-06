@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [dashboardData, setDashboardData] = useState(null); // Add state for fetched data
 
-  // Add useEffect to fetch data
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
@@ -15,7 +15,7 @@ const AdminDashboard = () => {
           },
         });
         const data = await response.json();
-        console.log("Fetched data:", data); // Log fetched data
+        setDashboardData(data); // Update state with fetched data
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
       } finally {
@@ -32,7 +32,10 @@ const AdminDashboard = () => {
       {loading ? (
         <p>Loading dashboard...</p>
       ) : (
-        <p>Welcome to the admin dashboard.</p>
+        <div>
+          <p>Welcome to the admin dashboard.</p>
+          <pre>{JSON.stringify(dashboardData, null, 2)}</pre> {/* Display fetched data */}
+        </div>
       )}
     </div>
   );
