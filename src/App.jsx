@@ -11,7 +11,7 @@ import ProductDetails from "./components/pages/ProductDetails";
 import CartContextProvider from "./components/Context/CartContext";
 import OrderConfirmation from "./components/pages/OrderConfirmation";
 import CategoryItems from "./components/pages/CategoryItems";
-import PaymentPage from "./components/pages/PaymentPage";
+import Checkout from "./components/pages/Checkout";
 import AdminLayout from "./components/admin/layouts/AdminLayout";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import ManageUsers from "./components/admin/AdminUserPage/ManageUsers";
@@ -53,7 +53,7 @@ const App = () => {
                   <Route path="/products/:id" element={<ProductDetails />} />
                   <Route path="/filter" element={<ProductList />} />
                   <Route path="/order-confirmation" element={<OrderConfirmation />} />
-                  <Route path="/payment" element={<PaymentPage />} />
+                  <Route path="/payment" element={<Checkout />} />
                   <Route path="/order-status" element={<OrderStatus />} />
                 </Routes>
                 <Footer />

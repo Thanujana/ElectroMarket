@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import{ createContext, useContext, useState, useEffect } from "react";
 
 // ✅ Create Context
 const CartContext = createContext();
@@ -39,10 +39,11 @@ const CartContextProvider = ({ children }) => {
     const clearCart = () => {
         setCart([]);
         localStorage.removeItem("cart");
+        window.dispatchEvent(new Event("storage")); // ✅ Forces UI update
     };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart ,setCart}}>
             {children}
         </CartContext.Provider>
     );
