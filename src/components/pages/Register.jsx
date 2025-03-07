@@ -54,6 +54,11 @@ const Register = () => {
         return; // Restrict to 10 digits
       }
     }
+    // ✅ Tax Number Validation: Must be alphanumeric, max 15 characters
+  if (name === "taxNumber") {
+    if (!/^\d*$/.test(value)) return; // Only allow alphanumeric characters
+    if (value.length > 15) return; // Limit to 15 characters
+  }
   
     setFormData((prev) => ({ ...prev, [name]: value }));
   
