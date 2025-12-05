@@ -1,95 +1,63 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button } from "@/components/ui/button";
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const UserApproval = () => {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("authToken");
-  const userRole = localStorage.getItem("userRole");
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    } else if (userRole !== "ROLE_ADMIN") {
-      navigate(userRole === "ROLE_BUYER" ? "/buyer/dashboard" : "/seller/dashboard");
-    } else {
-      fetchPendingUsers();
-    }
-  }, [token, userRole, navigate]);
+    fetchUsers();
+  }, []);
 
-  const fetchPendingUsers = async () => {
+  const fetchUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/admin/pending-users", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get("http://localhost:8080/api/admins/users");
       setUsers(response.data);
-      setLoading(false);
     } catch (error) {
-      console.error("Error fetching users:", error);
-      toast.error("Failed to load users.");
-      setLoading(false);
+      setError("Failed to fetch users.");
     }
   };
 
-  const handleApproval = async (userId, action) => {
+  const approveUser = async (userId) => {
     try {
-      await axios.post(
-        `http://localhost:5000/api/admin/${action}-user`,
-        { userId },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      toast.success(`User ${action}ed successfully!`);
-      setUsers(users.filter(user => user.id !== userId));
+      await axios.put(`http://localhost:8080/api/admins/users/approve/${userId}`);
+      alert("User approved successfully!");
+      fetchUsers(); // Refresh the user list
     } catch (error) {
-      console.error(`Error ${action}ing user:`, error);
-      toast.error(`Failed to ${action} user.`);
+      alert("Failed to approve user.");
     }
   };
 
   return (
-    <div className="p-6 min-h-screen bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">User Approval</h1>
-      {loading ? (
-        <p>Loading users...</p>
-      ) : users.length === 0 ? (
-        <p>No pending users for approval.</p>
-      ) : (
-        <Table className="bg-white shadow-md rounded-lg">
-          <TableHeader>
-            <TableRow>
-              <TableHead>ID</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {users.map(user => (
-              <TableRow key={user.id}>
-                <TableCell>{user.id}</TableCell>
-                <TableCell>{user.name}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{user.role}</TableCell>
-                <TableCell>
-                  <Button className="bg-green-500 hover:bg-green-600 mx-1" onClick={() => handleApproval(user.id, "approve")}>
+    <div className="container mt-4">
+      <h2>Approve Users</h2>
+      {error && <p className="text-danger">{error}</p>}
+      <table className="table table-bordered">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>{user.email}</td>
+              <td>{user.roles.map((role) => role.role).join(", ")}</td>
+              <td>{user.roles.some(role => role.role === "ROLE_APPROVED_USER") ? "Approved" : "Pending"}</td>
+              <td>
+                {!user.roles.some(role => role.role === "ROLE_APPROVED_USER") && (
+                  <button className="btn btn-success" onClick={() => approveUser(user.id)}>
                     Approve
-                  </Button>
-                  <Button className="bg-red-500 hover:bg-red-600 mx-1" onClick={() => handleApproval(user.id, "reject")}>
-                    Reject
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      )}
+                  </button>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
